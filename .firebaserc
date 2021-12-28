@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "moodfood-ef2ef": {
+      "hosting": {
+        "moodfood": [
+          "moodfood-ef2ef"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "moodfood-ef2ef"
+  }
+}
