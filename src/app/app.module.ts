@@ -13,9 +13,11 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { RecipesModule } from './recipes/recipes.module';
 import { RecipesComponent } from './recipes/recipes.component';
 import { HeaderComponent } from './header/header.component';
+import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
+import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, RecipeDetailsComponent, RecipeFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

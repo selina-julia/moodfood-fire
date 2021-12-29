@@ -1,21 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Recipe } from '../recipes/shared/recipe';
 import { RecipesService } from '../services/recipes.service';
-import { Recipe } from './shared/recipe';
 
 @Component({
-  selector: 'app-recipes',
-  templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.scss'],
+  selector: 'app-recipe-form',
+  templateUrl: './recipe-form.component.html',
+  styleUrls: ['./recipe-form.component.scss'],
 })
-export class RecipesComponent implements OnInit {
+export class RecipeFormComponent implements OnInit {
   public recipes$!: Observable<Recipe[]>;
   public form!: FormGroup;
   public recipes: Recipe[] = [];
@@ -27,7 +22,6 @@ export class RecipesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getRecipes();
     this.initFormGroup();
   }
 
@@ -36,17 +30,8 @@ export class RecipesComponent implements OnInit {
       title: '',
     });
   }
-
-  public openModal(content: TemplateRef<any>) {}
-
   public createRecipe() {
     this.recipeService.createRecipe(this.form.value).then();
     console.log('create something');
-  }
-
-  public editRecipe() {}
-
-  async getRecipes() {
-    this.recipes$ = this.recipeService.getRecipes();
   }
 }
