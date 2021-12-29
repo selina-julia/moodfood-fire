@@ -1,5 +1,19 @@
-<div class="flex justify-between">
-  <div>Logo</div>
+<header
+  class="
+    flex
+    justify-between
+    mb-10
+    py-2
+    px-20
+    z-10
+    main-header
+    items-center
+    backdrop-filter backdrop-blur-lg
+  "
+>
+  <div class="text-xl font-bold" [routerLink]="'recipes'">
+    mood<span class="text-yellow-500">food</span>
+  </div>
   <nav>
     <ul class="flex gap-x-3">
       <li [routerLink]="'recipes'" routerLinkActive="text-yellow-500">
@@ -8,9 +22,9 @@
       <li [routerLink]="'recipes'" routerLinkActive="text-yellow-500">
         Favoriten
       </li>
-      <li [routerLink]="'recipes/edit'" routerLinkActive="text-yellow-500">
+      <li [routerLink]="'create'" routerLinkActive="text-yellow-500">
         Erstellen
       </li>
     </ul>
   </nav>
-</div>
+</header>

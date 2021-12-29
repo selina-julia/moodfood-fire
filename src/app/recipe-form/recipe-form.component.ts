@@ -37,12 +37,15 @@ export class RecipeFormComponent implements OnInit {
       title: new FormControl(''),
       description: new FormControl(''),
       time: new FormControl(''),
+      image: new FormControl(
+        'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
+      ),
     });
   }
   public createRecipe() {
     this.recipeService.createRecipe(this.form.value).then();
     console.log('create something');
-    this.router.navigate(['../../recipes'], { relativeTo: this.route });
+    this.router.navigate(['/recipes']);
   }
 
   public async getRecipe() {

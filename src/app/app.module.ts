@@ -17,7 +17,12 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
 import { RecipeFormComponent } from './recipe-form/recipe-form.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, RecipeDetailsComponent, RecipeFormComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    RecipeDetailsComponent,
+    RecipeFormComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
