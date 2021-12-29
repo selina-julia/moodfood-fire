@@ -44,7 +44,9 @@ export class RecipesComponent implements OnInit {
     console.log('create something');
   }
 
-  public editRecipe() {}
+  public deleteRecipe(id: string | undefined) {
+    this.recipeService.deleteRecipe(id);
+  }
 
   async getRecipes() {
     this.recipes$ = this.recipeService.getRecipes();

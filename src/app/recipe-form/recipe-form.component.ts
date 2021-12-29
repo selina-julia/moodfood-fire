@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/compiler';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Recipe } from '../recipes/shared/recipe';
 import { RecipesService } from '../services/recipes.service';
@@ -14,24 +16,46 @@ export class RecipeFormComponent implements OnInit {
   public recipes$!: Observable<Recipe[]>;
   public form!: FormGroup;
   public recipes: Recipe[] = [];
+  public recipe: Recipe | undefined;
 
   constructor(
-    firestore: AngularFirestore,
     private recipeService: RecipesService,
-    private fb: FormBuilder
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private cdRef: ChangeDetectorRef,
+    private router: Router
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.getRecipe();
     this.initFormGroup();
   }
 
   public initFormGroup() {
-    this.form = this.fb.group({
-      title: '',
+    console.log('initformgroup');
+    this.form = new FormGroup({
+      title: new FormControl(''),
+      description: new FormControl(''),
+      time: new FormControl(''),
     });
   }
   public createRecipe() {
     this.recipeService.createRecipe(this.form.value).then();
     console.log('create something');
+    this.router.navigate(['../../recipes'], { relativeTo: this.route });
+  }
+
+  public async getRecipe() {
+    console.log('getrecipe');
+
+    const routeParams = this.route.snapshot.paramMap;
+    const productIdFromRoute = routeParams.get('recipeId');
+
+    await this.recipeService.getRecipes().subscribe((items) => {
+      this.recipe = items.find((item) => item.id === productIdFromRoute);
+    });
+    this.cdRef.detectChanges();
+
+    this.initFormGroup();
   }
 }

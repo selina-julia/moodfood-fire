@@ -1,10 +1,7 @@
 <ul>
-  <li
-    class="flex gap-x-2"
-    *ngFor="let item of recipes$ | async"
-    [routerLink]="['/recipes', item.id]"
-  >
-    <p>{{ item.title }}</p>
+  <li class="flex gap-x-2" *ngFor="let item of recipes$ | async">
+    <a [routerLink]="['/recipes', item.id]">{{ item.title }}</a>
     <a [routerLink]="['/recipes/edit', item.id]">Edit</a>
+    <a (click)="deleteRecipe(item.id)">Delete</a>
   </li>
 </ul>

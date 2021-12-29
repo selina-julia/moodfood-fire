@@ -1,4 +1,25 @@
 <form action="" [formGroup]="form">
-  <input type="text" class="border" formControlName="title" />
-  <button (click)="createRecipe()">Add</button>
+  <div class="flex flex-col mb-5">
+    <label for="title">Titel</label>
+    <input type="text" class="border" formControlName="title" id="title" />
+  </div>
+
+  <div class="flex flex-col mb-5">
+    <label for="description">Beschreibung</label>
+    <input
+      type="text"
+      class="border"
+      formControlName="description"
+      id="description"
+    />
+  </div>
+
+  <div class="flex flex-col mb-5">
+    <label for="time">Kochzeit</label>
+    <input type="number" class="border" formControlName="time" id="time" />
+  </div>
+
+  <button (click)="createRecipe()" class="px-3 py-2 bg-indigo-500 text-white">
+    Add
+  </button>
 </form>

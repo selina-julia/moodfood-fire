@@ -33,7 +33,7 @@ export class RecipesService {
     return this.firestore.doc('recipes/' + id).update(payload);
   }
 
-  deleteRecipe(id: string) {
+  deleteRecipe(id: string | undefined) {
     return this.firestore.doc('recipes/' + id).delete();
   }
 

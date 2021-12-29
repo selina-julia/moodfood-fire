@@ -1,9 +1,15 @@
-<div class="flex justify-between bg-indigo-500 text-white">
+<div class="flex justify-between">
   <div>Logo</div>
   <nav>
     <ul class="flex gap-x-3">
       <li [routerLink]="'recipes'" routerLinkActive="text-yellow-500">
         Rezepte
+      </li>
+      <li [routerLink]="'recipes'" routerLinkActive="text-yellow-500">
+        Favoriten
+      </li>
+      <li [routerLink]="'recipes/edit'" routerLinkActive="text-yellow-500">
+        Erstellen
       </li>
     </ul>
   </nav>
