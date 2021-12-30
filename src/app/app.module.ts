@@ -10,11 +10,13 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { RecipesModule } from './recipes/recipes.module';
-import { RecipesComponent } from './recipes/recipes.component';
-import { HeaderComponent } from './header/header.component';
-import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
-import { RecipeFormComponent } from './recipe-form/recipe-form.component';
+import { RecipesModule } from './modules/recipes/recipes.module';
+import { RecipesComponent } from './modules/recipes/recipes.component';
+import { HeaderComponent } from './shared/modules/layout/header/header.component';
+import { RecipeDetailsComponent } from './modules/recipe-details/recipe-details.component';
+import { RecipeFormComponent } from './modules/recipe-form/recipe-form.component';
+import { ModalModule } from './shared/modules/ui/modal/modal.module';
+import { FooterComponent } from './shared/modules/layout/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { RecipeFormComponent } from './recipe-form/recipe-form.component';
     HeaderComponent,
     RecipeDetailsComponent,
     RecipeFormComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { RecipeFormComponent } from './recipe-form/recipe-form.component';
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
     RecipesModule,
+    ModalModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

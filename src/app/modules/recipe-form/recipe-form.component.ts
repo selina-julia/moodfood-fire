@@ -4,8 +4,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
 import { Recipe } from '../recipes/shared/recipe';
-import { RecipesService } from '../services/recipes.service';
 
 @Component({
   selector: 'app-recipe-form',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, Observable } from 'rxjs';
-import { Recipe } from '../recipes/shared/recipe';
+import { Recipe } from '../../../modules/recipes/shared/recipe';
 @Injectable({
   providedIn: 'root',
 })

@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { RecipesService } from '../services/recipes.service';
+import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
 import { Recipe } from './shared/recipe';
 
 @Component({

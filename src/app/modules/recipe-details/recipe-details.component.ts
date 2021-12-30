@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Recipe } from '../recipes/shared/recipe';
-import { RecipesService } from '../services/recipes.service';
+import { RecipesService } from '../../shared/services/recipes/recipes.service';
 
 @Component({
   selector: 'app-recipe-details',
