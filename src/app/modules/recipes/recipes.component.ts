@@ -20,6 +20,7 @@ export class RecipesComponent implements OnInit {
   public form!: FormGroup;
   public recipes: Recipe[] = [];
   public showModal: boolean = false;
+  public deleteItem: Recipe | undefined;
 
   constructor(
     firestore: AngularFirestore,
@@ -42,9 +43,10 @@ export class RecipesComponent implements OnInit {
     this.recipeService.createRecipe(this.form.value).then();
   }
 
-  public deleteRecipe() {
+  public deleteRecipe(id: Recipe) {
     this.showModal = true;
-    // this.recipeService.deleteRecipe(id);
+    this.deleteItem = id;
+    console.log(this.deleteItem);
   }
 
   public onCancelClick() {
@@ -54,6 +56,7 @@ export class RecipesComponent implements OnInit {
   public onModalDeleteClick(id: string | undefined) {
     this.recipeService.deleteRecipe(id);
     this.showModal = false;
+    console.log(id);
   }
 
   async getRecipes() {

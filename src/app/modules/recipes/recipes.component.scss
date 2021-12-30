@@ -9,3 +9,19 @@
 .border-radius {
   border-radius: 15%;
 }
+
+.recipe-item {
+  transition: 300ms ease;
+  .edit-delete-box {
+    opacity: 0;
+    height: 0;
+    transition: 300ms ease;
+  }
+  &:hover {
+    transform: translateY(-5%);
+    .edit-delete-box {
+      opacity: 100;
+      height: auto;
+    }
+  }
+}

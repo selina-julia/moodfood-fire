@@ -17,6 +17,7 @@ export class RecipeFormComponent implements OnInit {
   public form!: FormGroup;
   public recipes: Recipe[] = [];
   public recipe: Recipe | undefined;
+  public selectedImage!: string | undefined;
 
   constructor(
     private recipeService: RecipesService,
@@ -37,12 +38,16 @@ export class RecipeFormComponent implements OnInit {
       title: new FormControl(''),
       description: new FormControl(''),
       time: new FormControl(''),
-      image: new FormControl(
-        'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
-      ),
+      image: new FormControl(''),
+      imageSource: new FormControl(''),
     });
   }
   public createRecipe() {
+    const formData = new FormData();
+    formData.append('image', this.form?.get('imageSource')?.value);
+
+    console.log(this.form);
+
     this.recipeService.createRecipe(this.form.value).then();
     console.log('create something');
     this.router.navigate(['/recipes']);
@@ -61,4 +66,34 @@ export class RecipeFormComponent implements OnInit {
 
     this.initFormGroup();
   }
+
+  public onFileSelected(event: Event) {
+    if ((event?.target as HTMLInputElement).files) {
+      const x = (event?.target as HTMLInputElement).files;
+
+      if (x) {
+        const file = x[0];
+        this.form.patchValue({
+          fileSource: file,
+        });
+      }
+    }
+  }
+
+  // public onFileSelected(event: Event) {
+  //   console.log(event);
+
+  //   const x = (event?.target as HTMLInputElement).files;
+  //   if (x) {
+  //     this.selectedImage = x[0].name;
+  //   }
+
+  //   if (x) {
+  //     const file = x[0] as File;
+  //     this.form.controls['image'].setValue(file.name);
+  //     console.log(this.form.controls['image'].value);
+  //   }
+
+  //   console.log(this.selectedImage);
+  // }
 }
