@@ -16,6 +16,7 @@ import { HeaderComponent } from './shared/modules/layout/header/header.component
 import { RecipeDetailsComponent } from './modules/recipe-details/recipe-details.component';
 import { RecipeFormComponent } from './modules/recipe-form/recipe-form.component';
 import { FooterComponent } from './shared/modules/layout/footer/footer.component';
+import { ButtonComponent } from './shared/modules/ui/button/button.component';
 
 @NgModule({
   declarations: [
