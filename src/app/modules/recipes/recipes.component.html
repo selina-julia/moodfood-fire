@@ -7,7 +7,6 @@
     <h2 class="ml-3 text-2xl font-bold" [routerLink]="['/recipes', item.id]">
       {{ item.title }}
     </h2>
-
     <div class="flex justify-between mx-3">
       <div class="flex">
         <div *ngFor="let number of getRecipeLevel(item.level)">

@@ -22,6 +22,7 @@ import { FooterComponent } from './shared/modules/layout/footer/footer.component
 import { HeaderTopBarComponent } from './shared/modules/layout/header-top-bar/header-top-bar.component';
 import { HeaderComponent } from './shared/modules/layout/header/header.component';
 import { IconComponent } from './shared/modules/ui/icon/icon.component';
+import { IconModule } from './shared/modules/ui/icon/icon.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { IconComponent } from './shared/modules/ui/icon/icon.component';
     NoopAnimationsModule,
     MatIconModule,
     HttpClientModule,
+    IconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

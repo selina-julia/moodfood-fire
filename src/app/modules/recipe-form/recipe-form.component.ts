@@ -57,7 +57,7 @@ export class RecipeFormComponent implements OnInit {
     const formData = new FormData();
     formData.append('image', this.form?.get('imageSource')?.value);
 
-    console.log(this.form);
+    console.log(this.form?.get('categories')?.value);
 
     this.recipeService.createRecipe(this.form.value).then();
     console.log('create something');
