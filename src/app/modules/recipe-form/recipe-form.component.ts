@@ -44,8 +44,13 @@ export class RecipeFormComponent implements OnInit {
       title: new FormControl(''),
       description: new FormControl(''),
       time: new FormControl(''),
-      image: new FormControl(''),
+      image: new FormControl(
+        'https://a.storyblok.com/f/134761/4032x3024/45917713ab/img_1435.jpg'
+      ),
       imageSource: new FormControl(''),
+      level: new FormControl(1),
+      categories: new FormControl(''),
+      isFavorite: new FormControl(false),
     });
   }
   public createRecipe() {

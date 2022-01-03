@@ -1,33 +1,152 @@
 <form action="" [formGroup]="form">
-  <div class="flex flex-col mb-5">
-    <label for="title">Titel</label>
-    <input type="text" class="border" formControlName="title" id="title" />
-  </div>
+  <div class="flex gap-x-10">
+    <!-- Rezeptname -->
+    <div class="flex-grow">
+      <div class="flex flex-col mb-5">
+        <label for="title" class="mb-2 text-sm font-semibold text-gray-900"
+          >Rezeptname</label
+        >
+        <input
+          type="text"
+          class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
+          formControlName="title"
+          id="title"
+        />
+      </div>
 
-  <div class="flex flex-col mb-5">
-    <label for="description">Beschreibung</label>
-    <input
-      type="text"
-      class="border"
-      formControlName="description"
-      id="description"
-    />
-  </div>
+      <!-- Zubereitung -->
+      <div class="flex flex-col mb-5">
+        <label
+          for="description"
+          class="mb-2 text-sm font-semibold text-gray-900"
+        >
+          Zubereitung
+        </label>
+        <textarea
+          type="text"
+          rows="8"
+          class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
+          formControlName="description"
+          id="description"
+        >
+        </textarea>
+      </div>
+    </div>
 
-  <div class="flex flex-col mb-5">
-    <label for="time">Kochzeit</label>
-    <input type="number" class="border" formControlName="time" id="time" />
-  </div>
+    <div class="flex-grow">
+      <!-- Kochzeit -->
+      <div class="flex flex-col mb-5">
+        <label for="time" class="mb-2 text-sm font-semibold text-gray-900"
+          >Kochzeit</label
+        >
+        <input
+          type="number"
+          class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
+          formControlName="time"
+          id="time"
+        />
+      </div>
 
-  <div class="flex flex-col mb-5">
-    <label for="image">Bild</label>
-    <input
-      type="file"
-      (change)="onFileSelected($event)"
-      class="border"
-      id="image"
-      formControlName="image"
-    />
+      <!-- Schwierigkeit -->
+
+      <div class="flex flex-col mb-5">
+        <label for="level" class="mb-2 text-sm font-semibold text-gray-900"
+          >Schwierigkeitsgrad</label
+        >
+        <div class="flex gap-x-3">
+          <div
+            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800 level-option"
+          >
+            <input
+              id="easy"
+              class="hidden"
+              type="radio"
+              value="easy"
+              name="level"
+              formControlName="level"
+            />
+            <label for="easy">Leicht</label>
+          </div>
+
+          <div
+            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800 level-option"
+          >
+            <input
+              id="medium"
+              class="hidden"
+              type="radio"
+              value="medium"
+              name="level"
+              formControlName="level"
+            />
+            <label for="medium">Mittel</label>
+          </div>
+
+          <div
+            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800 level-option"
+          >
+            <input
+              id="advanced"
+              class="hidden"
+              type="radio"
+              value="advanced"
+              name="level"
+              formControlName="level"
+            />
+            <label for="advanced">Schwierig</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kategorien -->
+      <div class="flex flex-col mb-5">
+        <label for="categories" class="mb-2 text-sm font-semibold text-gray-900"
+          >Kategorien</label
+        >
+
+        <div>
+          <input
+            class="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer  form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
+            type="radio"
+            formControlName="categories"
+            value="italian"
+            id="italian"
+          />
+          <label
+            class="inline-block text-gray-800 form-check-label"
+            for="italian"
+          >
+            Italienisch
+          </label>
+        </div>
+
+        <div>
+          <input
+            class="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer  form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
+            type="radio"
+            formControlName="categories"
+            value="chinese"
+            id="chinese"
+          />
+          <label
+            class="inline-block text-gray-800 form-check-label"
+            for="chinese"
+          >
+            Chinesisch
+          </label>
+        </div>
+      </div>
+
+      <div class="flex flex-col mb-5">
+        <label for="image">Bild</label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          id="image"
+          formControlName="image"
+        />
+      </div>
+    </div>
   </div>
 
   <!--  <div class="flex justify-center mt-8">
@@ -76,7 +195,10 @@
 
   -->
 
-  <button (click)="createRecipe()" class="px-3 py-2 text-white bg-indigo-500">
-    Add
+  <button
+    (click)="createRecipe()"
+    class="px-4 py-2 text-white bg-black rounded-md"
+  >
+    Rezept erstellen
   </button>
 </form>

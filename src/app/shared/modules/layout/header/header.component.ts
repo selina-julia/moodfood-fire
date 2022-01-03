@@ -14,4 +14,8 @@ export class HeaderComponent implements OnInit {
   public onArrowClick() {
     this.navExpanded = !this.navExpanded;
   }
+
+  public closeNav() {
+    this.navExpanded = false;
+  }
 }

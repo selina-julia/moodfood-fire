@@ -25,7 +25,7 @@
         'pl-10 items-start': navExpanded
       }"
     >
-      <div class="flex items-center gap-x-3">
+      <div class="flex items-center gap-x-3" (click)="closeNav()">
         <div
           [routerLink]="'recipes'"
           class="flex justify-center header-icon"
@@ -38,7 +38,7 @@
         <div [routerLink]="'recipes'" *ngIf="navExpanded">Rezepte</div>
       </div>
 
-      <div class="flex items-center gap-x-3">
+      <div class="flex items-center gap-x-3" (click)="closeNav()">
         <div
           [routerLink]="'favorites'"
           class="flex justify-center header-icon"
@@ -51,7 +51,7 @@
         <div [routerLink]="'favorites'" *ngIf="navExpanded">Favoriten</div>
       </div>
 
-      <div class="flex items-center gap-x-3">
+      <div class="flex items-center gap-x-3" (click)="closeNav()">
         <div
           [routerLink]="'create'"
           class="flex justify-center header-icon"

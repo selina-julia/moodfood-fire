@@ -1,5 +1,5 @@
 <div
-  class="post-thumbnail mb-10"
+  class="mb-10 post-thumbnail"
   [ngStyle]="{ backgroundImage: 'url(' + recipe?.image + ')' }"
 ></div>
 <div class="px-16">
@@ -12,9 +12,15 @@
     <button routerLink="/recipes">Zurück</button>
   </div>
 
-  <h1 class="mb-5 text-3xl font-bold xl:w-7/12 lg:text-7xl">
+  <h1 class="mb-10 text-3xl font-bold xl:w-7/12 lg:text-7xl">
     {{ recipe?.title }}
   </h1>
+
+  <span
+    *ngIf="recipe?.categories"
+    class="px-2 py-1 mr-3 border border-gray-500 rounded-sm"
+    >{{ recipe?.categories }}</span
+  >
 
   <p class="mt-5 xl:mr-36">{{ recipe?.description }}</p>
 
