@@ -1,57 +1,79 @@
 <header
-  class="z-10 items-center justify-between py-10 mb-10  main-header backdrop-filter backdrop-blur-lg"
+  class="z-10 items-center justify-between py-10 mb-10 transition duration-300 ease-out  main-header backdrop-filter backdrop-blur-lg"
+  [ngClass]="{ 'w-32': !navExpanded, 'w-64': navExpanded }"
 >
   <div
-    class="flex justify-center mb-16 text-xl font-bold cursor-pointer"
+    class="flex mb-16 cursor-pointer"
+    [ngClass]="{
+      'justify-center': !navExpanded,
+      'pl-10 justify-start': navExpanded
+    }"
     [routerLink]="'recipes'"
   >
-    <button *ngIf="navExpanded()">
+    <div *ngIf="navExpanded" class="text-2xl font-bold">
       mood<span class="text-yellow-500">food</span>
-    </button>
-    <div class="w-9">
+    </div>
+    <div class="w-9" *ngIf="!navExpanded">
       <app-icon iconName="moodfood-small"></app-icon>
     </div>
   </div>
   <nav>
-    <ul class="flex flex-col items-center gap-y-10">
-      <div
-        [routerLink]="'recipes'"
-        class="flex justify-center header-icon"
-        routerLinkActive="activeIcon"
-      >
-        <div class="w-7">
-          <app-icon iconName="home"></app-icon>
+    <div
+      class="flex flex-col gap-y-10"
+      [ngClass]="{
+        'items-center': !navExpanded,
+        'pl-10 items-start': navExpanded
+      }"
+    >
+      <div class="flex items-center gap-x-3">
+        <div
+          [routerLink]="'recipes'"
+          class="flex justify-center header-icon"
+          routerLinkActive="activeIcon"
+        >
+          <div class="w-7">
+            <app-icon iconName="home"></app-icon>
+          </div>
         </div>
-        <span class="hidden"> Rezepte </span>
+        <div [routerLink]="'recipes'" *ngIf="navExpanded">Rezepte</div>
       </div>
 
-      <div
-        [routerLink]="'favorites'"
-        class="flex justify-center header-icon"
-        routerLinkActive="activeIcon"
-      >
-        <div class="w-7">
-          <app-icon iconName="like"></app-icon>
+      <div class="flex items-center gap-x-3">
+        <div
+          [routerLink]="'favorites'"
+          class="flex justify-center header-icon"
+          routerLinkActive="activeIcon"
+        >
+          <div class="w-7">
+            <app-icon iconName="like"></app-icon>
+          </div>
         </div>
-        <span class="hidden"> Favoriten </span>
+        <div [routerLink]="'favorites'" *ngIf="navExpanded">Favoriten</div>
       </div>
 
-      <div
-        [routerLink]="'create'"
-        class="flex justify-center header-icon"
-        routerLinkActive="activeIcon"
-      >
-        <div class="w-5">
-          <app-icon iconName="plus"></app-icon>
+      <div class="flex items-center gap-x-3">
+        <div
+          [routerLink]="'create'"
+          class="flex justify-center header-icon"
+          routerLinkActive="activeIcon"
+        >
+          <div class="w-6">
+            <app-icon iconName="plus"></app-icon>
+          </div>
         </div>
-        <span class="hidden"> Erstellen </span>
+        <div [routerLink]="'create'" *ngIf="navExpanded">Erstellen</div>
       </div>
 
       <div class="flex justify-center header-icon">
-        <div class="w-7">
-          <app-icon iconName="arrow"></app-icon>
+        <div
+          class="transition duration-300 ease-out w-7"
+          [ngClass]="{
+            'rotate-180': navExpanded
+          }"
+        >
+          <app-icon iconName="arrow" (click)="onArrowClick()"></app-icon>
         </div>
       </div>
-    </ul>
+    </div>
   </nav>
 </header>

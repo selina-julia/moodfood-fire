@@ -2,11 +2,12 @@
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 120px;
+  // width: 120px;
   background-color: white;
   border-bottom: 1px solid lightgray;
   height: 100%;
   box-shadow: 2px 0px 29px rgba(0, 0, 0, 0.05);
+  transition: 300ms ease;
 }
 
 .header-icon {

@@ -6,11 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  public navExpanded = false;
   constructor() {}
 
   ngOnInit(): void {}
 
-  public navExpanded() {
-    return false;
+  public onArrowClick() {
+    this.navExpanded = !this.navExpanded;
   }
 }
