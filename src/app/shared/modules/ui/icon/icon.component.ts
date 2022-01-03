@@ -22,6 +22,13 @@ export class IconComponent implements OnInit {
     );
 
     this.matIconRegistry.addSvgIcon(
+      'arrow',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/right.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
       'like',
       this.domSanitzer.bypassSecurityTrustResourceUrl(
         '../../../../../assets/icons/love.svg'

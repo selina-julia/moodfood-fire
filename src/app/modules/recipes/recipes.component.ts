@@ -1,11 +1,8 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
@@ -22,24 +19,47 @@ export class RecipesComponent implements OnInit {
   public recipes: Recipe[] = [];
   public showModal: boolean = false;
   public deleteItem: Recipe | undefined;
+  public isFavoritesPage: boolean = false;
+  public iterator!: number;
 
   constructor(
-    firestore: AngularFirestore,
     private recipeService: RecipesService,
     private fb: FormBuilder,
-    private headerTitleService: HeaderTitleService
+    private headerTitleService: HeaderTitleService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.getRecipes();
     this.initFormGroup();
-    this.headerTitleService.setTitle('Dashboard');
+
+    this.isFavoritesPage = this.router.url === '/favorites';
+
+    this.headerTitleService.setTitle(
+      this.isFavoritesPage ? 'Favoriten' : 'Dashboard'
+    );
   }
 
   public initFormGroup() {
     this.form = this.fb.group({
       title: '',
     });
+  }
+
+  public getRecipeLevel(level: string) {
+    switch (level) {
+      case 'easy':
+        return new Array(1);
+
+      case 'medium':
+        return new Array(2);
+
+      case 'advanced':
+        return new Array(3);
+
+      default:
+        return null;
+    }
   }
 
   public createRecipe() {

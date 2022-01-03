@@ -7,6 +7,17 @@
     <h2 class="ml-3 text-2xl font-bold" [routerLink]="['/recipes', item.id]">
       {{ item.title }}
     </h2>
+
+    <div class="flex justify-between mx-3">
+      <div class="flex">
+        <div *ngFor="let number of getRecipeLevel(item.level)">
+          <div class="flex w-7">
+            <span>+</span>
+          </div>
+        </div>
+      </div>
+      <div>{{ item.time }} min</div>
+    </div>
     <div class="flex ml-3 gap-x-2">
       <a [routerLink]="['/recipes/edit', item.id]">Edit</a>
       <a (click)="deleteRecipe(item)">Delete</a>
