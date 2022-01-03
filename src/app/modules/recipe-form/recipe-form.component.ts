@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
 import { Recipe } from '../recipes/shared/recipe';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-recipe-form',
@@ -24,7 +25,8 @@ export class RecipeFormComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private cdRef: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private storage: AngularFireStorage
   ) {}
 
   async ngOnInit() {
@@ -73,9 +75,8 @@ export class RecipeFormComponent implements OnInit {
 
       if (x) {
         const file = x[0];
-        this.form.patchValue({
-          fileSource: file,
-        });
+        const filePath = '/RecipeImages/';
+        const task = this.storage.upload(filePath, file);
       }
     }
   }

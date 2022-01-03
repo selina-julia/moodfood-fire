@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  BrowserTransferStateModule,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +20,8 @@ import { RecipeDetailsComponent } from './modules/recipe-details/recipe-details.
 import { RecipeFormComponent } from './modules/recipe-form/recipe-form.component';
 import { FooterComponent } from './shared/modules/layout/footer/footer.component';
 import { ButtonComponent } from './shared/modules/ui/button/button.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   declarations: [
@@ -35,6 +40,9 @@ import { ButtonComponent } from './shared/modules/ui/button/button.component';
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
     RecipesModule,
+    AngularFireStorageModule,
+    AngularSvgIconModule.forRoot(),
+    BrowserTransferStateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

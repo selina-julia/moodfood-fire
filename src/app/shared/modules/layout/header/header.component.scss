@@ -1,13 +1,14 @@
 .main-header {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  bottom: 0;
+  width: 120px;
   background-color: rgba(255, 255, 255, 0.85);
   border-bottom: 1px solid lightgray;
+  height: 100%;
 
-  @media (min-width: 768px) {
-    height: 4rem;
-    border: 0;
-  }
+  // @media (min-width: 768px) {
+  //   height: 4rem;
+  //   border: 0;
+  // }
 }
