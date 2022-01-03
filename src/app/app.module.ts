@@ -21,7 +21,11 @@ import { RecipeFormComponent } from './modules/recipe-form/recipe-form.component
 import { FooterComponent } from './shared/modules/layout/footer/footer.component';
 import { ButtonComponent } from './shared/modules/ui/button/button.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularSvgIconModule } from 'angular-svg-icon';
+import { MatIconModule } from '@angular/material/icon';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { IconComponent } from './shared/modules/ui/icon/icon.component';
+import { HeaderTopBarComponent } from './shared/modules/layout/header-top-bar/header-top-bar.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     RecipeDetailsComponent,
     RecipeFormComponent,
     FooterComponent,
+    IconComponent,
+    HeaderTopBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +47,10 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     AngularFirestoreModule,
     RecipesModule,
     AngularFireStorageModule,
-    AngularSvgIconModule.forRoot(),
     BrowserTransferStateModule,
+    NoopAnimationsModule,
+    MatIconModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

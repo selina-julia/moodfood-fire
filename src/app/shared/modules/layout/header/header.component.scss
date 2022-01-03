@@ -3,12 +3,21 @@
   top: 0;
   bottom: 0;
   width: 120px;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: white;
   border-bottom: 1px solid lightgray;
   height: 100%;
+  box-shadow: 2px 0px 29px rgba(0, 0, 0, 0.05);
+}
 
-  // @media (min-width: 768px) {
-  //   height: 4rem;
-  //   border: 0;
-  // }
+.header-icon {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  transition: 300ms ease;
+}
+
+.activeIcon {
+  background: #f6cc63;
+  box-shadow: 0px 4px 20px 4px rgba(246, 204, 99, 0.31);
+  transition: 300ms ease;
 }

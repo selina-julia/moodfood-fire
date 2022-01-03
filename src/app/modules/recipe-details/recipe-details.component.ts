@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Recipe } from '../recipes/shared/recipe';
 import { RecipesService } from '../../shared/services/recipes/recipes.service';
+import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -15,10 +16,13 @@ export class RecipeDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipesService
+    private recipeService: RecipesService,
+    private headerTitleService: HeaderTitleService
   ) {}
 
   ngOnInit(): void {
+    this.headerTitleService.setTitle('');
+
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = routeParams.get('recipeId');
 

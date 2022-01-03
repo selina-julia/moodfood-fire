@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
 import { Recipe } from './shared/recipe';
 
@@ -25,12 +26,14 @@ export class RecipesComponent implements OnInit {
   constructor(
     firestore: AngularFirestore,
     private recipeService: RecipesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private headerTitleService: HeaderTitleService
   ) {}
 
   ngOnInit() {
     this.getRecipes();
     this.initFormGroup();
+    this.headerTitleService.setTitle('Dashboard');
   }
 
   public initFormGroup() {
@@ -46,7 +49,6 @@ export class RecipesComponent implements OnInit {
   public deleteRecipe(id: Recipe) {
     this.showModal = true;
     this.deleteItem = id;
-    console.log(this.deleteItem);
   }
 
   public onCancelClick() {

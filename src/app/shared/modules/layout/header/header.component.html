@@ -1,20 +1,51 @@
 <header
-  class="z-10 items-center justify-between py-2 mb-10  main-header backdrop-filter backdrop-blur-lg"
+  class="z-10 items-center justify-between py-10 mb-10  main-header backdrop-filter backdrop-blur-lg"
 >
-  <div class="text-xl font-bold" [routerLink]="'recipes'">
-    mood<span class="text-yellow-500">food</span>
+  <div
+    class="flex justify-center mb-16 text-xl font-bold cursor-pointer"
+    [routerLink]="'recipes'"
+  >
+    <button *ngIf="navExpanded()">
+      mood<span class="text-yellow-500">food</span>
+    </button>
+    <div class="w-9">
+      <app-icon iconName="moodfood-small"></app-icon>
+    </div>
   </div>
   <nav>
-    <ul class="flex flex-col gap-y-3">
-      <li [routerLink]="'recipes'" routerLinkActive="text-yellow-500">
-        Rezepte
-      </li>
-      <li [routerLink]="'favorites'" routerLinkActive="text-yellow-500">
-        Favoriten
-      </li>
-      <li [routerLink]="'create'" routerLinkActive="text-yellow-500">
-        Erstellen
-      </li>
+    <ul class="flex flex-col items-center gap-y-10">
+      <div
+        [routerLink]="'recipes'"
+        class="flex justify-center header-icon"
+        routerLinkActive="activeIcon"
+      >
+        <div class="w-7">
+          <app-icon iconName="home"></app-icon>
+        </div>
+        <span class="hidden"> Rezepte </span>
+      </div>
+
+      <div
+        [routerLink]="'favorites'"
+        class="flex justify-center header-icon"
+        routerLinkActive="activeIcon"
+      >
+        <div class="w-7">
+          <app-icon iconName="like"></app-icon>
+        </div>
+        <span class="hidden"> Favoriten </span>
+      </div>
+
+      <div
+        [routerLink]="'create'"
+        class="flex justify-center header-icon"
+        routerLinkActive="activeIcon"
+      >
+        <div class="w-5">
+          <app-icon iconName="plus"></app-icon>
+        </div>
+        <span class="hidden"> Erstellen </span>
+      </div>
     </ul>
   </nav>
 </header>

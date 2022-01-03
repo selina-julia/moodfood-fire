@@ -1,26 +1,22 @@
-<div class="flex gap-x-10">
-  <div class="w-1/6 bg-yellow-50">Filter</div>
-
-  <div class="grid grid-cols-4 gap-4">
-    <div
-      class="p-4 border gap-x-2 border-radius"
-      *ngFor="let item of recipes$ | async"
-    >
-      <img [src]="item.image" alt="" class="mb-3 recipe-image" />
-      <h2 class="ml-3 text-2xl font-bold" [routerLink]="['/recipes', item.id]">
-        {{ item.title }}
-      </h2>
-      <div class="flex ml-3 gap-x-2">
-        <a [routerLink]="['/recipes/edit', item.id]">Edit</a>
-        <a (click)="deleteRecipe(item)">Delete</a>
-      </div>
-
-      <app-modal
-        (cancel)="onCancelClick()"
-        (delete)="onModalDeleteClick(deleteItem?.id)"
-        [title]="deleteItem?.title"
-        *ngIf="showModal"
-      ></app-modal>
+<div class="grid grid-cols-5 gap-4">
+  <div
+    class="p-4 border gap-x-2 border-radius"
+    *ngFor="let item of recipes$ | async"
+  >
+    <img [src]="item.image" alt="" class="mb-3 recipe-image" />
+    <h2 class="ml-3 text-2xl font-bold" [routerLink]="['/recipes', item.id]">
+      {{ item.title }}
+    </h2>
+    <div class="flex ml-3 gap-x-2">
+      <a [routerLink]="['/recipes/edit', item.id]">Edit</a>
+      <a (click)="deleteRecipe(item)">Delete</a>
     </div>
+
+    <app-modal
+      (cancel)="onCancelClick()"
+      (delete)="onModalDeleteClick(deleteItem?.id)"
+      [title]="deleteItem?.title"
+      *ngIf="showModal"
+    ></app-modal>
   </div>
 </div>

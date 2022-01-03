@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
 import { Recipe } from '../recipes/shared/recipe';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
 
 @Component({
   selector: 'app-recipe-form',
@@ -26,12 +27,15 @@ export class RecipeFormComponent implements OnInit {
     private fb: FormBuilder,
     private cdRef: ChangeDetectorRef,
     private router: Router,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private headerTitleService: HeaderTitleService
   ) {}
 
   async ngOnInit() {
     this.getRecipe();
     this.initFormGroup();
+
+    this.headerTitleService.setTitle('Rezept erstellen');
   }
 
   public initFormGroup() {
