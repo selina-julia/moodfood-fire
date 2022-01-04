@@ -1,3 +1,6 @@
+<div class="flex mb-16">
+  <app-search-bar (refineItems)="onSearchInputChange($event)"></app-search-bar>
+</div>
 <div
   class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
 >
@@ -13,7 +16,9 @@
       <div class="flex">
         <div *ngFor="let number of getRecipeLevel(item.level)">
           <div class="flex w-7">
-            <span>+</span>
+            <div class="w-5">
+              <app-icon iconName="like"></app-icon>
+            </div>
           </div>
         </div>
       </div>

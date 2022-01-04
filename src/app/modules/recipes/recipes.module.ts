@@ -8,11 +8,19 @@ import { ButtonComponent } from 'src/app/shared/modules/ui/button/button.compone
 import { IconComponent } from 'src/app/shared/modules/ui/icon/icon.component';
 import { IconModule } from 'src/app/shared/modules/ui/icon/icon.module';
 import { ModalComponent } from 'src/app/shared/modules/ui/modal/modal.component';
+import { SearchBarComponent } from 'src/app/shared/modules/ui/search-bar/search-bar.component';
+import { SearchBarModule } from 'src/app/shared/modules/ui/search-bar/search-bar.module';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipesComponent } from './recipes.component';
 
 @NgModule({
   declarations: [RecipesComponent, ModalComponent, ButtonComponent],
-  imports: [CommonModule, RecipesRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    RecipesRoutingModule,
+    ReactiveFormsModule,
+    SearchBarModule,
+    IconModule,
+  ],
 })
 export class RecipesModule {}

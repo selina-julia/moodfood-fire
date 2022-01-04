@@ -62,6 +62,14 @@ export class RecipesComponent implements OnInit {
     }
   }
 
+  public onSearchInputChange(inputValue: string) {
+    console.log(inputValue);
+
+    // return this.posts.filter((post: { title: string }) => {
+    //   return post.title.toLowerCase().includes(this.search.toLowerCase())
+    // })
+  }
+
   public createRecipe() {
     this.recipeService.createRecipe(this.form.value).then();
   }
@@ -81,7 +89,7 @@ export class RecipesComponent implements OnInit {
     console.log(id);
   }
 
-  async getRecipes() {
+  getRecipes() {
     this.recipes$ = this.recipeService.getRecipes();
   }
 }

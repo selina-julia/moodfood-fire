@@ -48,6 +48,13 @@ export class IconComponent implements OnInit {
         '../../../../../assets/icons/moodfood_small.svg'
       )
     );
+
+    this.matIconRegistry.addSvgIcon(
+      'search',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/search.svg'
+      )
+    );
   }
 
   ngOnInit(): void {}

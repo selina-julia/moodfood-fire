@@ -23,6 +23,8 @@ import { HeaderTopBarComponent } from './shared/modules/layout/header-top-bar/he
 import { HeaderComponent } from './shared/modules/layout/header/header.component';
 import { IconComponent } from './shared/modules/ui/icon/icon.component';
 import { IconModule } from './shared/modules/ui/icon/icon.module';
+import { SearchBarComponent } from './shared/modules/ui/search-bar/search-bar.component';
+import { SearchBarModule } from './shared/modules/ui/search-bar/search-bar.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,6 @@ import { IconModule } from './shared/modules/ui/icon/icon.module';
     RecipeDetailsComponent,
     RecipeFormComponent,
     FooterComponent,
-    IconComponent,
     HeaderTopBarComponent,
   ],
   imports: [
@@ -49,6 +50,7 @@ import { IconModule } from './shared/modules/ui/icon/icon.module';
     MatIconModule,
     HttpClientModule,
     IconModule,
+    SearchBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

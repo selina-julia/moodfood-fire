@@ -1,0 +1,12 @@
+<div class="flex items-start py-2 bg-transparent border-b border-gray-500">
+  <input
+    type="text"
+    placeholder="Suchbegriff ..."
+    class="bg-transparent focus:outline-none"
+    (input)="onSearchInputChange($event)"
+  />
+
+  <div class="w-5">
+    <app-icon iconName="search"></app-icon>
+  </div>
+</div>
