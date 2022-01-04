@@ -6,12 +6,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    NoopAnimationsModule,
-    MatIconModule,
-    HttpClientModule,
-  ],
+  imports: [CommonModule, MatIconModule],
   exports: [],
 })
 export class IconModule {}

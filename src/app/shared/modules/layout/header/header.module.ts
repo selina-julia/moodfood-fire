@@ -4,6 +4,6 @@ import { IconModule } from '../../ui/icon/icon.module';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule],
+  imports: [CommonModule, IconModule],
 })
 export class HeaderModule {}

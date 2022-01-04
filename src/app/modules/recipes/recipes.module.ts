@@ -13,11 +13,6 @@ import { RecipesComponent } from './recipes.component';
 
 @NgModule({
   declarations: [RecipesComponent, ModalComponent, ButtonComponent],
-  imports: [
-    CommonModule,
-    RecipesRoutingModule,
-    ReactiveFormsModule,
-    IconModule,
-  ],
+  imports: [CommonModule, RecipesRoutingModule, ReactiveFormsModule],
 })
 export class RecipesModule {}
