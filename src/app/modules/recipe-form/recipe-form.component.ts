@@ -1,7 +1,12 @@
 import { ChangeDetectionStrategy } from '@angular/compiler';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
@@ -41,7 +46,7 @@ export class RecipeFormComponent implements OnInit {
   public initFormGroup() {
     console.log('initformgroup');
     this.form = new FormGroup({
-      title: new FormControl(''),
+      title: new FormControl('', Validators.required),
       description: new FormControl(''),
       time: new FormControl(''),
       image: new FormControl(

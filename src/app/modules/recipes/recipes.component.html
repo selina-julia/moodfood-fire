@@ -5,11 +5,11 @@
   class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
 >
   <div
-    class="p-4 border gap-x-2 border-radius"
-    *ngFor="let item of recipes$ | async"
+    class="relative p-4 border gap-x-2 border-radius"
+    *ngFor="let item of recipeList"
   >
     <img [src]="item.image" alt="" class="mb-3 recipe-image" />
-    <h2 class="ml-3 text-2xl font-bold" [routerLink]="['/recipes', item.id]">
+    <h2 class="ml-3 text-2xl font-bold" [routerLink]="['/recipes', item.uid]">
       {{ item.title }}
     </h2>
     <div class="flex justify-between mx-3">
@@ -27,6 +27,16 @@
     <div class="flex ml-3 gap-x-2">
       <a [routerLink]="['/recipes/edit', item.id]">Edit</a>
       <a (click)="deleteRecipe(item)">Delete</a>
+    </div>
+
+    <div
+      class="absolute p-3 border border-gray-300 rounded-lg -top-2 -right-2"
+      (click)="updateFavorites(item)"
+      [ngClass]="getFavoriteClasses(item.isFavorite)"
+    >
+      <div class="w-8 h-8">
+        <app-icon iconName="like"></app-icon>
+      </div>
     </div>
 
     <app-modal

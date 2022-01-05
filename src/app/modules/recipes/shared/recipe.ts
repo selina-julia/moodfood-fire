@@ -1,10 +1,11 @@
 export interface Recipe {
-  id?: string;
+  id: string;
+  uid?: string;
   title: string;
   description?: string;
   time?: number;
   level: 'easy' | 'medium' | 'advanced';
-  isFavorite?: boolean;
+  isFavorite: boolean;
   categories?: string[];
   ingredients?: string[];
   image?: string;

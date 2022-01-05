@@ -14,13 +14,15 @@ import { Recipe } from './shared/recipe';
   styleUrls: ['./recipes.component.scss'],
 })
 export class RecipesComponent implements OnInit {
-  public recipes$!: Observable<Recipe[]>;
+  // public recipes$!: Observable<Recipe[]>;
   public form!: FormGroup;
   public recipes: Recipe[] = [];
+  public recipeList: Recipe[] = [];
   public showModal: boolean = false;
   public deleteItem: Recipe | undefined;
   public isFavoritesPage: boolean = false;
   public iterator!: number;
+  public isFavorite: boolean = false;
 
   constructor(
     private recipeService: RecipesService,
@@ -30,10 +32,10 @@ export class RecipesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isFavoritesPage = this.router.url === '/favorites';
+
     this.getRecipes();
     this.initFormGroup();
-
-    this.isFavoritesPage = this.router.url === '/favorites';
 
     this.headerTitleService.setTitle(
       this.isFavoritesPage ? 'Favoriten' : 'Dashboard'
@@ -60,6 +62,12 @@ export class RecipesComponent implements OnInit {
       default:
         return null;
     }
+  }
+
+  public updateFavorites(recipe: Recipe) {
+    console.log(recipe.uid);
+    recipe.isFavorite = !recipe.isFavorite;
+    this.recipeService.updateRecipe(recipe.uid, recipe);
   }
 
   public onSearchInputChange(inputValue: string) {
@@ -89,7 +97,22 @@ export class RecipesComponent implements OnInit {
     console.log(id);
   }
 
+  public getFavoriteClasses(isFavorite: boolean): string {
+    return isFavorite ? 'bg-yellow-500 border-yellow-500' : 'bg-[#fffbf7]';
+  }
+
   getRecipes() {
-    this.recipes$ = this.recipeService.getRecipes();
+    if (this.isFavoritesPage) {
+      this.recipeService.getRecipes().subscribe((items) => {
+        this.recipeList = items.filter((item) => item.isFavorite);
+        console.log(this.recipeList);
+      });
+    } else {
+      this.recipeService.getRecipes().subscribe((items) => {
+        this.recipeList = items;
+        console.log(this.recipeList);
+      });
+    }
+    // this.recipes$ = this.recipeService.getRecipes();
   }
 }

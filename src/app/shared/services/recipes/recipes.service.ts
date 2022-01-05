@@ -18,8 +18,8 @@ export class RecipesService {
         map((actions) => {
           return actions.map((a) => {
             const data = a.payload.doc.data() as Recipe;
-            const id = a.payload.doc.id;
-            return { id, ...data };
+            const uid = a.payload.doc.id;
+            return { uid, ...data };
           });
         })
       );
@@ -29,7 +29,7 @@ export class RecipesService {
     return this.firestore.collection('recipes').add(payload);
   }
 
-  updateRecipe(id: string, payload: Recipe) {
+  updateRecipe(id: string | undefined, payload: Recipe) {
     return this.firestore.doc('recipes/' + id).update(payload);
   }
 
