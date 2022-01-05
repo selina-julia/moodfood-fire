@@ -59,7 +59,7 @@
       <div>{{ item.time }} min</div>
     </div>
     <div class="flex ml-3 gap-x-2">
-      <a [routerLink]="['/recipes/edit', item.id]">Edit</a>
+      <a [routerLink]="['/recipes/edit', item.uid]">Edit</a>
       <a (click)="deleteRecipe(item)">Delete</a>
     </div>
 

@@ -11,6 +11,7 @@
           class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
           formControlName="title"
           id="title"
+          [value]="recipe?.title"
         />
       </div>
       <!-- Zubereitung -->
@@ -27,6 +28,7 @@
           class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
           formControlName="description"
           id="description"
+          [value]="recipe?.description"
         >
         </textarea>
       </div>
@@ -43,6 +45,7 @@
           class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
           formControlName="time"
           id="time"
+          [value]="recipe?.time"
         />
       </div>
 
@@ -62,6 +65,7 @@
               value="easy"
               name="level"
               formControlName="level"
+              [value]="recipe?.level"
             />
             <label for="easy">Leicht</label>
           </div>

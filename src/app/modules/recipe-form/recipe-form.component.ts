@@ -23,12 +23,13 @@ export class RecipeFormComponent implements OnInit {
   public recipes$!: Observable<Recipe[]>;
   public form!: FormGroup;
   public recipes: Recipe[] = [];
-  public recipe: Recipe | undefined;
+  public recipe!: Recipe | undefined;
   public selectedImage!: string | undefined;
   public isReady: boolean = false;
   public filePath!: File;
   public previewImage: any;
   public isLoading = false;
+  public isUpdating = false;
 
   constructor(
     private recipeService: RecipesService,
@@ -41,8 +42,9 @@ export class RecipeFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getRecipe();
     this.initForm();
+
+    this.getRecipe();
 
     this.headerTitleService.setTitle('Rezept erstellen');
     this.previewImage = '../../../assets/images/placeholder.jpeg';
@@ -54,7 +56,6 @@ export class RecipeFormComponent implements OnInit {
   }
 
   public initFormGroup() {
-    console.log('initformgroup');
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
       description: new FormControl(''),
@@ -108,21 +109,28 @@ export class RecipeFormComponent implements OnInit {
   }
 
   public createRecipe() {
-    this.recipeService.createRecipe(this.form.value).then();
-    console.log('create something');
-    this.router.navigate(['/recipes']);
+    if (!this.isUpdating) {
+      this.recipeService.createRecipe(this.form.value).then();
+      this.router.navigate(['/recipes']);
+    } else {
+      this.recipeService.updateRecipe(this.recipe?.uid, this.form.value);
+      this.router.navigate(['/recipes']);
+    }
   }
 
-  public async getRecipe() {
+  public getRecipe() {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = routeParams.get('recipeId');
 
-    await this.recipeService.getRecipes().subscribe((items) => {
-      this.recipe = items.find((item) => item.id === productIdFromRoute);
-    });
-    this.cdRef.detectChanges();
+    if (productIdFromRoute) {
+      this.isUpdating = true;
+      this.recipeService.getRecipes().subscribe((items) => {
+        this.recipe = items.find((item) => item.uid === productIdFromRoute);
+        console.log(this.recipe);
+      });
 
-    this.initFormGroup();
+      this.cdRef.detectChanges();
+    }
   }
 
   public onFileSelected(event: Event) {
