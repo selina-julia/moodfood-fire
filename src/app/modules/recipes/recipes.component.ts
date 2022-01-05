@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,12 +23,14 @@ export class RecipesComponent implements OnInit {
   public isFavoritesPage: boolean = false;
   public iterator!: number;
   public isFavorite: boolean = false;
+  public showOptions: boolean = false;
 
   constructor(
     private recipeService: RecipesService,
     private fb: FormBuilder,
     private headerTitleService: HeaderTitleService,
-    private router: Router
+    private router: Router,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -64,6 +66,10 @@ export class RecipesComponent implements OnInit {
     }
   }
 
+  public onDotsClicked() {
+    this.showOptions = !this.showOptions;
+  }
+
   public updateFavorites(recipe: Recipe) {
     console.log(recipe.uid);
     recipe.isFavorite = !recipe.isFavorite;
@@ -73,9 +79,11 @@ export class RecipesComponent implements OnInit {
   public onSearchInputChange(inputValue: string) {
     console.log(inputValue);
 
-    // return this.posts.filter((post: { title: string }) => {
-    //   return post.title.toLowerCase().includes(this.search.toLowerCase())
-    // })
+    this.recipeList = this.recipeList.filter((post: { title: string }) => {
+      return post.title.toLowerCase().includes(inputValue.toLowerCase());
+    });
+
+    this.cdRef.detectChanges();
   }
 
   public createRecipe() {
@@ -98,7 +106,9 @@ export class RecipesComponent implements OnInit {
   }
 
   public getFavoriteClasses(isFavorite: boolean): string {
-    return isFavorite ? 'bg-yellow-500 border-yellow-500' : 'bg-[#fffbf7]';
+    return isFavorite
+      ? 'bg-yellow-500 border-yellow-500 text-black'
+      : 'bg-[#fffbf7]';
   }
 
   getRecipes() {

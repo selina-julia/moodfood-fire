@@ -16,7 +16,7 @@ export class ButtonComponent implements OnInit {
   getButtonClasses(): string {
     switch (this.type) {
       case 'primary':
-        return 'bg-black text-white px-3 py-2 rounded-md block';
+        return 'bg-black text-white px-3 py-2 rounded-sm block';
 
       case 'textlink':
         return 'bb text-black';

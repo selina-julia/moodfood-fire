@@ -8,16 +8,49 @@
     class="relative p-4 border gap-x-2 border-radius"
     *ngFor="let item of recipeList"
   >
-    <img [src]="item.image" alt="" class="mb-3 recipe-image" />
-    <h2 class="ml-3 text-2xl font-bold" [routerLink]="['/recipes', item.uid]">
-      {{ item.title }}
-    </h2>
+    <img
+      [src]="item.image"
+      alt=""
+      class="mb-3 cursor-pointer recipe-image"
+      [routerLink]="['/recipes', item.uid]"
+    />
+    <div class="flex justify-between mb-2">
+      <h2
+        class="ml-3 text-2xl font-bold cursor-pointer"
+        [routerLink]="['/recipes', item.uid]"
+      >
+        {{ item.title }}
+      </h2>
+      <div class="relative w-5">
+        <app-icon
+          class="cursor-pointer"
+          (click)="onDotsClicked()"
+          iconName="dots"
+        ></app-icon>
+
+        <!-- edit and delete box -->
+        <div
+          *ngIf="showOptions"
+          class="absolute bottom-0 px-5 bg-white rounded-md  h-fit top-1 right-6 box-shadow"
+        >
+          <div class="flex items-center py-2 gap-x-2">
+            <div class="w-4"><app-icon iconName="edit"></app-icon></div>
+            <p>Bearbeiten</p>
+          </div>
+          <hr />
+          <div class="flex items-center py-2 gap-x-2">
+            <div class="w-4"><app-icon iconName="trash"></app-icon></div>
+            <p>Löschen</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="flex justify-between mx-3">
       <div class="flex">
         <div *ngFor="let number of getRecipeLevel(item.level)">
           <div class="flex w-7">
             <div class="w-5">
-              <app-icon iconName="like"></app-icon>
+              <app-icon iconName="chef"></app-icon>
             </div>
           </div>
         </div>
@@ -35,13 +68,15 @@
       [ngClass]="getFavoriteClasses(item.isFavorite)"
     >
       <div class="w-8 h-8">
-        <app-icon iconName="like"></app-icon>
+        <app-icon
+          [iconName]="item.isFavorite ? 'heart-full' : 'heart'"
+        ></app-icon>
       </div>
     </div>
 
     <app-modal
       (cancel)="onCancelClick()"
-      (delete)="onModalDeleteClick(deleteItem?.id)"
+      (delete)="onModalDeleteClick(deleteItem?.uid)"
       [title]="deleteItem?.title"
       *ngIf="showModal"
     ></app-modal>

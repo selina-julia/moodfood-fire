@@ -25,6 +25,7 @@ export class RecipeFormComponent implements OnInit {
   public recipes: Recipe[] = [];
   public recipe: Recipe | undefined;
   public selectedImage!: string | undefined;
+  public isReady: boolean = false;
 
   constructor(
     private recipeService: RecipesService,
@@ -36,11 +37,16 @@ export class RecipeFormComponent implements OnInit {
     private headerTitleService: HeaderTitleService
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.getRecipe();
-    this.initFormGroup();
+    this.initForm();
 
     this.headerTitleService.setTitle('Rezept erstellen');
+  }
+
+  private initForm(): void {
+    this.initFormGroup();
+    this.listenToFormGroupChanges();
   }
 
   public initFormGroup() {
@@ -48,16 +54,23 @@ export class RecipeFormComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
       description: new FormControl(''),
-      time: new FormControl(''),
-      image: new FormControl(
-        'https://a.storyblok.com/f/134761/4032x3024/45917713ab/img_1435.jpg'
-      ),
+      time: new FormControl('', Validators.required),
+      image: new FormControl(''),
       imageSource: new FormControl(''),
-      level: new FormControl(1),
+      level: new FormControl('easy', Validators.required),
       categories: new FormControl(''),
       isFavorite: new FormControl(false),
     });
   }
+
+  private listenToFormGroupChanges(): void {
+    this.form.valueChanges.subscribe(() => {
+      console.log(this.form);
+    });
+
+    // this.subscriptions.add(valueChangesSub);
+  }
+
   public createRecipe() {
     const formData = new FormData();
     formData.append('image', this.form?.get('imageSource')?.value);

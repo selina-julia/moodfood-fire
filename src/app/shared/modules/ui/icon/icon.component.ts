@@ -36,6 +36,27 @@ export class IconComponent implements OnInit {
     );
 
     this.matIconRegistry.addSvgIcon(
+      'heart-full',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/heart-full.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'heart',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/heart.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'chef',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/chef.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
       'plus',
       this.domSanitzer.bypassSecurityTrustResourceUrl(
         '../../../../../assets/icons/plus.svg'
@@ -53,6 +74,27 @@ export class IconComponent implements OnInit {
       'search',
       this.domSanitzer.bypassSecurityTrustResourceUrl(
         '../../../../../assets/icons/search.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'dots',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/dots.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'edit',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/write.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'trash',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/trash.svg'
       )
     );
   }
