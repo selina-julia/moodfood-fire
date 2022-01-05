@@ -6,8 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
-  @Input() type!: 'primary' | 'textlink';
+  @Input() type!: 'primary' | 'textlink' | 'primary-light';
   @Input() buttonText!: string;
+  @Input() icon!: string;
 
   constructor() {}
 
@@ -16,10 +17,14 @@ export class ButtonComponent implements OnInit {
   getButtonClasses(): string {
     switch (this.type) {
       case 'primary':
-        return 'bg-black text-white px-3 py-2 rounded-sm block';
+        return 'bg-black text-white px-3 py-2 rounded-md block';
+
+      case 'primary-light':
+        return 'bg-white px-3 py-2 rounded-md block box-shadow';
 
       case 'textlink':
-        return 'bb text-black';
+        return 'border-b text-black';
     }
+    return '';
   }
 }

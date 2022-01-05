@@ -1,1 +1,7 @@
-<div [ngClass]="getButtonClasses()">{{ buttonText }}</div>
+<div class="flex gap-x-3" [ngClass]="getButtonClasses()">
+  <div *ngIf="icon" class="w-5">
+    <app-icon [iconName]="icon"></app-icon>
+  </div>
+
+  <p>{{ buttonText }}</p>
+</div>

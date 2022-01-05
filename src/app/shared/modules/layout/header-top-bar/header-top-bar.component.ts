@@ -8,6 +8,8 @@ import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTi
 })
 export class HeaderTopBarComponent implements OnInit {
   public title = '';
+  public userName = 'Alan';
+  public initialLetter!: string;
 
   constructor(private headerTitleService: HeaderTitleService) {}
 
@@ -15,5 +17,7 @@ export class HeaderTopBarComponent implements OnInit {
     this.headerTitleService.title.subscribe((updatedTitle) => {
       this.title = updatedTitle;
     });
+
+    this.initialLetter = this.userName.charAt(0);
   }
 }
