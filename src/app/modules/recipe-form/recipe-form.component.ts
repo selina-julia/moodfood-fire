@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
 import { Recipe } from '../recipes/shared/recipe';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -26,6 +26,8 @@ export class RecipeFormComponent implements OnInit {
   public recipe: Recipe | undefined;
   public selectedImage!: string | undefined;
   public isReady: boolean = false;
+  public filePath!: File;
+  public previewImage: any;
 
   constructor(
     private recipeService: RecipesService,
@@ -42,6 +44,8 @@ export class RecipeFormComponent implements OnInit {
     this.initForm();
 
     this.headerTitleService.setTitle('Rezept erstellen');
+    this.previewImage =
+      'https://images.unsplash.com/photo-1599009434802-ca1dd09895e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80';
   }
 
   private initForm(): void {
@@ -55,13 +59,58 @@ export class RecipeFormComponent implements OnInit {
       title: new FormControl('', Validators.required),
       description: new FormControl(''),
       time: new FormControl('', Validators.required),
-      image: new FormControl(''),
-      imageSource: new FormControl(''),
+      image: new FormControl('', Validators.required),
       level: new FormControl('easy', Validators.required),
       categories: new FormControl(''),
       isFavorite: new FormControl(false),
     });
   }
+
+  public upload(event: Event) {
+    if ((event?.target as HTMLInputElement).files) {
+      const x = (event?.target as HTMLInputElement).files;
+
+      if (x) {
+        this.filePath = x[0];
+      }
+    }
+
+    const filePath = '/images' + Math.random() + this.filePath;
+
+    const fileRef = this.storage.ref(filePath);
+
+    console.log(this.filePath);
+    // this.storage.upload(
+    //   '/images' + Math.random() + this.filePath,
+    //   this.filePath
+    // );
+
+    this.storage
+      .upload(filePath, this.filePath)
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            console.log(url);
+            this.form.value['image'] = url;
+            this.form.patchValue({ image: url });
+            // this.form.controls['image'] = url;
+            this.previewImage = url;
+          });
+        })
+      )
+      .subscribe();
+
+    console.log(this.form);
+  }
+
+  // public uploadImage() {
+  //   console.log(this.filePath);
+  //   this.storage.upload(
+  //     '/images' + Math.random() + this.filePath,
+  //     this.filePath
+  //   );
+  // }
 
   private listenToFormGroupChanges(): void {
     this.form.valueChanges.subscribe(() => {
@@ -72,10 +121,10 @@ export class RecipeFormComponent implements OnInit {
   }
 
   public createRecipe() {
-    const formData = new FormData();
-    formData.append('image', this.form?.get('imageSource')?.value);
+    // const formData = new FormData();
+    // formData.append('image', this.form?.get('imageSource')?.value);
 
-    console.log(this.form?.get('categories')?.value);
+    // console.log(this.form?.get('categories')?.value);
 
     this.recipeService.createRecipe(this.form.value).then();
     console.log('create something');

@@ -135,14 +135,22 @@
         </div>
       </div>
 
+      <img
+        class="w-40"
+        [src]="previewImage"
+        (click)="fileuploader.click()"
+        alt=""
+      />
+
       <div class="flex flex-col mb-5">
-        <label for="image">Bild</label>
+        <label for="file">File:</label>
         <input
           type="file"
-          (change)="onFileSelected($event)"
-          id="image"
-          formControlName="image"
+          (change)="upload($event)"
+          #fileuploader
+          accept=".png,.jpg"
         />
+        <!-- <button (click)="uploadImage()">Upload Image</button>-->
       </div>
     </div>
   </div>
