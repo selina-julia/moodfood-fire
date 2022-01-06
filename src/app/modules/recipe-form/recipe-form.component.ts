@@ -30,6 +30,7 @@ export class RecipeFormComponent implements OnInit {
   public previewImage: any;
   public isLoading = false;
   public isUpdating = false;
+  public recipeIdFromRoute!: string | null;
 
   constructor(
     private recipeService: RecipesService,
@@ -44,7 +45,12 @@ export class RecipeFormComponent implements OnInit {
   ngOnInit() {
     this.initForm();
 
-    this.getRecipe();
+    this.recipeIdFromRoute = this.route.snapshot.paramMap.get('recipeId');
+
+    if (this.recipeIdFromRoute) {
+      this.isUpdating = true;
+      this.getRecipe();
+    }
 
     this.headerTitleService.setTitle('Rezept erstellen');
     this.previewImage = '../../../assets/images/placeholder.jpeg';
@@ -79,6 +85,7 @@ export class RecipeFormComponent implements OnInit {
 
     const filePath = '/images' + Math.random() + this.filePath;
     const fileRef = this.storage.ref(filePath);
+    console.log(fileRef);
 
     this.storage
       .upload(filePath, this.filePath)
@@ -119,18 +126,14 @@ export class RecipeFormComponent implements OnInit {
   }
 
   public getRecipe() {
-    const routeParams = this.route.snapshot.paramMap;
-    const productIdFromRoute = routeParams.get('recipeId');
+    const recipeIdFromRoute = this.route.snapshot.paramMap.get('recipeId');
 
-    if (productIdFromRoute) {
-      this.isUpdating = true;
-      this.recipeService.getRecipes().subscribe((items) => {
-        this.recipe = items.find((item) => item.uid === productIdFromRoute);
-        console.log(this.recipe);
-      });
+    this.recipeService.getRecipes().subscribe((items) => {
+      this.recipe = items.find((item) => item.uid === recipeIdFromRoute);
+      console.log(this.recipe);
+    });
 
-      this.cdRef.detectChanges();
-    }
+    this.cdRef.detectChanges();
   }
 
   public onFileSelected(event: Event) {
