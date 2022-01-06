@@ -25,6 +25,8 @@ import { IconComponent } from './shared/modules/ui/icon/icon.component';
 import { IconModule } from './shared/modules/ui/icon/icon.module';
 import { SearchBarComponent } from './shared/modules/ui/search-bar/search-bar.component';
 import { SearchBarModule } from './shared/modules/ui/search-bar/search-bar.module';
+import { UserGreetingComponent } from './shared/modules/ui/user-greeting/user-greeting.component';
+import { UserGreetingModule } from './shared/modules/ui/user-greeting/user-greeting.module';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { SearchBarModule } from './shared/modules/ui/search-bar/search-bar.modul
     HttpClientModule,
     IconModule,
     SearchBarModule,
+    UserGreetingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

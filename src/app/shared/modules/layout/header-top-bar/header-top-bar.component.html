@@ -1,11 +1,4 @@
 <div class="flex justify-between mb-5">
   <h1 class="text-4xl font-semibold">{{ title }}</h1>
-  <div class="flex items-center gap-x-4">
-    <p>Willkommen zurück, {{ userName }}!</p>
-    <div
-      class="flex items-center justify-center bg-yellow-500 rounded-full  w-9 h-9"
-    >
-      <span class="text-xl font-semibold text-white">{{ initialLetter }}</span>
-    </div>
-  </div>
+  <app-user-greeting class="hidden lg:block"></app-user-greeting>
 </div>

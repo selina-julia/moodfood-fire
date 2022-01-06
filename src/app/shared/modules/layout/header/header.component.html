@@ -12,7 +12,7 @@
     transition
     duration-300
     ease-out
-    bg-[#fffbf7] bg-opacity-50
+    bg-[#fffbf7] bg-opacity-80
     lg:bg-white lg:mb-10 lg:px-auto lg:py-10 lg:block
     main-header
     backdrop-filter backdrop-blur-lg
@@ -27,7 +27,14 @@
     }"
     [routerLink]="'recipes'"
   >
-    <div *ngIf="navExpanded" class="text-2xl font-bold">
+    <div
+      [ngClass]="{
+        'w-auto opacity-100 transition-all duration-200 ease-linear':
+          navExpanded,
+        'w-0 opacity-0': !navExpanded
+      }"
+      class="text-2xl font-bold"
+    >
       mood<span class="text-yellow-500">food</span>
     </div>
     <div class="w-9" *ngIf="!navExpanded">
@@ -47,7 +54,13 @@
         'pl-10 items-start': navExpanded
       }"
     >
-      <div class="flex items-center gap-x-3" (click)="closeNav()">
+      <div
+        class="flex items-center cursor-pointer"
+        [ngClass]="{
+          'gap-x-3': navExpanded
+        }"
+        (click)="closeNav()"
+      >
         <div
           [routerLink]="'recipes'"
           class="flex justify-center header-icon"
@@ -57,10 +70,25 @@
             <app-icon iconName="home"></app-icon>
           </div>
         </div>
-        <div [routerLink]="'recipes'" *ngIf="navExpanded">Rezepte</div>
+        <div
+          [routerLink]="'recipes'"
+          [ngClass]="{
+            'w-auto opacity-100 transition-all duration-200 ease-linear':
+              navExpanded,
+            'w-0 opacity-0': !navExpanded
+          }"
+        >
+          Rezepte
+        </div>
       </div>
 
-      <div class="flex items-center gap-x-3" (click)="closeNav()">
+      <div
+        class="flex items-center cursor-pointer"
+        [ngClass]="{
+          'gap-x-3': navExpanded
+        }"
+        (click)="closeNav()"
+      >
         <div
           [routerLink]="'favorites'"
           class="flex justify-center header-icon"
@@ -70,23 +98,47 @@
             <app-icon iconName="like"></app-icon>
           </div>
         </div>
-        <div [routerLink]="'favorites'" *ngIf="navExpanded">Favoriten</div>
+        <div
+          [routerLink]="'favorites'"
+          [ngClass]="{
+            'w-auto opacity-100 transition-all duration-200 ease-linear':
+              navExpanded,
+            'w-0 opacity-0': !navExpanded
+          }"
+        >
+          Favoriten
+        </div>
       </div>
 
-      <div class="flex items-center gap-x-3" (click)="closeNav()">
+      <div
+        class="flex items-center cursor-pointer"
+        [ngClass]="{
+          'gap-x-3': navExpanded
+        }"
+        (click)="closeNav()"
+      >
         <div
           [routerLink]="'create'"
-          class="flex justify-center header-icon"
+          class="flex justify-center transition-all duration-200 ease-linear  header-icon"
           routerLinkActive="activeIcon"
         >
           <div class="w-6">
             <app-icon iconName="plus"></app-icon>
           </div>
         </div>
-        <div [routerLink]="'create'" *ngIf="navExpanded">Erstellen</div>
+        <div
+          [routerLink]="'create'"
+          [ngClass]="{
+            'w-auto opacity-100 transition-all duration-200 ease-linear':
+              navExpanded,
+            'w-0 opacity-0': !navExpanded
+          }"
+        >
+          Erstellen
+        </div>
       </div>
 
-      <div class="flex justify-center header-icon">
+      <div class="flex justify-center cursor-pointer header-icon">
         <div
           class="transition duration-300 ease-out w-7"
           [ngClass]="{
@@ -158,6 +210,19 @@
         </div>
       </div>
       <div [routerLink]="'create'" *ngIf="navExpanded">Erstellen</div>
+    </div>
+
+    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+      <div
+        [routerLink]="'recipes'"
+        class="flex justify-center header-icon"
+        routerLinkActive="activeIcon"
+      >
+        <div class="w-8">
+          <app-icon iconName="user"></app-icon>
+        </div>
+      </div>
+      <div [routerLink]="'recipes'" *ngIf="navExpanded">Profil</div>
     </div>
   </div>
 </nav>
