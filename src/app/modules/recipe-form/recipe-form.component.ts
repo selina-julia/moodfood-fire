@@ -67,7 +67,7 @@ export class RecipeFormComponent implements OnInit {
       description: new FormControl(''),
       time: new FormControl('', Validators.required),
       image: new FormControl('', Validators.required),
-      level: new FormControl('easy', Validators.required),
+      level: new FormControl('', Validators.required),
       categories: new FormControl(''),
       isFavorite: new FormControl(false),
     });
