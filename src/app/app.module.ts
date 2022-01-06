@@ -27,6 +27,8 @@ import { SearchBarComponent } from './shared/modules/ui/search-bar/search-bar.co
 import { SearchBarModule } from './shared/modules/ui/search-bar/search-bar.module';
 import { UserGreetingComponent } from './shared/modules/ui/user-greeting/user-greeting.component';
 import { UserGreetingModule } from './shared/modules/ui/user-greeting/user-greeting.module';
+import { AuthFormComponent } from './modules/auth-form/auth-form.component';
+import { ButtonModule } from './shared/modules/ui/button/button.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { UserGreetingModule } from './shared/modules/ui/user-greeting/user-greet
     RecipeFormComponent,
     FooterComponent,
     HeaderTopBarComponent,
+    AuthFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { UserGreetingModule } from './shared/modules/ui/user-greeting/user-greet
     IconModule,
     SearchBarModule,
     UserGreetingModule,
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

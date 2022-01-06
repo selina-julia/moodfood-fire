@@ -17,10 +17,10 @@ export class ButtonComponent implements OnInit {
   getButtonClasses(): string {
     switch (this.type) {
       case 'primary':
-        return 'bg-black text-white px-3 py-2 rounded-md block';
+        return 'bg-black text-white px-4 py-3 rounded-md block';
 
       case 'primary-light':
-        return 'bg-white px-3 py-2 rounded-md block box-shadow';
+        return 'bg-white px-4 py-3 rounded-md block box-shadow';
 
       case 'textlink':
         return 'border-b text-black';
