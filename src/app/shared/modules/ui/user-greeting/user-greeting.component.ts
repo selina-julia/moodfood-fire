@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-greeting.component.scss'],
 })
 export class UserGreetingComponent implements OnInit {
-  public userName = 'Alan';
+  public userName = '';
   public initialLetter!: string;
 
   ngOnInit(): void {
+    if (this.userName) {
+      this.getInitialLetter();
+    }
+  }
+
+  public getInitialLetter() {
     this.initialLetter = this.userName.charAt(0);
   }
 }

@@ -214,7 +214,7 @@
 
     <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
       <div
-        [routerLink]="'recipes'"
+        [routerLink]="'auth'"
         class="flex justify-center header-icon"
         routerLinkActive="activeIcon"
       >
@@ -222,7 +222,7 @@
           <app-icon iconName="user"></app-icon>
         </div>
       </div>
-      <div [routerLink]="'recipes'" *ngIf="navExpanded">Profil</div>
+      <div [routerLink]="'auth'" *ngIf="navExpanded">Profil</div>
     </div>
   </div>
 </nav>
