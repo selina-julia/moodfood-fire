@@ -18,12 +18,14 @@ export class RecipesComponent implements OnInit {
   public form!: FormGroup;
   public recipes: Recipe[] = [];
   public recipeList: Recipe[] = [];
+  public filteredList: Recipe[] = [];
   public showModal: boolean = false;
   public deleteItem: Recipe | undefined;
   public isFavoritesPage: boolean = false;
   public iterator!: number;
   public isFavorite: boolean = false;
   public showOptions: boolean = false;
+  public searchInput!: string;
 
   constructor(
     private recipeService: RecipesService,
@@ -76,14 +78,19 @@ export class RecipesComponent implements OnInit {
     this.recipeService.updateRecipe(recipe.uid, recipe);
   }
 
+  public filteredItems() {
+    return this.recipeList.filter((post: { title: string }) => {
+      return post.title.toLowerCase().includes(this.searchInput.toLowerCase());
+    });
+  }
+
   public onSearchInputChange(inputValue: string) {
     console.log(inputValue);
+    this.searchInput = inputValue;
 
-    this.recipeList = this.recipeList.filter((post: { title: string }) => {
-      return post.title.toLowerCase().includes(inputValue.toLowerCase());
+    this.filteredList = this.recipeList.filter((post: { title: string }) => {
+      return post.title.toLowerCase().includes(this.searchInput.toLowerCase());
     });
-
-    this.cdRef.detectChanges();
   }
 
   public createRecipe() {
@@ -115,14 +122,17 @@ export class RecipesComponent implements OnInit {
     if (this.isFavoritesPage) {
       this.recipeService.getRecipes().subscribe((items) => {
         this.recipeList = items.filter((item) => item.isFavorite);
+        this.filteredList = items.filter((item) => item.isFavorite);
         console.log(this.recipeList);
       });
     } else {
       this.recipeService.getRecipes().subscribe((items) => {
         this.recipeList = items;
+        this.filteredList = items;
         console.log(this.recipeList);
       });
     }
+
     // this.recipes$ = this.recipeService.getRecipes();
   }
 }
