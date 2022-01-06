@@ -104,6 +104,20 @@ export class IconComponent implements OnInit {
         '../../../../../assets/icons/filter.svg'
       )
     );
+
+    this.matIconRegistry.addSvgIcon(
+      'menu',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/hamburger.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'close',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/close.svg'
+      )
+    );
   }
 
   ngOnInit(): void {}

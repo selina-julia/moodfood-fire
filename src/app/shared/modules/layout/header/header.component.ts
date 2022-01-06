@@ -5,11 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public navExpanded = false;
-  constructor() {}
-
-  ngOnInit(): void {}
+  public isMobileNavVisible = false;
 
   public onArrowClick() {
     this.navExpanded = !this.navExpanded;
@@ -17,5 +15,9 @@ export class HeaderComponent implements OnInit {
 
   public closeNav() {
     this.navExpanded = false;
+  }
+
+  public toggleMobileNav() {
+    this.isMobileNavVisible = !this.isMobileNavVisible;
   }
 }

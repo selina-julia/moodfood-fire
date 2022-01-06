@@ -1,9 +1,25 @@
+<!--header desktop -->
 <header
-  class="z-10 items-center justify-between py-10 mb-10 transition duration-300 ease-out  main-header backdrop-filter backdrop-blur-lg"
-  [ngClass]="{ 'w-32': !navExpanded, 'w-64': navExpanded }"
+  class="
+    z-10
+    flex
+    items-center
+    justify-between
+    w-full
+    px-5
+    py-3
+    transition
+    duration-300
+    ease-out
+    bg-[#fffbf7] bg-opacity-50
+    lg:bg-white lg:mb-10 lg:px-auto lg:py-10 lg:block
+    main-header
+    backdrop-filter backdrop-blur-lg
+  "
+  [ngClass]="{ 'lg:w-32': !navExpanded, 'lg:w-64': navExpanded }"
 >
   <div
-    class="flex mb-16 cursor-pointer"
+    class="flex cursor-pointer lg:mb-16"
     [ngClass]="{
       'justify-center': !navExpanded,
       'pl-10 justify-start': navExpanded
@@ -17,7 +33,12 @@
       <app-icon iconName="moodfood-small"></app-icon>
     </div>
   </div>
-  <nav>
+  <div (click)="toggleMobileNav()" class="lg:hidden">
+    <div class="w-9">
+      <app-icon iconName="menu"></app-icon>
+    </div>
+  </div>
+  <nav class="hidden lg:block">
     <div
       class="flex flex-col gap-y-10"
       [ngClass]="{
@@ -77,3 +98,65 @@
     </div>
   </nav>
 </header>
+
+<!--mobile nav-->
+<nav
+  class="absolute z-50 w-full h-full p-5 transition-all duration-500 ease-in-out bg-white  lg:hidden"
+  [ngClass]="{
+    '-left-full': !isMobileNavVisible,
+    'left-0': isMobileNavVisible
+  }"
+>
+  <div class="flex justify-end w-full">
+    <div class="w-7" (click)="toggleMobileNav()">
+      <app-icon iconName="close"></app-icon>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col items-center justify-center h-full gap-y-10"
+    [ngClass]="{
+      'items-center': !navExpanded,
+      'pl-10 items-start': navExpanded
+    }"
+  >
+    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+      <div
+        [routerLink]="'recipes'"
+        class="flex justify-center header-icon"
+        routerLinkActive="activeIcon"
+      >
+        <div class="w-7">
+          <app-icon iconName="home"></app-icon>
+        </div>
+      </div>
+      <div [routerLink]="'recipes'" *ngIf="navExpanded">Rezepte</div>
+    </div>
+
+    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+      <div
+        [routerLink]="'favorites'"
+        class="flex justify-center header-icon"
+        routerLinkActive="activeIcon"
+      >
+        <div class="w-7">
+          <app-icon iconName="like"></app-icon>
+        </div>
+      </div>
+      <div [routerLink]="'favorites'" *ngIf="navExpanded">Favoriten</div>
+    </div>
+
+    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+      <div
+        [routerLink]="'create'"
+        class="flex justify-center header-icon"
+        routerLinkActive="activeIcon"
+      >
+        <div class="w-6">
+          <app-icon iconName="plus"></app-icon>
+        </div>
+      </div>
+      <div [routerLink]="'create'" *ngIf="navExpanded">Erstellen</div>
+    </div>
+  </div>
+</nav>
