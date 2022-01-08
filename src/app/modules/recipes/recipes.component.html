@@ -36,7 +36,7 @@
         >
           <div
             id="recipe-1"
-            class="flex items-center py-2 gap-x-2"
+            class="flex items-center py-2 cursor-pointer gap-x-2"
             [routerLink]="['/recipes/edit', item.uid]"
           >
             <div class="w-4"><app-icon iconName="edit"></app-icon></div>
@@ -44,7 +44,7 @@
           </div>
           <hr />
           <div
-            class="flex items-center py-2 gap-x-2"
+            class="flex items-center py-2 cursor-pointer gap-x-2"
             (click)="deleteRecipe(item)"
           >
             <div class="w-4"><app-icon iconName="trash"></app-icon></div>
