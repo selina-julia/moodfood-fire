@@ -1,3 +1,5 @@
+import { DocumentReference } from '@angular/fire/compat/firestore';
+
 export interface Recipe {
   id: string;
   uid?: string;
@@ -9,4 +11,5 @@ export interface Recipe {
   categories?: string[];
   ingredients?: string[];
   image?: string;
+  ref?: DocumentReference;
 }

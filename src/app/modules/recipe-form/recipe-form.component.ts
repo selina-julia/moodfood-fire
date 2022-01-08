@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy } from '@angular/compiler';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {
   FormBuilder,
   FormControl,
@@ -9,10 +8,11 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, Observable } from 'rxjs';
+import { Category } from 'src/app/shared/models/category';
+import { CategoriesService } from 'src/app/shared/services/categories/categories.service';
+import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
 import { Recipe } from '../recipes/shared/recipe';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
 
 @Component({
   selector: 'app-recipe-form',
@@ -31,6 +31,7 @@ export class RecipeFormComponent implements OnInit {
   public isLoading = false;
   public isUpdating = false;
   public recipeIdFromRoute!: string | null;
+  public categories!: Category[];
 
   constructor(
     private recipeService: RecipesService,
@@ -39,11 +40,13 @@ export class RecipeFormComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private router: Router,
     private storage: AngularFireStorage,
-    private headerTitleService: HeaderTitleService
+    private headerTitleService: HeaderTitleService,
+    private categoriesService: CategoriesService
   ) {}
 
   ngOnInit() {
     this.initForm();
+    this.getCategories();
 
     this.recipeIdFromRoute = this.route.snapshot.paramMap.get('recipeId');
 
@@ -70,6 +73,13 @@ export class RecipeFormComponent implements OnInit {
       level: new FormControl('', Validators.required),
       categories: new FormControl(''),
       isFavorite: new FormControl(false),
+    });
+  }
+
+  public getCategories() {
+    this.categoriesService.getRecipes().subscribe((items) => {
+      this.categories = items;
+      console.log(this.categories);
     });
   }
 

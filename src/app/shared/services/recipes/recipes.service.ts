@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, Observable } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { Recipe } from '../../../modules/recipes/shared/recipe';
+import { Category } from '../../models/category';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,7 +20,32 @@ export class RecipesService {
           return actions.map((a) => {
             const data = a.payload.doc.data() as Recipe;
             const uid = a.payload.doc.id;
+
             return { uid, ...data };
+          });
+        })
+      );
+  }
+
+  getCategoriesForRecipe(id: string) {
+    this.firestore
+      .collection('recipes')
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((a) => {
+            const data = a.payload.doc.data() as Recipe;
+            const categoryId = 'austrian';
+
+            return this.firestore
+              .collection('categories')
+              .doc(categoryId)
+              .snapshotChanges()
+              .pipe(
+                map((actions) => {
+                  return actions.payload.data();
+                })
+              );
           });
         })
       );

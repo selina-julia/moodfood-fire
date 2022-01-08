@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { Recipe } from '../recipes/shared/recipe';
 import { RecipesService } from '../../shared/services/recipes/recipes.service';
 import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Category } from 'src/app/shared/models/category';
 
 @Component({
   selector: 'app-recipe-details',
@@ -17,7 +19,8 @@ export class RecipeDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipesService,
-    private headerTitleService: HeaderTitleService
+    private headerTitleService: HeaderTitleService,
+    private afs: AngularFirestore
   ) {}
 
   ngOnInit(): void {
