@@ -25,21 +25,28 @@
       <div class="relative w-5">
         <app-icon
           class="cursor-pointer"
-          (click)="onDotsClicked()"
+          (click)="onDotsClicked(item)"
           iconName="dots"
         ></app-icon>
 
         <!-- edit and delete box -->
         <div
-          *ngIf="showOptions"
+          *ngIf="showOptionsBox(item) && showOptions"
           class="absolute bottom-0 px-5 bg-white rounded-md  h-fit top-1 right-6 box-shadow"
         >
-          <div class="flex items-center py-2 gap-x-2">
+          <div
+            id="recipe-1"
+            class="flex items-center py-2 gap-x-2"
+            [routerLink]="['/recipes/edit', item.uid]"
+          >
             <div class="w-4"><app-icon iconName="edit"></app-icon></div>
             <p>Bearbeiten</p>
           </div>
           <hr />
-          <div class="flex items-center py-2 gap-x-2">
+          <div
+            class="flex items-center py-2 gap-x-2"
+            (click)="deleteRecipe(item)"
+          >
             <div class="w-4"><app-icon iconName="trash"></app-icon></div>
             <p>Löschen</p>
           </div>
@@ -58,10 +65,12 @@
       </div>
       <div>{{ item.time }} min</div>
     </div>
+    <!--
     <div class="flex ml-3 gap-x-2">
       <a [routerLink]="['/recipes/edit', item.uid]">Edit</a>
       <a (click)="deleteRecipe(item)">Delete</a>
     </div>
+    -->
 
     <div
       class="absolute p-3 border border-gray-300 rounded-lg -top-2 -right-2"

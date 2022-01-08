@@ -26,6 +26,7 @@ export class RecipesComponent implements OnInit {
   public isFavorite: boolean = false;
   public showOptions: boolean = false;
   public searchInput!: string;
+  public optionsItem!: Recipe | undefined;
 
   constructor(
     private recipeService: RecipesService,
@@ -68,8 +69,13 @@ export class RecipesComponent implements OnInit {
     }
   }
 
-  public onDotsClicked() {
+  public onDotsClicked(item: Recipe | undefined) {
+    this.optionsItem = item;
     this.showOptions = !this.showOptions;
+  }
+
+  public showOptionsBox(item: Recipe) {
+    return item === this.optionsItem;
   }
 
   public updateFavorites(recipe: Recipe) {
@@ -104,6 +110,7 @@ export class RecipesComponent implements OnInit {
 
   public onCancelClick() {
     this.showModal = false;
+    this.showOptions = false;
   }
 
   public onModalDeleteClick(id: string | undefined) {
