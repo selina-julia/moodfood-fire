@@ -20,36 +20,13 @@ export class RecipesService {
           return actions.map((a) => {
             const data = a.payload.doc.data() as Recipe;
             const uid = a.payload.doc.id;
-
             return { uid, ...data };
           });
         })
       );
   }
 
-  getCategoriesForRecipe(id: string) {
-    this.firestore
-      .collection('recipes')
-      .snapshotChanges()
-      .pipe(
-        map((changes) => {
-          return changes.map((a) => {
-            const data = a.payload.doc.data() as Recipe;
-            const categoryId = 'austrian';
-
-            return this.firestore
-              .collection('categories')
-              .doc(categoryId)
-              .snapshotChanges()
-              .pipe(
-                map((actions) => {
-                  return actions.payload.data();
-                })
-              );
-          });
-        })
-      );
-  }
+  getCategoriesForRecipe(id: string) {}
 
   createRecipe(payload: Recipe) {
     return this.firestore.collection('recipes').add(payload);

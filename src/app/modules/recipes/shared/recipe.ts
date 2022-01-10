@@ -11,5 +11,4 @@ export interface Recipe {
   categories?: string[];
   ingredients?: string[];
   image?: string;
-  ref?: DocumentReference;
 }

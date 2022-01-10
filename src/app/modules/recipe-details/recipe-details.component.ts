@@ -35,6 +35,7 @@ export class RecipeDetailsComponent implements OnInit {
         return item.uid === productIdFromRoute;
       });
       console.log(this.recipe);
+      console.log(this.recipe?.categories);
     });
 
     // this.recipeService.getRecipeById(params['id']).subscribe(res => (this.recipe = res));
