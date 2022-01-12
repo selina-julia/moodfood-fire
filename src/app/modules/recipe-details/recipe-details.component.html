@@ -19,8 +19,9 @@
   <span
     *ngIf="recipe?.categories"
     class="px-2 py-1 mr-3 border border-gray-500 rounded-sm"
-    >{{ recipe?.categories }}</span
   >
+    {{ category?.name }}
+  </span>
 
   <p class="mt-5 xl:mr-36">{{ recipe?.description }}</p>
 

@@ -1,4 +1,5 @@
 import { DocumentReference } from '@angular/fire/compat/firestore';
+import { Category } from 'src/app/shared/models/category';
 
 export interface Recipe {
   id: string;
@@ -8,7 +9,7 @@ export interface Recipe {
   time?: number;
   level: 'easy' | 'medium' | 'advanced';
   isFavorite: boolean;
-  categories?: string[];
+  categories?: DocumentReference<Category>;
   ingredients?: string[];
   image?: string;
 }

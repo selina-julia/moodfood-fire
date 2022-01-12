@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, Observable, take } from 'rxjs';
+import { BehaviorSubject, map, Observable, take } from 'rxjs';
 import { Recipe } from '../../../modules/recipes/shared/recipe';
 import { Category } from '../../models/category';
 @Injectable({
   providedIn: 'root',
 })
 export class RecipesService {
+  private categories = new BehaviorSubject<Map<string, Category | undefined>>(
+    new Map()
+  );
+
   constructor(private firestore: AngularFirestore) {}
 
   getRecipes(): Observable<Recipe[]> {
@@ -26,7 +30,9 @@ export class RecipesService {
       );
   }
 
-  getCategoriesForRecipe(id: string) {}
+  getCategoriesForRecipe(id: string | undefined) {
+    return this.firestore.doc('categories/' + id);
+  }
 
   createRecipe(payload: Recipe) {
     return this.firestore.collection('recipes').add(payload);
@@ -40,7 +46,28 @@ export class RecipesService {
     return this.firestore.doc('recipes/' + id).delete();
   }
 
-  getRecipeById(id: string) {
+  getRecipeById(id: string | undefined) {
     return this.firestore.doc('recipes/' + id);
+  }
+
+  // public addAuthor(userId: string, author: PcUser | undefined): void {
+  //   const authors = this.authors.getValue();
+  //   authors.set(userId, author);
+  //   this.authors.next(authors);
+  // }
+
+  get categories$(): BehaviorSubject<Map<string, Category | undefined>> {
+    console.log('hi');
+    return this.categories;
+  }
+
+  category$(uid: string): Observable<Category | undefined> {
+    console.log(uid);
+
+    console.log(this.firestore.doc('categories/' + uid));
+
+    return this.categories.pipe(
+      map((categoriesMap) => categoriesMap?.get(uid))
+    );
   }
 }
