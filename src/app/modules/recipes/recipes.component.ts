@@ -1,9 +1,6 @@
-import { Location } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
 import { Recipe } from './shared/recipe';
@@ -32,8 +29,7 @@ export class RecipesComponent implements OnInit {
     private recipeService: RecipesService,
     private fb: FormBuilder,
     private headerTitleService: HeaderTitleService,
-    private router: Router,
-    private cdRef: ChangeDetectorRef
+    private router: Router
   ) {}
 
   ngOnInit() {

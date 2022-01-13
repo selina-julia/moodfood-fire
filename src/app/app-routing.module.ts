@@ -7,7 +7,8 @@ import { RecipesComponent } from './modules/recipes/recipes.component';
 import { RegisterFormComponent } from './modules/register-form/register-form.component';
 
 const routes: Routes = [
-  { path: '', component: RecipesComponent },
+  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+
   {
     path: 'recipes',
     loadChildren: () =>
