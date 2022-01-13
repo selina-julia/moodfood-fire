@@ -29,6 +29,9 @@ import { UserGreetingComponent } from './shared/modules/ui/user-greeting/user-gr
 import { UserGreetingModule } from './shared/modules/ui/user-greeting/user-greeting.module';
 import { AuthFormComponent } from './modules/auth-form/auth-form.component';
 import { ButtonModule } from './shared/modules/ui/button/button.module';
+import { RegisterFormComponent } from './modules/register-form/register-form.component';
+import { AuthenticationService } from './shared/services/authentication/authentication.service';
+import { RegisterFormModule } from './modules/register-form/register-form.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import { ButtonModule } from './shared/modules/ui/button/button.module';
     FooterComponent,
     HeaderTopBarComponent,
     AuthFormComponent,
+    RegisterFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,9 +61,10 @@ import { ButtonModule } from './shared/modules/ui/button/button.module';
     IconModule,
     SearchBarModule,
     UserGreetingModule,
+    RegisterFormModule,
     ButtonModule,
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

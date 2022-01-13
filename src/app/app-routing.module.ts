@@ -4,6 +4,7 @@ import { AuthFormComponent } from './modules/auth-form/auth-form.component';
 import { RecipeDetailsComponent } from './modules/recipe-details/recipe-details.component';
 import { RecipeFormComponent } from './modules/recipe-form/recipe-form.component';
 import { RecipesComponent } from './modules/recipes/recipes.component';
+import { RegisterFormComponent } from './modules/register-form/register-form.component';
 
 const routes: Routes = [
   { path: '', component: RecipesComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'create', component: RecipeFormComponent },
   { path: 'favorites', component: RecipesComponent },
   { path: 'auth', component: AuthFormComponent },
+  { path: 'register', component: RegisterFormComponent },
 ];
 
 @NgModule({

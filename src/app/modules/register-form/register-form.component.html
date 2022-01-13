@@ -1,0 +1,94 @@
+<div
+  class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center min-h-screen px-4 py-12 bg-no-repeat bg-cover bg-gray-50 sm:px-6 lg:px-8"
+  [style.background-image]="'url(' + currentImage + ')'"
+>
+  <div class="absolute inset-0 z-0 bg-black opacity-60"></div>
+  <div class="z-10 w-full max-w-md p-10 space-y-8 bg-white rounded-xl">
+    <div class="text-center">
+      <h2 class="mt-6 text-3xl font-bold text-gray-900">Konto erstellen</h2>
+      <p class="mt-2 text-sm text-gray-600">
+        Lege ein Benutzerkonto an, um Rezepte zu erstellen
+      </p>
+    </div>
+
+    <form class="mt-8 space-y-6" [formGroup]="registerForm">
+      <input type="hidden" name="remember" value="true" />
+      <!--<div class="relative">
+        <label class="text-sm font-bold tracking-wide text-gray-700"
+          >Vorname</label
+        >
+        <input
+          class="w-full py-2 text-base border-b border-gray-300 focus:outline-none focus:border-blue-500"
+          type="text"
+          placeholder="Vorname"
+          autocomplete="given-name"
+          formControlName="firstName"
+        />
+      </div>
+      <div class="relative">
+        <label class="text-sm font-bold tracking-wide text-gray-700"
+          >Nachname</label
+        >
+        <input
+          class="w-full py-2 text-base border-b border-gray-300 focus:outline-none focus:border-blue-500"
+          type="text"
+          placeholder="Nachname"
+          autocomplete="family-name"
+          formControlName="lastName"
+        />
+      </div> -->
+      <div class="relative">
+        <label class="text-sm font-bold tracking-wide text-gray-700"
+          >E-Mail</label
+        >
+        <input
+          class="w-full py-2 text-base border-b border-gray-300 focus:outline-none focus:border-blue-500"
+          type="email"
+          placeholder="mail@gmail.com"
+          autocomplete="email"
+          formControlName="email"
+        />
+      </div>
+      <div class="content-center mt-8">
+        <label class="text-sm font-bold tracking-wide text-gray-700">
+          Passwort
+        </label>
+        <input
+          class="content-center w-full py-2 text-base border-b border-gray-300 focus:outline-none focus:border-blue-500"
+          type="password"
+          placeholder="Passwort eingeben"
+          formControlName="password"
+        />
+      </div>
+
+      <div class="content-center mt-8">
+        <label class="text-sm font-bold tracking-wide text-gray-700">
+          Passwort bestätigen
+        </label>
+        <input
+          class="content-center w-full py-2 text-base border-b border-gray-300 focus:outline-none focus:border-blue-500"
+          type="password"
+          placeholder="Passwort bestätigen"
+        />
+      </div>
+
+      <div>
+        <app-button
+          type="primary"
+          buttonText="Benutzerkonto erstellen"
+          (click)="onCreateUserAccount()"
+        ></app-button>
+      </div>
+      <p
+        class="flex flex-col items-center justify-center mt-10 text-center text-gray-500 text-md"
+      >
+        <span>Bereits einen Account?</span>
+        <a
+          [routerLink]="'/auth'"
+          class="text-blue-500 transition duration-300 ease-in cursor-pointer hover:text-indigo-500no-underline hover:underline"
+          >Jetzt einloggen</a
+        >
+      </p>
+    </form>
+  </div>
+</div>
