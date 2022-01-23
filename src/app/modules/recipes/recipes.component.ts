@@ -22,6 +22,7 @@ export class RecipesComponent implements OnInit {
   public showModal: boolean = false;
   public deleteItem: Recipe | undefined;
   public isFavoritesPage: boolean = false;
+  public isDashboardPage: boolean = false;
   public iterator!: number;
   public isFavorite: boolean = false;
   public showOptions: boolean = false;
@@ -42,6 +43,7 @@ export class RecipesComponent implements OnInit {
 
   async ngOnInit() {
     this.isFavoritesPage = this.router.url === '/favorites';
+    this.isDashboardPage = this.router.url === '/recipes';
     this.isLoading = true;
 
     setTimeout(() => {
@@ -52,8 +54,12 @@ export class RecipesComponent implements OnInit {
     }, 1000);
 
     this.headerTitleService.setTitle(
-      this.isFavoritesPage ? 'Favoriten' : 'Dashboard'
+      this.isFavoritesPage ? 'Favoriten' : 'Meine Rezepte'
     );
+
+    if (this.isDashboardPage) {
+      this.headerTitleService.setTitle('Dashboard');
+    }
   }
 
   public async refreshCurrentUser(): Promise<void> {
@@ -137,7 +143,6 @@ export class RecipesComponent implements OnInit {
   public onModalDeleteClick(id: string | undefined) {
     this.recipeService.deleteRecipe(id);
     this.showModal = false;
-    console.log(id);
   }
 
   public getFavoriteClasses(isFavorite: boolean): string {
@@ -152,17 +157,13 @@ export class RecipesComponent implements OnInit {
     }
     if (this.isFavoritesPage) {
       this.recipeService.getRecipes().subscribe((items) => {
-        this.recipes$.next(items);
-
-        this.recipes$.subscribe((val) => console.log(val));
-
-        this.recipeList = items.filter(
-          (item) => item.isFavorite && item.userId === this.userId
-        );
-        this.filteredList = items.filter(
-          (item) => item.isFavorite && item.userId === this.userId
-        );
-        console.log(this.recipeList);
+        this.recipeList = items.filter((item) => item.isFavorite);
+        this.filteredList = items.filter((item) => item.isFavorite);
+      });
+    } else if (this.isDashboardPage) {
+      this.recipeService.getRecipes().subscribe((items) => {
+        this.recipeList = items;
+        this.filteredList = items;
       });
     } else {
       this.recipeService.getRecipes().subscribe((items) => {
@@ -171,7 +172,5 @@ export class RecipesComponent implements OnInit {
         console.log(this.recipeList);
       });
     }
-
-    // this.recipes$ = this.recipeService.getRecipes();
   }
 }

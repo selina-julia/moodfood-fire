@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'favorites', component: RecipesComponent },
   { path: 'auth', component: AuthFormComponent },
   { path: 'register', component: RegisterFormComponent },
+  { path: 'myrecipes', component: RecipesComponent },
 ];
 
 @NgModule({

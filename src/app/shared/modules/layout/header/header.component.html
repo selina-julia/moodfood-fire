@@ -62,6 +62,34 @@
             'w-0 opacity-0': !navExpanded
           }"
         >
+          Foodboard
+        </div>
+      </div>
+
+      <div
+        class="flex items-center cursor-pointer"
+        [ngClass]="{
+          'gap-x-3': navExpanded
+        }"
+        (click)="closeNav()"
+      >
+        <div
+          [routerLink]="'myrecipes'"
+          class="flex justify-center header-icon"
+          routerLinkActive="activeIcon"
+        >
+          <div class="w-7">
+            <app-icon iconName="cooking"></app-icon>
+          </div>
+        </div>
+        <div
+          [routerLink]="'myrecipes'"
+          [ngClass]="{
+            'w-auto opacity-100 transition-all duration-200 ease-linear':
+              navExpanded,
+            'w-0 opacity-0': !navExpanded
+          }"
+        >
           Rezepte
         </div>
       </div>
@@ -169,7 +197,20 @@
           <app-icon iconName="home"></app-icon>
         </div>
       </div>
-      <div [routerLink]="'recipes'" *ngIf="navExpanded">Rezepte</div>
+      <div [routerLink]="'recipes'" *ngIf="navExpanded">Foodboard</div>
+    </div>
+
+    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+      <div
+        [routerLink]="'myrecipes'"
+        class="flex justify-center header-icon"
+        routerLinkActive="activeIcon"
+      >
+        <div class="w-7">
+          <app-icon iconName="cooking"></app-icon>
+        </div>
+      </div>
+      <div [routerLink]="'myrecipes'" *ngIf="navExpanded">Meine Rezepte</div>
     </div>
 
     <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
