@@ -1,22 +1,6 @@
 <!--header desktop -->
 <header
-  class="
-    z-10
-    flex
-    items-center
-    justify-between
-    w-full
-    px-5
-    lg:px-0
-    py-3
-    transition
-    duration-300
-    ease-out
-    bg-[#fffbf7] bg-opacity-80
-    lg:bg-white lg:mb-10 lg:px-auto lg:py-10 lg:block
-    main-header
-    backdrop-filter backdrop-blur-lg
-  "
+  class="z-10 flex items-center justify-between w-full px-5 lg:px-0 py-3 transition duration-300 ease-out bg-[#fffbf7] bg-opacity-80 lg:bg-white lg:mb-10 lg:px-auto lg:py-10 lg:block main-header backdrop-filter backdrop-blur-lg"
   [ngClass]="{ 'lg:w-32': !navExpanded, 'lg:w-64': navExpanded }"
 >
   <div
@@ -35,7 +19,7 @@
       }"
       class="text-2xl font-bold"
     >
-      mood<span class="text-yellow-500">food</span>
+      mood<span class="text-[#f6cc63]">food</span>
     </div>
     <div class="w-9" *ngIf="!navExpanded">
       <app-icon iconName="moodfood-small"></app-icon>
@@ -119,7 +103,7 @@
       >
         <div
           [routerLink]="'create'"
-          class="flex justify-center transition-all duration-200 ease-linear  header-icon"
+          class="flex justify-center transition-all duration-200 ease-linear header-icon"
           routerLinkActive="activeIcon"
         >
           <div class="w-6">
@@ -154,7 +138,7 @@
 
 <!--mobile nav-->
 <nav
-  class="absolute z-50 w-full h-full p-5 transition-all duration-500 ease-in-out bg-white  lg:hidden"
+  class="absolute z-50 w-full h-full p-5 transition-all duration-500 ease-in-out bg-white lg:hidden"
   [ngClass]="{
     '-left-full': !isMobileNavVisible,
     'left-0': isMobileNavVisible

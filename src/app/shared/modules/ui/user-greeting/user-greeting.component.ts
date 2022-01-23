@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/shared/models/user';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-user-greeting',
@@ -6,16 +8,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-greeting.component.scss'],
 })
 export class UserGreetingComponent implements OnInit {
-  public userName = '';
-  public initialLetter!: string;
+  public initialLetter?: string;
+  public currentUser?: User;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    if (this.userName) {
-      this.getInitialLetter();
-    }
+    this.refreshCurrentUser();
   }
 
-  public getInitialLetter() {
-    this.initialLetter = this.userName.charAt(0);
+  public refreshCurrentUser(): void {
+    this.authService.fetchUser();
+
+    this.authService.user$.subscribe((val) => {
+      console.log(val);
+      if (val) {
+        this.currentUser = val;
+      }
+    });
+  }
+
+  public getInitialLetter(): string | undefined {
+    return this.currentUser?.firstName?.charAt(0);
+  }
+
+  public onLogout() {
+    this.authService.logout();
+    console.log(this.currentUser);
   }
 }

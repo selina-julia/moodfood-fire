@@ -117,7 +117,7 @@ export class RecipesComponent implements OnInit {
 
   public getFavoriteClasses(isFavorite: boolean): string {
     return isFavorite
-      ? 'bg-yellow-500 border-yellow-500 text-black'
+      ? 'bg-[#f6cc63] border-[#f6cc63] text-black'
       : 'bg-[#fffbf7]';
   }
 

@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
 import { User } from '../../models/user';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +33,9 @@ export class AuthService {
 
   constructor(
     private auth: AngularFireAuth,
-    private angularFirestore: AngularFirestore
+    private angularFirestore: AngularFirestore,
+    private router: Router,
+    private zone: NgZone
   ) {}
 
   public async login(email: string, password: string): Promise<void> {
@@ -57,6 +61,7 @@ export class AuthService {
       }
 
       console.log(email, password, 'login successful');
+      this.router.navigate(['recipes']);
 
       resolve();
     });
@@ -74,6 +79,7 @@ export class AuthService {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.setUserData(result, firstName, lastName);
+        this.login(email, password);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -101,31 +107,21 @@ export class AuthService {
         console.error('Error writing document: ', error);
       });
   }
-  // public fetchUser(): void {
-  //   this.auth.user
-  //     .pipe(
-  //       switchMap((authUser: User | null) =>
-  //         this.angularFirestore
-  //           .collection<User>(PC_COLLECTIONS.USER_PROFILES)
-  //           .doc(authUser?.uid)
-  //           .valueChanges({ idField: 'uid' })
-  //       ),
-  //       map((user) => (user ? userConverter.fromFirestore(user) : undefined))
-  //     )
-  //     .subscribe((user) => {
-  //       this.store.setUser(user);
-  //       this.sentryService.setUser(
-  //         user
-  //           ? {
-  //               uid: user.uid,
-  //               email: user.email,
-  //               firstname: user.firstname,
-  //               lastname: user.lastname,
-  //             }
-  //           : null
-  //       );
-  //     });
-  // }
+
+  public fetchUser(): void {
+    this.auth.user
+      .pipe(
+        switchMap((authUser: firebase.User | null) =>
+          this.angularFirestore
+            .collection<User>('users')
+            .doc(authUser?.uid)
+            .valueChanges({ idField: 'uid' })
+        )
+      )
+      .subscribe((user) => {
+        this.user$.next(user);
+      });
+  }
 
   private getFirebaseErrorMessage(code: string): string | undefined {
     const foundError = this.errors.find((error) => {
@@ -133,5 +129,15 @@ export class AuthService {
     });
 
     return foundError ? foundError.message : undefined;
+  }
+
+  get user(): BehaviorSubject<User | undefined> {
+    return this.user;
+  }
+
+  public async logout(): Promise<void> {
+    await this.auth.signOut();
+    this.user$.next(undefined);
+    window.location.reload();
   }
 }
