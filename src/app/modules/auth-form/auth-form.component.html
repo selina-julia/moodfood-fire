@@ -35,7 +35,12 @@
       <span class="font-normal text-gray-500">ODER</span>
       <span class="w-16 h-px bg-gray-300"></span>
     </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
+    <form
+      class="mt-8 space-y-6"
+      action="#"
+      method="POST"
+      [formGroup]="loginForm"
+    >
       <input type="hidden" name="remember" value="true" />
       <div class="relative">
         <label class="text-sm font-bold tracking-wide text-gray-700"
@@ -45,6 +50,7 @@
           class="w-full py-2 text-base border-b border-gray-300 focus:outline-none focus:border-blue-500"
           type="email"
           placeholder="mail@gmail.com"
+          formControlName="email"
         />
       </div>
       <div class="content-center mt-8">
@@ -55,6 +61,7 @@
           class="content-center w-full py-2 text-base border-b border-gray-300 focus:outline-none focus:border-blue-500"
           type="password"
           placeholder="Passwort eingeben"
+          formControlName="password"
         />
       </div>
       <div class="flex items-center justify-between">
@@ -76,7 +83,11 @@
         </div>
       </div>
       <div>
-        <app-button type="primary" buttonText="Log in"></app-button>
+        <app-button
+          type="primary"
+          (click)="onLogin()"
+          buttonText="Log in"
+        ></app-button>
       </div>
       <p
         class="flex flex-col items-center justify-center mt-10 text-center text-gray-500 text-md"

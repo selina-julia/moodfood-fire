@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-register-form',
@@ -17,7 +17,7 @@ export class RegisterFormComponent implements OnInit {
     password: string;
   }> = new EventEmitter();
 
-  // constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     const imgUrl = '../../../assets/images/';
@@ -42,8 +42,8 @@ export class RegisterFormComponent implements OnInit {
 
   public initForm() {
     this.registerForm = new FormGroup({
-      // firstName: new FormControl(''),
-      // lastName: new FormControl(''),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
@@ -59,6 +59,12 @@ export class RegisterFormComponent implements OnInit {
 
   public onCreateUserAccount() {
     console.log(this.registerForm);
+    this.authService.signUp(
+      this.registerForm.controls['email'].value,
+      this.registerForm.controls['password'].value,
+      this.registerForm.controls['firstName'].value,
+      this.registerForm.controls['lastName'].value
+    );
 
     //   this.authenticationService
     //     .login(this.registerForm.value)

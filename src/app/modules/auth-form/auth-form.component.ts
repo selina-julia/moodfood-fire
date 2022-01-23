@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-auth-form',
@@ -8,10 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class AuthFormComponent implements OnInit {
   public images!: string[];
   public currentImage!: string;
+  public loginForm!: FormGroup;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.initForm();
+
     const imgUrl = '../../../assets/images/';
     this.images = [
       imgUrl + 'login1.jpeg',
@@ -22,14 +27,26 @@ export class AuthFormComponent implements OnInit {
       imgUrl + 'login6.jpeg',
     ];
 
-    console.log(this.images);
-
     this.setRandomBgImage();
+  }
+
+  public initForm() {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
   }
 
   public setRandomBgImage() {
     this.currentImage =
       this.images[Math.floor(Math.random() * this.images.length)];
     console.log(this.currentImage);
+  }
+
+  public onLogin() {
+    this.authService.login(
+      this.loginForm.controls['email'].value,
+      this.loginForm.controls['password'].value
+    );
   }
 }
