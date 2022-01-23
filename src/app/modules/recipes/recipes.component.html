@@ -1,9 +1,32 @@
-<div class="flex items-center mb-16 gap-x-10">
+<div class="flex items-center mb-16 gap-x-10" *ngIf="filteredList.length">
   <app-filter></app-filter>
   <app-search-bar (refineItems)="onSearchInputChange($event)"></app-search-bar>
 </div>
+
 <div
-  class="grid gap-4 pb-16  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+  *ngIf="isLoading"
+  wire:loading
+  class="absolute top-0 right-0 flex items-center justify-center w-full h-full"
+>
+  <svg
+    class="absolute w-6 h-6 bg-transparent border-2 border-transparent border-opacity-50 rounded-full animate-spin"
+    style="border-right-color: black; border-top-color: black"
+    viewBox="0 0 24 24"
+  ></svg>
+</div>
+
+<!--<div *ngIf="!user?.email">
+  <h1 class="mt-10 mb-2 text-3xl font-bold">Noch keine Rezepte :(</h1>
+  <p class="mb-6">Melde dich an, um deine Rezepte zu speichern!</p>
+  <app-button
+    type="primary"
+    [routerLink]="'auth'"
+    buttonText="Jetzt einloggen"
+    class="flex"
+  ></app-button>
+</div>-->
+<div
+  class="grid gap-4 pb-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
 >
   <div
     class="relative p-4 border gap-x-2 border-radius"
@@ -32,7 +55,7 @@
         <!-- edit and delete box -->
         <div
           *ngIf="showOptionsBox(item) && showOptions"
-          class="absolute bottom-0 px-5 bg-white rounded-md  h-fit top-1 right-6 box-shadow"
+          class="absolute bottom-0 px-5 bg-white rounded-md h-fit top-1 right-6 box-shadow"
         >
           <div
             id="recipe-1"

@@ -67,6 +67,7 @@
       </div>
 
       <div
+        *ngIf="currentUser?.email"
         class="flex items-center cursor-pointer"
         [ngClass]="{
           'gap-x-3': navExpanded
@@ -95,6 +96,7 @@
       </div>
 
       <div
+        *ngIf="currentUser?.email"
         class="flex items-center cursor-pointer"
         [ngClass]="{
           'gap-x-3': navExpanded

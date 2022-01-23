@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { User } from 'src/app/shared/models/user';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
 import { Recipe } from './shared/recipe';
@@ -24,23 +27,45 @@ export class RecipesComponent implements OnInit {
   public showOptions: boolean = false;
   public searchInput!: string;
   public optionsItem!: Recipe | undefined;
+  public userId?: string;
+  public user?: User;
+  public recipes$ = new BehaviorSubject<Recipe[] | undefined>(undefined);
+  public isLoading: boolean = false;
 
   constructor(
     private recipeService: RecipesService,
     private fb: FormBuilder,
     private headerTitleService: HeaderTitleService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.isFavoritesPage = this.router.url === '/favorites';
+    this.isLoading = true;
 
-    this.getRecipes();
-    this.initFormGroup();
+    setTimeout(() => {
+      this.refreshCurrentUser();
+      this.getRecipes();
+      this.initFormGroup();
+      this.isLoading = false;
+    }, 1000);
 
     this.headerTitleService.setTitle(
       this.isFavoritesPage ? 'Favoriten' : 'Dashboard'
     );
+  }
+
+  public async refreshCurrentUser(): Promise<void> {
+    this.authService.fetchUser();
+
+    this.authService.user$.subscribe((val) => {
+      console.log(val);
+      if (val) {
+        this.userId = val.uid;
+        this.user = val;
+      }
+    });
   }
 
   public initFormGroup() {
@@ -122,16 +147,27 @@ export class RecipesComponent implements OnInit {
   }
 
   getRecipes() {
+    if (!this.userId) {
+      return;
+    }
     if (this.isFavoritesPage) {
       this.recipeService.getRecipes().subscribe((items) => {
-        this.recipeList = items.filter((item) => item.isFavorite);
-        this.filteredList = items.filter((item) => item.isFavorite);
+        this.recipes$.next(items);
+
+        this.recipes$.subscribe((val) => console.log(val));
+
+        this.recipeList = items.filter(
+          (item) => item.isFavorite && item.userId === this.userId
+        );
+        this.filteredList = items.filter(
+          (item) => item.isFavorite && item.userId === this.userId
+        );
         console.log(this.recipeList);
       });
     } else {
       this.recipeService.getRecipes().subscribe((items) => {
-        this.recipeList = items;
-        this.filteredList = items;
+        this.recipeList = items.filter((item) => item.userId === this.userId);
+        this.filteredList = items.filter((item) => item.userId === this.userId);
         console.log(this.recipeList);
       });
     }

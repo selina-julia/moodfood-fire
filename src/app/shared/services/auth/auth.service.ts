@@ -61,9 +61,9 @@ export class AuthService {
       }
 
       console.log(email, password, 'login successful');
-      this.router.navigate(['recipes']);
 
       resolve();
+      this.router.navigate(['recipes']);
     });
   }
 
@@ -138,6 +138,6 @@ export class AuthService {
   public async logout(): Promise<void> {
     await this.auth.signOut();
     this.user$.next(undefined);
-    window.location.reload();
+    this.router.navigate(['auth']);
   }
 }

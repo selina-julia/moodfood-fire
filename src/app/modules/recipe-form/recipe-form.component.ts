@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, Observable } from 'rxjs';
 import { Category } from 'src/app/shared/models/category';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { CategoriesService } from 'src/app/shared/services/categories/categories.service';
 import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
 import { RecipesService } from 'src/app/shared/services/recipes/recipes.service';
@@ -32,6 +33,7 @@ export class RecipeFormComponent implements OnInit {
   public isUpdating = false;
   public recipeIdFromRoute!: string | null;
   public categories!: Category[];
+  public userId?: string;
 
   constructor(
     private recipeService: RecipesService,
@@ -41,7 +43,8 @@ export class RecipeFormComponent implements OnInit {
     private router: Router,
     private storage: AngularFireStorage,
     private headerTitleService: HeaderTitleService,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -60,8 +63,20 @@ export class RecipeFormComponent implements OnInit {
   }
 
   private initForm(): void {
+    this.refreshCurrentUser();
     this.initFormGroup();
     this.listenToFormGroupChanges();
+  }
+
+  public refreshCurrentUser(): void {
+    this.authService.fetchUser();
+
+    this.authService.user$.subscribe((val) => {
+      console.log(val);
+      if (val) {
+        this.userId = val.uid;
+      }
+    });
   }
 
   public initFormGroup() {
@@ -73,7 +88,14 @@ export class RecipeFormComponent implements OnInit {
       level: new FormControl('', Validators.required),
       categories: new FormControl(''),
       isFavorite: new FormControl(false),
+      userId: new FormControl(''),
     });
+    this.setUserId();
+  }
+
+  public setUserId() {
+    this.form.value['userId'] = this.userId;
+    this.form.patchValue({ userId: this.userId });
   }
 
   public getCategories() {

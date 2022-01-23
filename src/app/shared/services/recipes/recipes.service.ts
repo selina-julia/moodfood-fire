@@ -10,6 +10,7 @@ export class RecipesService {
   private categories = new BehaviorSubject<Map<string, Category | undefined>>(
     new Map()
   );
+  public recipes$ = new BehaviorSubject<Recipe[] | undefined>(undefined);
 
   constructor(private firestore: AngularFirestore) {}
 

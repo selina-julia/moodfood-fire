@@ -4,6 +4,7 @@ import { Category } from 'src/app/shared/models/category';
 export interface Recipe {
   id: string;
   uid?: string;
+  userId?: string;
   title: string;
   description?: string;
   time?: number;
