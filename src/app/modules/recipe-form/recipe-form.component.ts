@@ -72,7 +72,6 @@ export class RecipeFormComponent implements OnInit {
     this.authService.fetchUser();
 
     this.authService.user$.subscribe((val) => {
-      console.log(val);
       if (val) {
         this.userId = val.uid;
       }
@@ -88,6 +87,7 @@ export class RecipeFormComponent implements OnInit {
       level: new FormControl('', Validators.required),
       categories: new FormControl(''),
       isFavorite: new FormControl(false),
+      publicState: new FormControl('private'),
       userId: new FormControl(''),
     });
     this.setUserId();
@@ -101,7 +101,6 @@ export class RecipeFormComponent implements OnInit {
   public getCategories() {
     this.categoriesService.getRecipes().subscribe((items) => {
       this.categories = items;
-      console.log(this.categories);
     });
   }
 
@@ -117,7 +116,6 @@ export class RecipeFormComponent implements OnInit {
 
     const filePath = '/images' + Math.random() + this.filePath;
     const fileRef = this.storage.ref(filePath);
-    console.log(fileRef);
 
     this.storage
       .upload(filePath, this.filePath)
@@ -125,7 +123,6 @@ export class RecipeFormComponent implements OnInit {
       .pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
-            console.log(url);
             if (url) {
               this.isLoading = false;
             }
@@ -141,7 +138,6 @@ export class RecipeFormComponent implements OnInit {
 
   private listenToFormGroupChanges(): void {
     this.form.valueChanges.subscribe(() => {
-      console.log(this.form);
     });
 
     // this.subscriptions.add(valueChangesSub);
@@ -162,7 +158,6 @@ export class RecipeFormComponent implements OnInit {
 
     this.recipeService.getRecipes().subscribe((items) => {
       this.recipe = items.find((item) => item.uid === recipeIdFromRoute);
-      console.log(this.recipe);
     });
 
     this.cdRef.detectChanges();

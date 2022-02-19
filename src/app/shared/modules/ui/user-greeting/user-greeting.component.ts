@@ -21,7 +21,6 @@ export class UserGreetingComponent implements OnInit {
     this.authService.fetchUser();
 
     this.authService.user$.subscribe((val) => {
-      console.log(val);
       if (val) {
         this.currentUser = val;
       }
@@ -34,6 +33,5 @@ export class UserGreetingComponent implements OnInit {
 
   public onLogout() {
     this.authService.logout();
-    console.log(this.currentUser);
   }
 }

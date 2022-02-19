@@ -71,14 +71,15 @@ export class AuthService {
     email: string,
     password: string,
     firstName: string,
-    lastName: string
+    lastName: string,
+    favoriteRecipes: string[]
   ) {
     return this.auth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
-        this.setUserData(result, firstName, lastName);
+        this.setUserData(result, firstName, lastName, favoriteRecipes);
         this.login(email, password);
       })
       .catch((error) => {
@@ -86,7 +87,7 @@ export class AuthService {
       });
   }
 
-  public async setUserData(user: any, firstName: string, lastName: string) {
+  public async setUserData(user: any, firstName: string, lastName: string, favoriteRecipes: string[]) {
     if (!user) {
       return;
     }
@@ -99,6 +100,7 @@ export class AuthService {
         loginProvider: 'Email',
         firstName: firstName,
         lastName: lastName,
+        favoriteRecipes: favoriteRecipes
       })
       .then(() => {
         console.log('successful');
@@ -121,6 +123,10 @@ export class AuthService {
       .subscribe((user) => {
         this.user$.next(user);
       });
+  }
+
+  updateUserRecipes(userId: string | undefined, payload: User) {
+    return this.angularFirestore.doc('users/' + userId).update(payload);
   }
 
   private getFirebaseErrorMessage(code: string): string | undefined {

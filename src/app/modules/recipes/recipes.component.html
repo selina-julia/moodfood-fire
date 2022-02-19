@@ -50,6 +50,7 @@
           class="cursor-pointer"
           (click)="onDotsClicked(item)"
           iconName="dots"
+          *ngIf="item.userId === user?.uid"
         ></app-icon>
 
         <!-- edit and delete box -->
@@ -98,11 +99,11 @@
     <div
       class="absolute p-3 border border-gray-300 rounded-lg -top-2 -right-2"
       (click)="updateFavorites(item)"
-      [ngClass]="getFavoriteClasses(item.isFavorite)"
+      [ngClass]="getFavoriteClasses(item)"
     >
       <div class="w-8 h-8">
         <app-icon
-          [iconName]="item.isFavorite ? 'heart-full' : 'heart'"
+          [iconName]="getFavoriteState(item) ? 'heart-full' : 'heart'"
         ></app-icon>
       </div>
     </div>

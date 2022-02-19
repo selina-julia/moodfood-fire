@@ -36,6 +36,7 @@ export class RecipesService {
   }
 
   createRecipe(payload: Recipe) {
+    console.log(payload)
     return this.firestore.collection('recipes').add(payload);
   }
 

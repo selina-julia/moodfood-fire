@@ -40,7 +40,6 @@ export class AuthFormComponent implements OnInit {
   public setRandomBgImage() {
     this.currentImage =
       this.images[Math.floor(Math.random() * this.images.length)];
-    console.log(this.currentImage);
   }
 
   public onLogin() {

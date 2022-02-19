@@ -5,6 +5,7 @@ export interface Recipe {
   id: string;
   uid?: string;
   userId?: string;
+  publicState?: 'public' | 'private';
   title: string;
   description?: string;
   time?: number;

@@ -19,7 +19,6 @@ export class FilterComponent implements OnInit {
   public getCategories() {
     this.categoriesService.getRecipes().subscribe((items) => {
       this.categories = items;
-      console.log(this.categories);
     });
   }
 }

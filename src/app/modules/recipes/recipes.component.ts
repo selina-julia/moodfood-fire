@@ -97,6 +97,7 @@ export class RecipesComponent implements OnInit {
   }
 
   public onDotsClicked(item: Recipe | undefined) {
+    console.log(item)
     this.optionsItem = item;
     this.showOptions = !this.showOptions;
   }
@@ -105,10 +106,39 @@ export class RecipesComponent implements OnInit {
     return item === this.optionsItem;
   }
 
+  // public updateFavorites(recipe: Recipe) {
+  //   console.log(recipe.uid);
+  //   recipe.isFavorite = !recipe.isFavorite;
+  //   this.recipeService.updateRecipe(recipe.uid, recipe);
+  // }
+
+  public getFavoriteState(recipe: Recipe) {
+    if(!this.user?.favoriteRecipes) {
+      return false;
+    }
+    return this.user?.favoriteRecipes.indexOf(recipe.uid as string) >= 0;
+  }
+
   public updateFavorites(recipe: Recipe) {
-    console.log(recipe.uid);
-    recipe.isFavorite = !recipe.isFavorite;
-    this.recipeService.updateRecipe(recipe.uid, recipe);
+    const favorites = this.user?.favoriteRecipes;
+    if(!favorites) {
+      return;
+    }
+
+    const position = favorites.indexOf(recipe.uid as string);
+
+    if(position === undefined) {
+      return;
+    }
+
+    if(position >= 0) {
+      favorites.splice(position, 1);
+    } else {
+      this.user?.favoriteRecipes?.push(recipe?.uid as string);
+    }
+
+    this.authService.updateUserRecipes(this.user?.uid, this.user as User)
+    this.isFavorite = !this.isFavorite;
   }
 
   public filteredItems() {
@@ -118,7 +148,6 @@ export class RecipesComponent implements OnInit {
   }
 
   public onSearchInputChange(inputValue: string) {
-    console.log(inputValue);
     this.searchInput = inputValue;
 
     this.filteredList = this.recipeList.filter((post: { title: string }) => {
@@ -145,8 +174,8 @@ export class RecipesComponent implements OnInit {
     this.showModal = false;
   }
 
-  public getFavoriteClasses(isFavorite: boolean): string {
-    return isFavorite
+  public getFavoriteClasses(item: Recipe): string {
+    return this.getFavoriteState(item)
       ? 'bg-[#f6cc63] border-[#f6cc63] text-black'
       : 'bg-[#fffbf7]';
   }
@@ -157,19 +186,22 @@ export class RecipesComponent implements OnInit {
     }
     if (this.isFavoritesPage) {
       this.recipeService.getRecipes().subscribe((items) => {
-        this.recipeList = items.filter((item) => item.isFavorite);
-        this.filteredList = items.filter((item) => item.isFavorite);
+        const favoriteRecipes = this.user?.favoriteRecipes;
+        if(favoriteRecipes) {
+          this.recipeList = items.filter((item) => favoriteRecipes.indexOf(item.uid as string) >= 0);
+          this.filteredList = items.filter((item) => favoriteRecipes.indexOf(item.uid as string) >= 0);
+        }
+
       });
     } else if (this.isDashboardPage) {
       this.recipeService.getRecipes().subscribe((items) => {
-        this.recipeList = items;
-        this.filteredList = items;
+        this.recipeList = items.filter((item) => item.publicState === 'public');
+        this.filteredList = items.filter((item) => item.publicState === 'public');
       });
     } else {
       this.recipeService.getRecipes().subscribe((items) => {
         this.recipeList = items.filter((item) => item.userId === this.userId);
         this.filteredList = items.filter((item) => item.userId === this.userId);
-        console.log(this.recipeList);
       });
     }
   }

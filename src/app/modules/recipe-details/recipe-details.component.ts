@@ -31,7 +31,6 @@ export class RecipeDetailsComponent implements OnInit {
 
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = routeParams.get('recipeId');
-    console.log(productIdFromRoute);
 
     this.recipeService.getRecipes().subscribe((items) => {
       this.recipe = items.find((item) => {
@@ -45,11 +44,9 @@ export class RecipeDetailsComponent implements OnInit {
       }
 
       this.category = cats.find((cat) => {
-        console.log(cat.uid, this.recipe?.categories?.id);
         return cat.uid === this.recipe?.categories?.id;
       });
 
-      console.log(this.category);
     });
 
     // this.recipeService.getRecipeById(params['id']).subscribe(res => (this.recipe = res));

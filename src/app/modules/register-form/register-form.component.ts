@@ -37,7 +37,6 @@ export class RegisterFormComponent implements OnInit {
   public setRandomBgImage() {
     this.currentImage =
       this.images[Math.floor(Math.random() * this.images.length)];
-    console.log(this.currentImage);
   }
 
   public initForm() {
@@ -46,6 +45,7 @@ export class RegisterFormComponent implements OnInit {
       lastName: new FormControl(''),
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
+      favoriteRecipes: new FormControl([]),
     });
   }
 
@@ -58,12 +58,12 @@ export class RegisterFormComponent implements OnInit {
   }
 
   public onCreateUserAccount() {
-    console.log(this.registerForm);
     this.authService.signUp(
       this.registerForm.controls['email'].value,
       this.registerForm.controls['password'].value,
       this.registerForm.controls['firstName'].value,
-      this.registerForm.controls['lastName'].value
+      this.registerForm.controls['lastName'].value,
+      this.registerForm.controls['favoriteRecipes'].value,
     );
 
     //   this.authenticationService
