@@ -45,13 +45,23 @@
       >
         {{ item.title }}
       </h2>
-      <div class="relative w-5">
-        <app-icon
-          class="cursor-pointer"
-          (click)="onDotsClicked(item)"
-          iconName="dots"
+      <div class="relative flex gap-x-2">
+        
+          <app-icon
+          class="cursor-pointer w-5"
+          (click)="changePublicState(item)"
+          [iconName]="item.publicState === 'public' ? 'public' : 'private'"
           *ngIf="item.userId === user?.uid"
+          
         ></app-icon>
+  
+          <app-icon
+            class="cursor-pointer w-5"
+            (click)="onDotsClicked(item)"
+            iconName="dots"
+            *ngIf="item.userId === user?.uid"
+          ></app-icon>
+     
 
         <!-- edit and delete box -->
         <div

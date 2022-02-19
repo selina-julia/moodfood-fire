@@ -8,6 +8,8 @@ import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTi
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Category } from 'src/app/shared/models/category';
 import { CategoriesService } from 'src/app/shared/services/categories/categories.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-recipe-details',
@@ -17,13 +19,16 @@ import { CategoriesService } from 'src/app/shared/services/categories/categories
 export class RecipeDetailsComponent implements OnInit {
   public recipe: Recipe | undefined;
   public category?: Category;
+  public userId?: string;
+  public user?: User;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipesService,
     private categoriesService: CategoriesService,
     private headerTitleService: HeaderTitleService,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +56,19 @@ export class RecipeDetailsComponent implements OnInit {
 
     // this.recipeService.getRecipeById(params['id']).subscribe(res => (this.recipe = res));
   }
+
+  // public async refreshCurrentUser(): Promise<void> {
+  //   this.authService.fetchUser();
+
+  //   this.authService.user$.subscribe((val) => {
+  //     console.log(val);
+  //     if (val) {
+  //       this.userId = val.uid;
+  //       this.user = val;
+  //       console.log(this.user)
+  //     }
+  //   });
+  // }
 
   public getAuthor$(
     item: Recipe | undefined

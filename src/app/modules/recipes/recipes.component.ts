@@ -51,7 +51,7 @@ export class RecipesComponent implements OnInit {
       this.getRecipes();
       this.initFormGroup();
       this.isLoading = false;
-    }, 1000);
+    }, 1200);
 
     this.headerTitleService.setTitle(
       this.isFavoritesPage ? 'Favoriten' : 'Meine Rezepte'
@@ -111,6 +111,20 @@ export class RecipesComponent implements OnInit {
   //   recipe.isFavorite = !recipe.isFavorite;
   //   this.recipeService.updateRecipe(recipe.uid, recipe);
   // }
+
+  public changePublicState(recipe: Recipe) {
+    switch(recipe.publicState) {
+      case 'public':
+        recipe.publicState = 'private'
+        break;
+      case 'private':
+        recipe.publicState = 'public'
+        break;
+    }
+
+    this.recipeService.updateRecipe(recipe.uid, recipe);
+   
+  }
 
   public getFavoriteState(recipe: Recipe) {
     if(!this.user?.favoriteRecipes) {

@@ -146,6 +146,18 @@ export class IconComponent implements OnInit {
         '../../../../../assets/icons/whisk.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'private',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/padlock.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'public',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/world.svg'
+      )
+    );
   }
 
   ngOnInit(): void {}
