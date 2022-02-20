@@ -140,7 +140,7 @@ export class RecipesComponent implements OnInit {
     return {
       headline: 'Status ändern', 
       description: `Das Rezept '${statusItem.title}' ist aktuell ${status}. Möchtest du den Veröffentlichungsstatus ändern?`,
-      actionButton: 'Status ändern',
+      actionButton: statusItem.publicState === 'private' ? 'Rezept veröffentlichen' : 'Rezept verstecken',
       cancelButton: 'Abbrechen'
     }
   }
