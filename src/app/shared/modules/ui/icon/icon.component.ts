@@ -158,6 +158,27 @@ export class IconComponent implements OnInit {
         '../../../../../assets/icons/world.svg'
       )
     );
+
+    this.matIconRegistry.addSvgIcon(
+      'warning',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/warning.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'success',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/success.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'info',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/info.svg'
+      )
+    );
   }
 
   ngOnInit(): void {}

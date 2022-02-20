@@ -20,7 +20,7 @@ export class RecipesComponent implements OnInit {
   public recipeList: Recipe[] = [];
   public filteredList: Recipe[] = [];
   public showModal: boolean = false;
-  public deleteItem: Recipe | undefined;
+  public deleteItem!: Recipe ;
   public isFavoritesPage: boolean = false;
   public isDashboardPage: boolean = false;
   public iterator!: number;
@@ -32,6 +32,9 @@ export class RecipesComponent implements OnInit {
   public user?: User;
   public recipes$ = new BehaviorSubject<Recipe[] | undefined>(undefined);
   public isLoading: boolean = false;
+  public showStatusModal = false;
+  public statusItem!: Recipe;
+  
 
   constructor(
     private recipeService: RecipesService,
@@ -62,6 +65,9 @@ export class RecipesComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+  }
+
   public async refreshCurrentUser(): Promise<void> {
     this.authService.fetchUser();
 
@@ -70,6 +76,7 @@ export class RecipesComponent implements OnInit {
       if (val) {
         this.userId = val.uid;
         this.user = val;
+        console.log(this.user)
       }
     });
   }
@@ -123,7 +130,28 @@ export class RecipesComponent implements OnInit {
     }
 
     this.recipeService.updateRecipe(recipe.uid, recipe);
+    this.showStatusModal = false;
    
+  }
+
+  public getStatusModelData(statusItem: Recipe) {
+    console.log(statusItem)
+    const status = statusItem.publicState === 'private' ? 'privat' : 'öffentlich';
+    return {
+      headline: 'Status ändern', 
+      description: `Das Rezept '${statusItem.title}' ist aktuell ${status}. Möchtest du den Veröffentlichungsstatus ändern?`,
+      actionButton: 'Status ändern',
+      cancelButton: 'Abbrechen'
+    }
+  }
+
+  public getDeleteRecipeModalData(item: Recipe) {
+    return {
+      headline: 'Rezept löschen', 
+      description: `Bist du sicher, dass du das Rezept '${item.title}' löschen möchtest?`,
+      actionButton: 'Löschen',
+      cancelButton: 'Abbrechen'
+    }
   }
 
   public getFavoriteState(recipe: Recipe) {
@@ -178,8 +206,14 @@ export class RecipesComponent implements OnInit {
     this.deleteItem = id;
   }
 
+  public onChangePublicState(recipe: Recipe) {
+    this.showStatusModal = true;
+    this.statusItem = recipe;
+  }
+
   public onCancelClick() {
     this.showModal = false;
+    this.showStatusModal = false;
     this.showOptions = false;
   }
 

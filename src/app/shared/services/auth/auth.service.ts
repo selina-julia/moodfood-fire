@@ -144,6 +144,7 @@ export class AuthService {
   public async logout(): Promise<void> {
     await this.auth.signOut();
     this.user$.next(undefined);
+    console.log(this.user$, 'hi');
     this.router.navigate(['auth']);
   }
 }

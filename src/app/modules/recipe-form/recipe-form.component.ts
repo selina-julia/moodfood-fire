@@ -146,10 +146,10 @@ export class RecipeFormComponent implements OnInit {
   public createRecipe() {
     if (!this.isUpdating) {
       this.recipeService.createRecipe(this.form.value).then();
-      this.router.navigate(['/recipes']);
+      this.router.navigate(['/myrecipes']);
     } else {
       this.recipeService.updateRecipe(this.recipe?.uid, this.form.value);
-      this.router.navigate(['/recipes']);
+      this.router.navigate(['/myrecipes']);
     }
   }
 
