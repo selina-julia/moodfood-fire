@@ -1,6 +1,6 @@
 <!--header desktop -->
 <header
-  class="z-10 flex items-center justify-between w-full px-5 lg:px-0 py-3 transition duration-300 ease-out bg-[#fffbf7] bg-opacity-80 lg:bg-white lg:mb-10 lg:px-auto lg:py-10 lg:block main-header backdrop-filter backdrop-blur-lg"
+  class="flex flex-col z-10 items-center justify-between w-full px-5 lg:px-0 py-3 transition duration-300 ease-out bg-[#fffbf7] bg-opacity-80 lg:bg-white lg:mb-10 lg:px-auto lg:py-10 lg:block main-header backdrop-filter backdrop-blur-lg"
   [ngClass]="{ 'lg:w-32': !navExpanded, 'lg:w-64': navExpanded }"
 >
   <div
@@ -25,19 +25,21 @@
       <app-icon iconName="moodfood-small"></app-icon>
     </div>
   </div>
+
   <div (click)="toggleMobileNav()" class="lg:hidden">
     <div class="w-9">
       <app-icon iconName="menu"></app-icon>
     </div>
   </div>
-  <nav class="hidden lg:block">
+  <nav class="hidden lg:block h-full">
     <div
-      class="flex flex-col gap-y-10"
+      class="flex flex-col gap-y-10 h-full"
       [ngClass]="{
         'items-center': !navExpanded,
         'pl-10 items-start': navExpanded
       }"
     >
+    <!-- dashboard -->
       <div
         class="flex items-center cursor-pointer"
         [ngClass]="{
@@ -66,8 +68,10 @@
         </div>
       </div>
 
+      <!-- my recipes -->
       <div
-        class="flex items-center cursor-pointer"
+        *ngIf="currentUser?.email"
+        class="flex items-center cursor-pointer grow-0"
         [ngClass]="{
           'gap-x-3': navExpanded
         }"
@@ -94,9 +98,10 @@
         </div>
       </div>
 
+      <!-- favorites -->
       <div
         *ngIf="currentUser?.email"
-        class="flex items-center cursor-pointer"
+        class="flex items-center cursor-pointer grow-0"
         [ngClass]="{
           'gap-x-3': navExpanded
         }"
@@ -123,9 +128,10 @@
         </div>
       </div>
 
+      <!-- create recipes -->
       <div
         *ngIf="currentUser?.email"
-        class="flex items-center cursor-pointer"
+        class="flex items-center cursor-pointer grow-0"
         [ngClass]="{
           'gap-x-3': navExpanded
         }"
@@ -152,7 +158,8 @@
         </div>
       </div>
 
-      <div class="flex justify-center cursor-pointer header-icon">
+      <!-- arrow -->
+      <div class="flex justify-center cursor-pointer header-icon grow-0">
         <div
           class="transition duration-300 ease-out w-7"
           [ngClass]="{
@@ -162,6 +169,38 @@
           <app-icon iconName="arrow" (click)="onArrowClick()"></app-icon>
         </div>
       </div>
+
+      <div class="grow"></div>
+
+      <!-- settings -->
+      <div
+      *ngIf="currentUser?.email"
+      class="flex items-center cursor-pointer grow-0 mb-20"
+      [ngClass]="{
+        'gap-x-3': navExpanded
+      }"
+      (click)="closeNav()"
+    >
+      <div
+        [routerLink]="'settings'"
+        class="flex justify-center transition-all duration-200 ease-linear header-icon"
+        routerLinkActive="activeIcon"
+      >
+        <div class="w-8">
+          <app-icon iconName="settings"></app-icon>
+        </div>
+      </div>
+      <div
+        [routerLink]="'settings'"
+        [ngClass]="{
+          'w-auto opacity-100 transition-all duration-200 ease-linear':
+            navExpanded,
+          'w-0 opacity-0': !navExpanded
+        }"
+      >
+        Einstellungen
+      </div>
+    </div>
     </div>
   </nav>
 </header>

@@ -16,6 +16,8 @@
     {{ recipe?.title }}
   </h1>
 
+  <!-- <p>{{getAuthorById(recipe?.userId)}}</p> -->
+
   <span
     *ngIf="recipe?.categories"
     class="px-2 py-1 mr-3 border border-gray-500 rounded-sm"
@@ -23,7 +25,7 @@
     {{ category?.name }}
   </span>
 
-  <p class="mt-5 xl:mr-36">{{ recipe?.description }}</p>
+  <!-- <p class="mt-5 xl:mr-36">{{ recipe?.description }}</p> -->
 
   <div class="mt-5 lg:flex">
     <div class="w-full xl:w-5/12 ingredients-wrapper">

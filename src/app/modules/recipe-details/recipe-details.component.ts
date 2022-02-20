@@ -61,12 +61,19 @@ export class RecipeDetailsComponent implements OnInit {
   //   this.authService.fetchUser();
 
   //   this.authService.user$.subscribe((val) => {
-  //     console.log(val);
   //     if (val) {
   //       this.userId = val.uid;
   //       this.user = val;
-  //       console.log(this.user)
   //     }
+  //   });
+  // }
+
+  // public getAuthorById(id: string | undefined) {
+
+  //   this.authService.getUsers().subscribe((items) => {
+  //     this.user = items.find((item) => {
+  //       return item.uid === id;
+  //     });
   //   });
   // }
 

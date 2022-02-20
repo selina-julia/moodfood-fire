@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
-import { BehaviorSubject, filter, map, switchMap } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, switchMap } from 'rxjs';
 import { User } from '../../models/user';
 import firebase from 'firebase/compat/app';
 
@@ -128,6 +128,34 @@ export class AuthService {
   updateUserRecipes(userId: string | undefined, payload: User) {
     return this.angularFirestore.doc('users/' + userId).update(payload);
   }
+
+  getUserById(userId: string | undefined) {
+    return this.angularFirestore.doc('users/' + userId);
+    // this.angularFirestore.collection('users').doc(userId).ref.get().then(function (doc) {
+    //   if (doc.exists) {
+    //     console.log(doc.data());
+    //   } else {
+    //     console.log("There is no document!");
+    //   }
+    // }).catch(function (error) {
+    //   console.log("There was an error getting your document:", error);
+    // });
+  }
+
+  // getUsers(): Observable<User[]> {
+  //   return this.angularFirestore
+  //     .collection('users')
+  //     .snapshotChanges()
+  //     .pipe(
+  //       map((actions) => {
+  //         return actions.map((a) => {
+  //           const data = a.payload.doc.data() as User;
+  //           const uid = a.payload.doc.id;
+  //           return { uid, ...data };
+  //         });
+  //       })
+  //     );
+  // }
 
   private getFirebaseErrorMessage(code: string): string | undefined {
     const foundError = this.errors.find((error) => {

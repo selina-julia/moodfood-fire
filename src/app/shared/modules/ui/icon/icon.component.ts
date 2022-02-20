@@ -179,6 +179,13 @@ export class IconComponent implements OnInit {
         '../../../../../assets/icons/info.svg'
       )
     );
+
+    this.matIconRegistry.addSvgIcon(
+      'settings',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/settings.svg'
+      )
+    );
   }
 
   ngOnInit(): void {}

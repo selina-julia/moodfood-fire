@@ -23,7 +23,6 @@ export class ModalComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.title);
   }
 
   public onCancel() {

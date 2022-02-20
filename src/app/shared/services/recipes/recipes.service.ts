@@ -15,8 +15,6 @@ export class RecipesService {
   constructor(private firestore: AngularFirestore) {}
 
   getRecipes(): Observable<Recipe[]> {
-    // return this.firestore.collection('recipes').valueChanges();
-
     return this.firestore
       .collection('recipes')
       .snapshotChanges()
@@ -36,7 +34,6 @@ export class RecipesService {
   }
 
   createRecipe(payload: Recipe) {
-    console.log(payload)
     return this.firestore.collection('recipes').add(payload);
   }
 
@@ -59,15 +56,10 @@ export class RecipesService {
   // }
 
   get categories$(): BehaviorSubject<Map<string, Category | undefined>> {
-    console.log('hi');
     return this.categories;
   }
 
   category$(uid: string): Observable<Category | undefined> {
-    console.log(uid);
-
-    console.log(this.firestore.doc('categories/' + uid));
-
     return this.categories.pipe(
       map((categoriesMap) => categoriesMap?.get(uid))
     );

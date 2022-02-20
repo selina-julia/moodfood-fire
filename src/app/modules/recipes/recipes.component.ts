@@ -72,11 +72,9 @@ export class RecipesComponent implements OnInit {
     this.authService.fetchUser();
 
     this.authService.user$.subscribe((val) => {
-      console.log(val);
       if (val) {
         this.userId = val.uid;
         this.user = val;
-        console.log(this.user)
       }
     });
   }
@@ -104,7 +102,6 @@ export class RecipesComponent implements OnInit {
   }
 
   public onDotsClicked(item: Recipe | undefined) {
-    console.log(item)
     this.optionsItem = item;
     this.showOptions = !this.showOptions;
   }
@@ -114,7 +111,6 @@ export class RecipesComponent implements OnInit {
   }
 
   // public updateFavorites(recipe: Recipe) {
-  //   console.log(recipe.uid);
   //   recipe.isFavorite = !recipe.isFavorite;
   //   this.recipeService.updateRecipe(recipe.uid, recipe);
   // }
@@ -135,7 +131,6 @@ export class RecipesComponent implements OnInit {
   }
 
   public getStatusModelData(statusItem: Recipe) {
-    console.log(statusItem)
     const status = statusItem.publicState === 'private' ? 'privat' : 'öffentlich';
     return {
       headline: 'Status ändern', 

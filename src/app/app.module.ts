@@ -32,6 +32,7 @@ import { ButtonModule } from './shared/modules/ui/button/button.module';
 import { RegisterFormComponent } from './modules/register-form/register-form.component';
 import { AuthenticationService } from './shared/services/authentication/authentication.service';
 import { RegisterFormModule } from './modules/register-form/register-form.module';
+import { UserSettingsComponent } from './modules/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { RegisterFormModule } from './modules/register-form/register-form.module
     HeaderTopBarComponent,
     AuthFormComponent,
     RegisterFormComponent,
+    UserSettingsComponent,
   ],
   imports: [
     BrowserModule,

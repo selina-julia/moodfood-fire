@@ -48,15 +48,16 @@ export class RecipeFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.recipeIdFromRoute = this.route.snapshot.paramMap.get('recipeId');
+
     this.initForm();
     this.getCategories();
-
-    this.recipeIdFromRoute = this.route.snapshot.paramMap.get('recipeId');
 
     if (this.recipeIdFromRoute) {
       this.isUpdating = true;
       this.getRecipe();
     }
+
 
     this.headerTitleService.setTitle('Rezept erstellen');
     this.previewImage = '../../../assets/images/placeholder.jpeg';
@@ -148,6 +149,7 @@ export class RecipeFormComponent implements OnInit {
       this.recipeService.createRecipe(this.form.value).then();
       this.router.navigate(['/myrecipes']);
     } else {
+      this.setUserId();
       this.recipeService.updateRecipe(this.recipe?.uid, this.form.value);
       this.router.navigate(['/myrecipes']);
     }
@@ -157,8 +159,26 @@ export class RecipeFormComponent implements OnInit {
     const recipeIdFromRoute = this.route.snapshot.paramMap.get('recipeId');
 
     this.recipeService.getRecipes().subscribe((items) => {
-      this.recipe = items.find((item) => item.uid === recipeIdFromRoute);
+      this.recipe = items.find((item) => { 
+        return item.uid === recipeIdFromRoute
+      });
+        this.cdRef.detectChanges();
+
     });
+
+    // todo: better solution than timeout
+    setTimeout(() => {
+
+    this.form.patchValue({
+      title: this.recipe?.title,
+      description: this.recipe?.description,
+      time: this.recipe?.time,
+      image: this.recipe?.image,
+      level: this.recipe?.level
+    })
+    this.previewImage = this.recipe?.image;
+      
+    }, 1000);
 
     this.cdRef.detectChanges();
   }
