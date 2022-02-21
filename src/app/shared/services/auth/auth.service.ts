@@ -91,7 +91,6 @@ export class AuthService {
     if (!user) {
       return;
     }
-    console.log(user);
     this.angularFirestore
       .collection('users')
       .doc(user.user?.uid)
@@ -172,7 +171,6 @@ export class AuthService {
   public async logout(): Promise<void> {
     await this.auth.signOut();
     this.user$.next(undefined);
-    console.log(this.user$, 'hi');
     this.router.navigate(['auth']);
   }
 }
