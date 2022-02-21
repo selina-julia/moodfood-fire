@@ -1,169 +1,185 @@
 <form action="" [formGroup]="form">
-  <div class="mb-10 lg:flex gap-x-10">
-    <!-- Rezeptname -->
-    <div class="flex-grow">
-      <div class="flex flex-col mb-5">
-        <label for="title" class="mb-2 text-sm font-semibold text-gray-900"
-          >Rezeptname</label
-        >
-        <input
-          type="text"
-          class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
-          formControlName="title"
-          id="title"
-        />
-      </div>
-      <!-- Zubereitung -->
-      <div class="flex flex-col mb-5">
-        <label
-          for="description"
-          class="mb-2 text-sm font-semibold text-gray-900"
-        >
-          Zubereitung
-        </label>
-        <textarea
-          type="text"
-          rows="8"
-          class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
-          formControlName="description"
-          id="description"
-        >
-        </textarea>
-      </div>
+    <div class="mb-10 lg:flex gap-x-10">
+        <!-- Rezeptname -->
+        <div class="flex-grow">
+            <div class="flex flex-col mb-5">
+                <label
+                    for="title"
+                    class="mb-2 text-sm font-semibold text-gray-900"
+                    >Rezeptname</label
+                >
+                <input
+                    type="text"
+                    class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800"
+                    formControlName="title"
+                    id="title"
+                />
+            </div>
+            <!-- Zubereitung -->
+            <div class="flex flex-col mb-5">
+                <label
+                    for="description"
+                    class="mb-2 text-sm font-semibold text-gray-900"
+                >
+                    Zubereitung
+                </label>
+                <textarea
+                    type="text"
+                    rows="8"
+                    class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800"
+                    formControlName="description"
+                    id="description"
+                >
+                </textarea>
+            </div>
 
-      <!-- Bild -->
-      <div>
-        <div>
-          <div>
-            <label class="inline-block mb-2 text-sm font-semibold text-gray-900"
-              >Bild (jpg, png, svg, jpeg)</label
-            >
-            <div class="flex items-center justify-center w-full">
-              <label
-                class="flex flex-col w-full border border-gray-500 border-dashed  hover:bg-gray-100 hover:border-gray-300"
-              >
-                <div class="flex flex-col items-center justify-center py-8">
-                  <div class="relative">
-                    <img
-                      class="object-cover w-20 h-20 mb-2 overflow-hidden rounded-full "
-                      [src]="previewImage"
-                      alt=""
-                    />
+            <!-- Bild -->
+            <div>
+                <div>
+                    <div>
+                        <label
+                            class="inline-block mb-2 text-sm font-semibold text-gray-900"
+                            >Bild (jpg, png, svg, jpeg)</label
+                        >
+                        <div class="flex items-center justify-center w-full">
+                            <label
+                                class="flex flex-col w-full border border-gray-500 border-dashed hover:bg-gray-100 hover:border-gray-300"
+                            >
+                                <div
+                                    class="flex flex-col items-center justify-center py-8"
+                                >
+                                    <div class="relative">
+                                        <img
+                                            class="object-cover w-20 h-20 mb-2 overflow-hidden rounded-full"
+                                            [src]="previewImage"
+                                            alt=""
+                                        />
+
+                                        <div
+                                            *ngIf="isLoading"
+                                            wire:loading
+                                            class="absolute top-0 right-0 flex items-center justify-center w-full h-full"
+                                        >
+                                            <svg
+                                                class="absolute w-6 h-6 bg-transparent border-2 border-transparent border-opacity-50 rounded-full animate-spin"
+                                                style="
+                                                    border-right-color: black;
+                                                    border-top-color: black;
+                                                "
+                                                viewBox="0 0 24 24"
+                                            ></svg>
+                                        </div>
+                                    </div>
+                                    <p
+                                        class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600"
+                                    >
+                                        Select a photo
+                                    </p>
+                                </div>
+                                <input
+                                    type="file"
+                                    (change)="upload($event)"
+                                    #fileuploader
+                                    class="h-0 opacity-0"
+                                />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-grow w-6/12">
+            <!-- Kochzeit -->
+            <div class="flex flex-col mb-5">
+                <label
+                    for="time"
+                    class="mb-2 text-sm font-semibold text-gray-900"
+                    >Kochzeit</label
+                >
+                <input
+                    type="number"
+                    class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800"
+                    formControlName="time"
+                    id="time"
+                />
+            </div>
+
+            <!-- Schwierigkeit -->
+            <div class="flex flex-col mb-5">
+                <label
+                    for="level"
+                    class="mb-2 text-sm font-semibold text-gray-900"
+                    >Schwierigkeitsgrad</label
+                >
+                <div class="flex gap-x-3">
+                    <div
+                        class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800 level-option"
+                    >
+                        <input
+                            id="easy"
+                            class="hidden"
+                            type="radio"
+                            value="easy"
+                            name="level"
+                            formControlName="level"
+                        />
+                        <label for="easy">Leicht</label>
+                    </div>
 
                     <div
-                      *ngIf="isLoading"
-                      wire:loading
-                      class="absolute top-0 right-0 flex items-center justify-center w-full h-full "
+                        class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800 level-option"
                     >
-                      <svg
-                        class="absolute w-6 h-6 bg-transparent border-2 border-transparent border-opacity-50 rounded-full  animate-spin"
-                        style="
-                          border-right-color: black;
-                          border-top-color: black;
-                        "
-                        viewBox="0 0 24 24"
-                      ></svg>
+                        <input
+                            id="medium"
+                            class="hidden"
+                            type="radio"
+                            value="medium"
+                            name="level"
+                            formControlName="level"
+                        />
+                        <label for="medium">Mittel</label>
                     </div>
-                  </div>
-                  <p
-                    class="pt-1 text-sm tracking-wider text-gray-400  group-hover:text-gray-600"
-                  >
-                    Select a photo
-                  </p>
+
+                    <div
+                        class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800 level-option"
+                    >
+                        <input
+                            id="advanced"
+                            class="hidden"
+                            type="radio"
+                            value="advanced"
+                            name="level"
+                            formControlName="level"
+                        />
+                        <label for="advanced">Schwierig</label>
+                    </div>
                 </div>
-                <input
-                  type="file"
-                  (change)="upload($event)"
-                  #fileuploader
-                  class="h-0 opacity-0"
-                />
-              </label>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="flex-grow w-6/12">
-      <!-- Kochzeit -->
-      <div class="flex flex-col mb-5">
-        <label for="time" class="mb-2 text-sm font-semibold text-gray-900"
-          >Kochzeit</label
-        >
-        <input
-          type="number"
-          class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
-          formControlName="time"
-          id="time"
-        />
-      </div>
+            <!-- Kategorien -->
 
-      <!-- Schwierigkeit -->
-      <div class="flex flex-col mb-5">
-        <label for="level" class="mb-2 text-sm font-semibold text-gray-900"
-          >Schwierigkeitsgrad</label
-        >
-        <div class="flex gap-x-3">
-          <div
-            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800 level-option"
-          >
-            <input
-              id="easy"
-              class="hidden"
-              type="radio"
-              value="easy"
-              name="level"
-              formControlName="level"
-            />
-            <label for="easy">Leicht</label>
-          </div>
+            <label for="level" class="mb-2 text-sm font-semibold text-gray-900"
+                >Kategorien</label
+            >
 
-          <div
-            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800 level-option"
-          >
-            <input
-              id="medium"
-              class="hidden"
-              type="radio"
-              value="medium"
-              name="level"
-              formControlName="level"
-            />
-            <label for="medium">Mittel</label>
-          </div>
+            <div class="flex gap-x-4 overflow-x-auto">
+                <div
+                    *ngFor="let cat of categories"
+                    (click)="refreshCategorySelect(cat)"
+                    [ngClass]="
+                        showSelectedCat(cat) ? 'bg-yellow-100' : 'bg-white'
+                    "
+                    class="box-shadow p-8 min-w-[150px] my-3 rounded-md flex flex-col items-center"
+                >
+                    <div class="w-10 h-10 mb-3">
+                        <app-icon [iconName]="cat.icon"></app-icon>
+                    </div>
+                    {{ cat.name }}
+                </div>
+            </div>
 
-          <div
-            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800 level-option"
-          >
-            <input
-              id="advanced"
-              class="hidden"
-              type="radio"
-              value="advanced"
-              name="level"
-              formControlName="level"
-            />
-            <label for="advanced">Schwierig</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Kategorien -->
-
-      <label for="level" class="mb-2 text-sm font-semibold text-gray-900"
-          >Kategorien</label
-        >
-
-      <div class="flex gap-x-4 overflow-x-auto">
-        <div *ngFor="let cat of categories" (click)="refreshCategorySelect(cat)" [ngClass]="showSelectedCat(cat) ? 'bg-yellow-100' : 'bg-white'" class="box-shadow p-8 min-w-[150px] my-3 rounded-md flex flex-col items-center">
-          <div class="w-10 h-10 mb-3">
-            <app-icon [iconName]="cat.icon"></app-icon>
-          </div>
-            {{cat.name}}
-        </div>
-      </div>
-
-      <!--<div class="flex flex-col mb-5">
+            <!--<div class="flex flex-col mb-5">
         <label for="file">File:</label>
         <input
           type="file"
@@ -172,23 +188,24 @@
           accept=".png,.jpg"
         />
       </div>-->
+        </div>
     </div>
-  </div>
 
-  <button
-    (click)="refreshCreateModalState()"
-    [disabled]="form.invalid"
-    class="px-4 py-2 text-white bg-black rounded-md  disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-200"
-  >
-  <span *ngIf="isUpdating">Änderungen speichern</span>
-  <span *ngIf="!isUpdating">Rezept erstellen</span>
-  </button>
+    <button
+        (click)="refreshCreateModalState()"
+        [disabled]="form.invalid"
+        class="px-4 py-2 text-white bg-black rounded-md disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-200"
+    >
+        <span *ngIf="isUpdating">Änderungen speichern</span>
+        <span *ngIf="!isUpdating">Rezept erstellen</span>
+    </button>
 </form>
 
-<app-modal 
-  (cancel)="refreshCreateModalState()"
-  (action)="createRecipe()"
-  *ngIf="showModal"
-  type="info"
-  [modalData]="getCreateModalData()">
+<app-modal
+    (cancel)="refreshCreateModalState()"
+    (action)="createRecipe()"
+    *ngIf="showModal"
+    type="info"
+    [modalData]="getCreateModalData()"
+>
 </app-modal>

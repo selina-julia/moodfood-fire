@@ -5,14 +5,12 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
   @Input() type!: 'primary' | 'textlink' | 'primary-light' | 'outline';
   @Input() buttonText!: string;
   @Input() icon!: string;
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   getButtonClasses(): string {
     switch (this.type) {

@@ -1,35 +1,45 @@
 <form action="" [formGroup]="userSettingsForm">
     <div class="flex mb-5 items-center gap-x-6">
-        <div class="flex items-center justify-center w-24 h-24 bg-[#f6cc63] rounded-full box-shadow">
+        <div
+            class="flex items-center justify-center w-24 h-24 bg-[#f6cc63] rounded-full box-shadow"
+        >
             <span class="text-3xl text-black">{{ getInitialLetter() }}</span>
         </div>
         <div>
-            <p class="text-sm mb-2">JPG, GIF oder PNG. </p>
-            <app-button type="outline" buttonText="Profilbild ändern"></app-button>
+            <p class="text-sm mb-2">JPG, GIF oder PNG.</p>
+            <app-button
+                type="outline"
+                buttonText="Profilbild ändern"
+            ></app-button>
         </div>
-        
     </div>
 
     <div class="flex gap-x-16">
         <div class="flex flex-col mb-5 grow">
-            <label for="firstName" class="mb-2 text-sm font-semibold text-gray-900"
-            >Vorname</label>
+            <label
+                for="firstName"
+                class="mb-2 text-sm font-semibold text-gray-900"
+                >Vorname</label
+            >
             <input
-            type="text"
-            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm   text-grey-800"
-            formControlName="firstName"
-            id="firstName"
+                type="text"
+                class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800"
+                formControlName="firstName"
+                id="firstName"
             />
         </div>
 
         <div class="flex flex-col mb-5 grow">
-            <label for="lastName" class="mb-2 text-sm font-semibold text-gray-900"
-            >Nachname</label>
+            <label
+                for="lastName"
+                class="mb-2 text-sm font-semibold text-gray-900"
+                >Nachname</label
+            >
             <input
-            type="text"
-            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
-            formControlName="lastName"
-            id="lastName"
+                type="text"
+                class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800"
+                formControlName="lastName"
+                id="lastName"
             />
         </div>
     </div>
@@ -37,31 +47,35 @@
     <div class="flex gap-x-16">
         <div class="flex flex-col mb-5 grow">
             <label for="email" class="mb-2 text-sm font-semibold text-gray-900"
-            >E-Mail</label>
+                >E-Mail</label
+            >
             <input
-            type="text"
-            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm   text-grey-800"
-            formControlName="email"
-            id="email"
+                type="text"
+                class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800"
+                formControlName="email"
+                id="email"
             />
         </div>
 
         <div class="flex flex-col mb-5 grow">
             <label for="phone" class="mb-2 text-sm font-semibold text-gray-900"
-            >Telefonnummer</label>
+                >Telefonnummer</label
+            >
             <input
-            type="text"
-            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm  text-grey-800"
-            formControlName="phone"
-            id="phone"
+                type="text"
+                class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800"
+                formControlName="phone"
+                id="phone"
             />
         </div>
     </div>
 
     <div class="flex gap-x-2 mt-4">
         <app-button type="primary" buttonText="Speichern"></app-button>
-        <app-button type="primary-light" buttonText="Abbrechen" (click)="onCancel()"></app-button>
+        <app-button
+            type="primary-light"
+            buttonText="Abbrechen"
+            (click)="onCancel()"
+        ></app-button>
     </div>
-
 </form>
-

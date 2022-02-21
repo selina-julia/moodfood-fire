@@ -1,45 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/shared/models/user';
-import { AuthService } from 'src/app/shared/services/auth/auth.service';
-import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTitle.service';
+import { Component, OnInit } from "@angular/core";
+import { User } from "src/app/shared/models/user";
+import { AuthService } from "src/app/shared/services/auth/auth.service";
+import { HeaderTitleService } from "src/app/shared/services/headerTitle/headerTitle.service";
 
 @Component({
-  selector: 'app-user-settings',
-  templateUrl: './user-settings.component.html',
-  styleUrls: ['./user-settings.component.scss']
+    selector: "app-user-settings",
+    templateUrl: "./user-settings.component.html",
+    styleUrls: ["./user-settings.component.scss"]
 })
 export class UserSettingsComponent implements OnInit {
-  public user!: User
-  public isEditMode = false;
+    public user!: User;
+    public isEditMode = false;
 
-  constructor(private headerTitleService: HeaderTitleService, private authService: AuthService) { }
+    constructor(
+        private headerTitleService: HeaderTitleService,
+        private authService: AuthService
+    ) {}
 
-  ngOnInit(): void {
-    this.headerTitleService.setTitle(
-     'Einstellungen'
-    );
+    ngOnInit(): void {
+        this.headerTitleService.setTitle("Einstellungen");
 
-    this.refreshCurrentUser()
-  }
+        this.refreshCurrentUser();
+    }
 
-  public getInitialLetter() {
-    if(!this.user?.firstName) return;
-    return this.user?.firstName?.charAt(0).toUpperCase();
-  }
+    public getInitialLetter() {
+        if (!this.user?.firstName) return;
+        return this.user?.firstName?.charAt(0).toUpperCase();
+    }
 
-  public editUserData():void {
-    this.isEditMode = !this.isEditMode;
-  }
+    public editUserData(): void {
+        this.isEditMode = !this.isEditMode;
+    }
 
-  public async refreshCurrentUser(): Promise<void> {
-    this.authService.fetchUser();
+    public async refreshCurrentUser(): Promise<void> {
+        this.authService.fetchUser();
 
-    this.authService.user$.subscribe((val) => {
-      if (val) {
-        // this.userId = val.uid;
-        this.user = val;
-      }
-    });
-  }
-
+        this.authService.user$.subscribe((val) => {
+            if (val) {
+                // this.userId = val.uid;
+                this.user = val;
+            }
+        });
+    }
 }

@@ -1,18 +1,20 @@
 <div class="flex items-center mb-16 gap-x-10">
-  <app-filter></app-filter>
-  <app-search-bar (refineItems)="onSearchInputChange($event)"></app-search-bar>
+    <app-filter></app-filter>
+    <app-search-bar
+        (refineItems)="onSearchInputChange($event)"
+    ></app-search-bar>
 </div>
 
 <div
-  *ngIf="isLoading"
-  wire:loading
-  class="absolute top-0 right-0 flex items-center justify-center w-full h-full"
+    *ngIf="isLoading"
+    wire:loading
+    class="absolute top-0 right-0 flex items-center justify-center w-full h-full"
 >
-  <svg
-    class="absolute w-6 h-6 bg-transparent border-2 border-transparent border-opacity-50 rounded-full animate-spin"
-    style="border-right-color: black; border-top-color: black"
-    viewBox="0 0 24 24"
-  ></svg>
+    <svg
+        class="absolute w-6 h-6 bg-transparent border-2 border-transparent border-opacity-50 rounded-full animate-spin"
+        style="border-right-color: black; border-top-color: black"
+        viewBox="0 0 24 24"
+    ></svg>
 </div>
 
 <!--<div *ngIf="!user?.email">
@@ -26,119 +28,122 @@
   ></app-button>
 </div>-->
 <div
-  class="grid gap-4 pb-16 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+    class="grid gap-4 pb-16 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
 >
-  <div
-    class="relative p-4 border gap-x-2 border-radius flex flex-col"
-    *ngFor="let item of filteredList"
-  >
-    <img
-      [src]="item.image"
-      alt=""
-      class="mb-3 cursor-pointer recipe-image"
-      [routerLink]="['/recipes', item.uid]"
-    />
-    <div class="flex flex-col justify-between flex-grow">
-    <div class="flex justify-between mb-2">
-      <h2
-        class="ml-3 text-2xl font-bold cursor-pointer"
-        [routerLink]="['/recipes', item.uid]"
-      >
-        {{ item.title }}
-      </h2>
-      
-      <div class="relative flex gap-x-2">
-        
-          <app-icon
-          class="cursor-pointer w-5"
-          (click)="onChangePublicState(item)"
-          [iconName]="item.publicState === 'public' ? 'public' : 'private'"
-          *ngIf="item.userId === user?.uid"
-          
-        ></app-icon>
-  
-          <app-icon
-            class="cursor-pointer w-5"
-            (click)="onDotsClicked(item)"
-            iconName="dots"
-            *ngIf="item.userId === user?.uid"
-          ></app-icon>
-     
+    <div
+        class="relative p-4 border gap-x-2 border-radius flex flex-col"
+        *ngFor="let item of filteredList"
+    >
+        <img
+            [src]="item.image"
+            alt=""
+            class="mb-3 cursor-pointer recipe-image"
+            [routerLink]="['/recipes', item.uid]"
+        />
+        <div class="flex flex-col justify-between flex-grow">
+            <div class="flex justify-between mb-2">
+                <h2
+                    class="ml-3 text-2xl font-bold cursor-pointer"
+                    [routerLink]="['/recipes', item.uid]"
+                >
+                    {{ item.title }}
+                </h2>
 
-        <!-- edit and delete box -->
-        <div
-          *ngIf="showOptionsBox(item) && showOptions"
-          class="absolute bottom-0 px-5 bg-white rounded-md h-fit top-1 right-6 box-shadow"
-        >
-          <div
-            id="recipe-1"
-            class="flex items-center py-2 cursor-pointer gap-x-2"
-            [routerLink]="['/recipes/edit', item.uid]"
-          >
-            <div class="w-4"><app-icon iconName="edit"></app-icon></div>
-            <p>Bearbeiten</p>
-          </div>
-          <hr />
-          <div
-            class="flex items-center py-2 cursor-pointer gap-x-2"
-            (click)="deleteRecipe(item)"
-          >
-            <div class="w-4"><app-icon iconName="trash"></app-icon></div>
-            <p>Löschen</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="flex justify-between mx-3">
-      <div class="flex">
-        <div *ngFor="let number of getRecipeLevel(item.level)">
-          <div class="flex w-7">
-            <div class="w-5">
-              <app-icon iconName="chef"></app-icon>
+                <div class="relative flex gap-x-2">
+                    <app-icon
+                        class="cursor-pointer w-5"
+                        (click)="onChangePublicState(item)"
+                        [iconName]="
+                            item.publicState === 'public' ? 'public' : 'private'
+                        "
+                        *ngIf="item.userId === user?.uid"
+                    ></app-icon>
+
+                    <app-icon
+                        class="cursor-pointer w-5"
+                        (click)="onDotsClicked(item)"
+                        iconName="dots"
+                        *ngIf="item.userId === user?.uid"
+                    ></app-icon>
+
+                    <!-- edit and delete box -->
+                    <div
+                        *ngIf="showOptionsBox(item) && showOptions"
+                        class="absolute bottom-0 px-5 bg-white rounded-md h-fit top-1 right-6 box-shadow"
+                    >
+                        <div
+                            id="recipe-1"
+                            class="flex items-center py-2 cursor-pointer gap-x-2"
+                            [routerLink]="['/recipes/edit', item.uid]"
+                        >
+                            <div class="w-4">
+                                <app-icon iconName="edit"></app-icon>
+                            </div>
+                            <p>Bearbeiten</p>
+                        </div>
+                        <hr />
+                        <div
+                            class="flex items-center py-2 cursor-pointer gap-x-2"
+                            (click)="deleteRecipe(item)"
+                        >
+                            <div class="w-4">
+                                <app-icon iconName="trash"></app-icon>
+                            </div>
+                            <p>Löschen</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="flex justify-between mx-3">
+                <div class="flex">
+                    <div *ngFor="let number of getRecipeLevel(item.level)">
+                        <div class="flex w-7">
+                            <div class="w-5">
+                                <app-icon iconName="chef"></app-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>{{ item.time }} min</div>
+            </div>
         </div>
-      </div>
-      <div>{{ item.time }} min</div>
-    </div>
-  </div>
-    <!--
+        <!--
     <div class="flex ml-3 gap-x-2">
       <a [routerLink]="['/recipes/edit', item.uid]">Edit</a>
       <a (click)="deleteRecipe(item)">Delete</a>
     </div>
     -->
 
-    <div
-      *ngIf="userId"
-      class="absolute p-3 border border-gray-300 rounded-lg -top-2 -right-2"
-      (click)="updateFavorites(item)"
-      [ngClass]="getFavoriteClasses(item)"
-    >
-      <div class="w-8 h-8">
-        <app-icon
-          [iconName]="getFavoriteState(item) ? 'heart-full' : 'heart'"
-        ></app-icon>
-      </div>
+        <div
+            *ngIf="userId"
+            class="absolute p-3 border border-gray-300 rounded-lg -top-2 -right-2"
+            (click)="updateFavorites(item)"
+            [ngClass]="getFavoriteClasses(item)"
+        >
+            <div class="w-8 h-8">
+                <app-icon
+                    [iconName]="getFavoriteState(item) ? 'heart-full' : 'heart'"
+                ></app-icon>
+            </div>
+        </div>
+
+        <app-modal
+            (cancel)="onCancelClick()"
+            (action)="onModalDeleteClick(deleteItem?.uid)"
+            [title]="deleteItem?.title"
+            *ngIf="showModal"
+            type="warning"
+            [modalData]="getDeleteRecipeModalData(deleteItem)"
+        >
+        </app-modal>
+
+        <app-modal
+            (cancel)="onCancelClick()"
+            (action)="changePublicState(statusItem)"
+            *ngIf="showStatusModal"
+            type="info"
+            [modalData]="getStatusModelData(statusItem)"
+        >
+        </app-modal>
     </div>
-
-    <app-modal
-      (cancel)="onCancelClick()"
-      (action)="onModalDeleteClick(deleteItem?.uid)"
-      [title]="deleteItem?.title"
-      *ngIf="showModal"
-      type="warning"
-      [modalData]="getDeleteRecipeModalData(deleteItem)"
-    >
-  </app-modal>
-
-  <app-modal
-    (cancel)="onCancelClick()"
-    (action)="changePublicState(statusItem)"
-    *ngIf="showStatusModal"
-    type="info"
-    [modalData]="getStatusModelData(statusItem)"
-  >
-  </app-modal>
-  </div>
 </div>

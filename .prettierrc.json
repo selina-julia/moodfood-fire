@@ -1,9 +1,6 @@
 {
-    "trailingComma": "es5",
+    "trailingComma":"none",
     "tabWidth": 4,
-    "semi": false,
-    "singleQuote": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "semi": true,
+    "singleQuote": false
 }
-  

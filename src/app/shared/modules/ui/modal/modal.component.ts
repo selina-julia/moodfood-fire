@@ -12,7 +12,7 @@ export type ModalData = {
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
   @Output() cancel = new EventEmitter();
   @Output() action = new EventEmitter();
   @Input() title: string | undefined;
@@ -21,9 +21,6 @@ export class ModalComponent implements OnInit {
 
 
   constructor() {}
-
-  ngOnInit(): void {
-  }
 
   public onCancel() {
     this.cancel.emit('cancel');

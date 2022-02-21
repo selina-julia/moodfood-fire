@@ -7,7 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
 })
-export class IconComponent implements OnInit {
+export class IconComponent {
   @Input() iconName!: string;
 
   constructor(
@@ -250,5 +250,4 @@ export class IconComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
 }
