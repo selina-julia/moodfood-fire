@@ -34,6 +34,7 @@ import { AuthenticationService } from './shared/services/authentication/authenti
 import { RegisterFormModule } from './modules/register-form/register-form.module';
 import { UserSettingsComponent } from './modules/user-settings/user-settings.component';
 import { UserSettingsFormComponent } from './modules/user-settings-form/user-settings-form.component';
+import { ModalModule } from './shared/modules/ui/modal/modal.module';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { UserSettingsFormComponent } from './modules/user-settings-form/user-set
     UserGreetingModule,
     RegisterFormModule,
     ButtonModule,
+    ModalModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent],

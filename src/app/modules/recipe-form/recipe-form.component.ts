@@ -34,6 +34,9 @@ export class RecipeFormComponent implements OnInit {
   public recipeIdFromRoute!: string | null;
   public categories!: Category[];
   public userId?: string;
+  public showModal = false;
+  public isCategorySelected = false;
+  public selectedCategory!: Category
 
   constructor(
     private recipeService: RecipesService,
@@ -142,6 +145,29 @@ export class RecipeFormComponent implements OnInit {
     });
 
     // this.subscriptions.add(valueChangesSub);
+  }
+
+  public refreshCreateModalState() {
+    this.showModal = !this.showModal;
+  }
+
+  public getCreateModalData() {
+      return {
+        headline: this.isUpdating ? 'Änderungen speichern' : 'Rezept erstellen',
+        description: 'Möchtest du die Änderungen für dieses Rezept speichern?',
+        actionButton: 'Speichern',
+        cancelButton: 'Abbrechen'
+
+    }
+  }
+
+  public refreshCategorySelect(cat: Category) {
+    this.selectedCategory = cat;
+    this.isCategorySelected = !this.isCategorySelected;
+  }
+
+  public showSelectedCat(item: Category) {
+    return item === this.selectedCategory;
   }
 
   public createRecipe() {

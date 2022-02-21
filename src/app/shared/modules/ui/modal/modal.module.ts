@@ -1,10 +1,11 @@
-// import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { ModalComponent } from './modal.component';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { IconModule } from '../icon/icon.module';
+import { ModalComponent } from './modal.component';
 
-// @NgModule({
-//   declarations: [ModalComponent],
-//   imports: [CommonModule],
-//   exports: [ModalComponent],
-// })
-// export class ModalModule {}
+@NgModule({
+  declarations: [ModalComponent],
+  imports: [CommonModule, IconModule],
+  exports: [ModalComponent],
+})
+export class ModalModule {}

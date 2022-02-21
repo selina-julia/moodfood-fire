@@ -186,6 +186,68 @@ export class IconComponent implements OnInit {
         '../../../../../assets/icons/settings.svg'
       )
     );
+
+    this.matIconRegistry.addSvgIcon(
+      'italian',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/italian.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'chinese',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/chinese.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'dessert',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/dessert.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'seafood',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/seafood.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'vegetarian',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/vegetarian.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'pork',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/pork.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'chicken',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/chicken.svg'
+      )
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'austrian',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/austrian.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'burger',
+      this.domSanitzer.bypassSecurityTrustResourceUrl(
+        '../../../../../assets/icons/burger.svg'
+      )
+    );
   }
 
   ngOnInit(): void {}
