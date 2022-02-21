@@ -1,13 +1,19 @@
-<div>
-    <h2 class="text-xl font-semibold uppercase mb-4">Persönliche Daten</h2>
-    <div class="flex gap-x-4 items-center">
-        <div class="flex items-center justify-center w-20 h-20 bg-[#f6cc63] rounded-full box-shadow">
-            <span class="text-3xl text-black">{{ getInitialLetter() }}</span>
-        </div>
+<ng-container *ngIf="!isEditMode">
+    <div class="mb-10">
+        <h2 class="text-xl font-semibold uppercase mb-4">Persönliche Daten</h2>
+        <div class="flex gap-x-4 items-center">
+            <div class="flex items-center justify-center w-20 h-20 bg-[#f6cc63] rounded-full box-shadow">
+                <span class="text-3xl text-black">{{ getInitialLetter() }}</span>
+            </div>
 
-        <div>
-            <p class="font-medium text-xl mb-2">{{user.firstName}} {{user.lastName}}</p>
-            <app-button buttonText="Profil bearbeiten" icon="edit"></app-button>
+            <div>
+                <p class="font-medium text-xl mb-2">{{user?.firstName}} {{user?.lastName}}</p>
+                <app-button (click)="editUserData()" buttonText="Profil bearbeiten" icon="edit"></app-button>
+            </div>
         </div>
     </div>
-</div>
+</ng-container>
+
+<ng-container *ngIf="isEditMode">
+    <app-user-settings-form [user]="user" (cancel)="editUserData()"></app-user-settings-form>
+</ng-container>

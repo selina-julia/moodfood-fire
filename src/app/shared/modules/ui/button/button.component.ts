@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
-  @Input() type!: 'primary' | 'textlink' | 'primary-light';
+  @Input() type!: 'primary' | 'textlink' | 'primary-light' | 'outline';
   @Input() buttonText!: string;
   @Input() icon!: string;
 
@@ -24,6 +24,9 @@ export class ButtonComponent implements OnInit {
 
       case 'textlink':
         return 'border-b text-black';
+
+      case 'outline':
+        return 'border border-gray-600 rounded-md bg-white px-4 py-2 text-black';
     }
     return '';
   }

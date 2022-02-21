@@ -33,6 +33,7 @@ import { RegisterFormComponent } from './modules/register-form/register-form.com
 import { AuthenticationService } from './shared/services/authentication/authentication.service';
 import { RegisterFormModule } from './modules/register-form/register-form.module';
 import { UserSettingsComponent } from './modules/user-settings/user-settings.component';
+import { UserSettingsFormComponent } from './modules/user-settings-form/user-settings-form.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { UserSettingsComponent } from './modules/user-settings/user-settings.com
     AuthFormComponent,
     RegisterFormComponent,
     UserSettingsComponent,
+    UserSettingsFormComponent,
   ],
   imports: [
     BrowserModule,

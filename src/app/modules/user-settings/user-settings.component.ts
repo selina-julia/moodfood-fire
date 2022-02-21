@@ -10,6 +10,7 @@ import { HeaderTitleService } from 'src/app/shared/services/headerTitle/headerTi
 })
 export class UserSettingsComponent implements OnInit {
   public user!: User
+  public isEditMode = false;
 
   constructor(private headerTitleService: HeaderTitleService, private authService: AuthService) { }
 
@@ -22,7 +23,12 @@ export class UserSettingsComponent implements OnInit {
   }
 
   public getInitialLetter() {
-    return this.user.firstName?.charAt(0)
+    if(!this.user?.firstName) return;
+    return this.user?.firstName?.charAt(0).toUpperCase();
+  }
+
+  public editUserData():void {
+    this.isEditMode = !this.isEditMode;
   }
 
   public async refreshCurrentUser(): Promise<void> {
