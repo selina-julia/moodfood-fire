@@ -1,7 +1,7 @@
 <form action="" [formGroup]="form">
-    <div class="mb-10 lg:flex gap-x-10">
+    <div class="mb-10 lg:flex gap-x-20">
         <!-- Rezeptname -->
-        <div class="flex-grow">
+        <div class="flex-grow w-6/12">
             <div class="flex flex-col mb-5">
                 <label
                     for="title"
@@ -16,7 +16,7 @@
                 />
             </div>
             <!-- Zubereitung -->
-            <div class="flex flex-col mb-5">
+            <!-- <div class="flex flex-col mb-5">
                 <label
                     for="description"
                     class="mb-2 text-sm font-semibold text-gray-900"
@@ -31,6 +31,39 @@
                     id="description"
                 >
                 </textarea>
+            </div> -->
+
+            <!-- Zubereitung Schritte -->
+            <div formArrayName="cookingSteps">
+                <label class="mb-2 text-sm font-semibold text-gray-900 block">
+                    Zubereitung
+                </label>
+                <div
+                    *ngFor="
+                        let quantity of cookingSteps().controls;
+                        let i = index
+                    "
+                    [formGroupName]="i"
+                >
+                    <div class="flex flex-col mb-5">
+                        <textarea
+                            type="text"
+                            placeholder="Schritt {{ i + 1 }}"
+                            rows="3"
+                            class="px-3 py-2 bg-transparent border border-gray-500 rounded-sm text-grey-800 placeholder:italic"
+                            formControlName="text"
+                            id="text"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <app-button
+                        icon="plusCircle"
+                        (click)="addCookingStep()"
+                        buttonText="Schritt hinzufügen"
+                    ></app-button>
+                </div>
             </div>
 
             <!-- Bild -->

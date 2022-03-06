@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { AngularFireStorage } from "@angular/fire/compat/storage";
 import {
+    FormArray,
     FormBuilder,
     FormControl,
     FormGroup,
@@ -91,9 +92,24 @@ export class RecipeFormComponent implements OnInit {
             categories: new FormControl(""),
             isFavorite: new FormControl(false),
             publicState: new FormControl("private"),
-            userId: new FormControl("")
+            userId: new FormControl(""),
+            cookingSteps: this.fb.array([])
         });
         this.setUserId();
+    }
+
+    public cookingSteps(): FormArray {
+        return this.form.get("cookingSteps") as FormArray;
+    }
+
+    public newStep(): FormGroup {
+        return this.fb.group({
+            text: ""
+        });
+    }
+
+    public addCookingStep() {
+        this.cookingSteps().push(this.newStep());
     }
 
     public setUserId() {
