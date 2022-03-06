@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { AngularFireStorage } from "@angular/fire/compat/storage";
 import {
     FormBuilder,
@@ -7,8 +7,9 @@ import {
     Validators
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { finalize, Observable } from "rxjs";
+import { finalize, Observable, Subscription } from "rxjs";
 import { Category } from "src/app/shared/models/category";
+import { User } from "src/app/shared/models/user";
 import { AuthService } from "src/app/shared/services/auth/auth.service";
 import { CategoriesService } from "src/app/shared/services/categories/categories.service";
 import { HeaderTitleService } from "src/app/shared/services/headerTitle/headerTitle.service";
@@ -20,7 +21,7 @@ import { Recipe } from "../recipes/shared/recipe";
     templateUrl: "./recipe-form.component.html",
     styleUrls: ["./recipe-form.component.scss"]
 })
-export class RecipeFormComponent implements OnInit {
+export class RecipeFormComponent implements OnInit, OnDestroy {
     public recipes$!: Observable<Recipe[]>;
     public form!: FormGroup;
     public recipes: Recipe[] = [];
@@ -37,6 +38,8 @@ export class RecipeFormComponent implements OnInit {
     public showModal = false;
     public isCategorySelected = false;
     public selectedCategory!: Category;
+
+    private subscriptions = new Subscription();
 
     constructor(
         private recipeService: RecipesService,
@@ -65,20 +68,27 @@ export class RecipeFormComponent implements OnInit {
         this.previewImage = "../../../assets/images/placeholder.jpeg";
     }
 
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+    }
+
     private initForm(): void {
-        this.refreshCurrentUser();
         this.initFormGroup();
+        this.refreshCurrentUser();
         this.listenToFormGroupChanges();
     }
 
     public refreshCurrentUser(): void {
-        this.authService.fetchUser();
+        this.subscriptions.add(
+            this.authService.user$.subscribe((val) => {
+                if (val) {
+                    this.userId = val.uid;
+                }
+                this.cdRef.detectChanges();
+            })
+        );
 
-        this.authService.user$.subscribe((val) => {
-            if (val) {
-                this.userId = val.uid;
-            }
-        });
+        console.log(this.userId);
     }
 
     public initFormGroup() {

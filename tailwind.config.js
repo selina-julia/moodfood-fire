@@ -9,6 +9,10 @@ module.exports = {
     },
   },
 
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
+
   content: ["./src/**/*.{html,ts}"],
 
   darkMode: "class", // or 'media' or 'class'

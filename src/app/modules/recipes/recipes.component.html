@@ -41,15 +41,15 @@
             [routerLink]="['/recipes', item.uid]"
         />
         <div class="flex flex-col justify-between flex-grow">
-            <div class="flex justify-between mb-2">
+            <div class="flex justify-between items-start mb-2 gap-x-2">
                 <h2
-                    class="ml-3 text-2xl font-bold cursor-pointer"
+                    class="ml-3 text-2xl font-bold cursor-pointer line-clamp-2"
                     [routerLink]="['/recipes', item.uid]"
                 >
                     {{ item.title }}
                 </h2>
 
-                <div class="relative flex gap-x-2">
+                <div class="relative flex gap-x-2 pt-1.5">
                     <app-icon
                         class="cursor-pointer w-5"
                         (click)="onChangePublicState(item)"

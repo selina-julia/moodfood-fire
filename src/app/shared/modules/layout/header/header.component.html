@@ -1,294 +1,298 @@
 <!--header desktop -->
 <header
-  class="flex flex-col z-10 items-center justify-between w-full px-5 lg:px-0 py-3 transition duration-300 ease-out bg-[#fffbf7] bg-opacity-80 lg:bg-white lg:mb-10 lg:px-auto lg:py-10 lg:block main-header backdrop-filter backdrop-blur-lg"
-  [ngClass]="{ 'lg:w-32': !navExpanded, 'lg:w-64': navExpanded }"
+    class="flex flex-col z-10 items-center justify-between w-full px-5 lg:px-0 py-3 transition duration-300 ease-out bg-[#fffbf7] bg-opacity-80 lg:bg-white lg:mb-10 lg:px-auto lg:py-10 lg:block main-header backdrop-filter backdrop-blur-lg"
+    [ngClass]="{ 'lg:w-32': !navExpanded, 'lg:w-64': navExpanded }"
 >
-  <div
-    class="flex cursor-pointer lg:mb-16"
-    [ngClass]="{
-      'justify-center': !navExpanded,
-      'pl-10 justify-start': navExpanded
-    }"
-    [routerLink]="'recipes'"
-  >
     <div
-      [ngClass]="{
-        'w-auto opacity-100 transition-all duration-200 ease-linear':
-          navExpanded,
-        'w-0 opacity-0': !navExpanded
-      }"
-      class="text-2xl font-bold"
+        class="flex cursor-pointer lg:mb-16"
+        [ngClass]="{
+            'justify-center': !navExpanded,
+            'pl-10 justify-start': navExpanded
+        }"
+        [routerLink]="'recipes'"
     >
-      mood<span class="text-[#f6cc63]">food</span>
+        <div
+            [ngClass]="{
+                'w-auto opacity-100 transition-all duration-200 ease-linear':
+                    navExpanded,
+                'w-0 opacity-0': !navExpanded
+            }"
+            class="text-2xl font-bold"
+        >
+            mood<span class="text-[#f6cc63]">food</span>
+        </div>
+        <div class="w-9" *ngIf="!navExpanded">
+            <app-icon iconName="moodfood-small"></app-icon>
+        </div>
     </div>
-    <div class="w-9" *ngIf="!navExpanded">
-      <app-icon iconName="moodfood-small"></app-icon>
+
+    <div (click)="toggleMobileNav()" class="lg:hidden">
+        <div class="w-9">
+            <app-icon iconName="menu"></app-icon>
+        </div>
     </div>
-  </div>
+    <nav class="hidden lg:block h-full">
+        <div
+            class="flex flex-col gap-y-10 h-full"
+            [ngClass]="{
+                'items-center': !navExpanded,
+                'pl-10 items-start': navExpanded
+            }"
+        >
+            <!-- dashboard -->
+            <div
+                class="flex items-center cursor-pointer"
+                [ngClass]="{
+                    'gap-x-3': navExpanded
+                }"
+                (click)="closeNav()"
+            >
+                <div
+                    [routerLink]="'recipes'"
+                    class="flex justify-center header-icon"
+                    routerLinkActive="activeIcon"
+                >
+                    <div class="w-7">
+                        <app-icon iconName="home"></app-icon>
+                    </div>
+                </div>
+                <div
+                    [routerLink]="'recipes'"
+                    [ngClass]="{
+                        'w-auto opacity-100 transition-all duration-200 ease-linear':
+                            navExpanded,
+                        'w-0 opacity-0': !navExpanded
+                    }"
+                >
+                    Foodboard
+                </div>
+            </div>
 
-  <div (click)="toggleMobileNav()" class="lg:hidden">
-    <div class="w-9">
-      <app-icon iconName="menu"></app-icon>
-    </div>
-  </div>
-  <nav class="hidden lg:block h-full">
-    <div
-      class="flex flex-col gap-y-10 h-full"
-      [ngClass]="{
-        'items-center': !navExpanded,
-        'pl-10 items-start': navExpanded
-      }"
-    >
-    <!-- dashboard -->
-      <div
-        class="flex items-center cursor-pointer"
-        [ngClass]="{
-          'gap-x-3': navExpanded
-        }"
-        (click)="closeNav()"
-      >
-        <div
-          [routerLink]="'recipes'"
-          class="flex justify-center header-icon"
-          routerLinkActive="activeIcon"
-        >
-          <div class="w-7">
-            <app-icon iconName="home"></app-icon>
-          </div>
-        </div>
-        <div
-          [routerLink]="'recipes'"
-          [ngClass]="{
-            'w-auto opacity-100 transition-all duration-200 ease-linear':
-              navExpanded,
-            'w-0 opacity-0': !navExpanded
-          }"
-        >
-          Foodboard
-        </div>
-      </div>
+            <!-- my recipes -->
+            <div
+                *ngIf="currentUser?.email"
+                class="flex items-center cursor-pointer grow-0"
+                [ngClass]="{
+                    'gap-x-3': navExpanded
+                }"
+                (click)="closeNav()"
+            >
+                <div
+                    [routerLink]="'myrecipes'"
+                    class="flex justify-center header-icon"
+                    routerLinkActive="activeIcon"
+                >
+                    <div class="w-7">
+                        <app-icon iconName="cooking"></app-icon>
+                    </div>
+                </div>
+                <div
+                    [routerLink]="'myrecipes'"
+                    [ngClass]="{
+                        'w-auto opacity-100 transition-all duration-200 ease-linear':
+                            navExpanded,
+                        'w-0 opacity-0': !navExpanded
+                    }"
+                >
+                    Rezepte
+                </div>
+            </div>
 
-      <!-- my recipes -->
-      <div
-        *ngIf="currentUser?.email"
-        class="flex items-center cursor-pointer grow-0"
-        [ngClass]="{
-          'gap-x-3': navExpanded
-        }"
-        (click)="closeNav()"
-      >
-        <div
-          [routerLink]="'myrecipes'"
-          class="flex justify-center header-icon"
-          routerLinkActive="activeIcon"
-        >
-          <div class="w-7">
-            <app-icon iconName="cooking"></app-icon>
-          </div>
-        </div>
-        <div
-          [routerLink]="'myrecipes'"
-          [ngClass]="{
-            'w-auto opacity-100 transition-all duration-200 ease-linear':
-              navExpanded,
-            'w-0 opacity-0': !navExpanded
-          }"
-        >
-          Rezepte
-        </div>
-      </div>
+            <!-- favorites -->
+            <div
+                *ngIf="currentUser?.email"
+                class="flex items-center cursor-pointer grow-0"
+                [ngClass]="{
+                    'gap-x-3': navExpanded
+                }"
+                (click)="closeNav()"
+            >
+                <div
+                    [routerLink]="'favorites'"
+                    class="flex justify-center header-icon"
+                    routerLinkActive="activeIcon"
+                >
+                    <div class="w-7">
+                        <app-icon iconName="like"></app-icon>
+                    </div>
+                </div>
+                <div
+                    [routerLink]="'favorites'"
+                    [ngClass]="{
+                        'w-auto opacity-100 transition-all duration-200 ease-linear':
+                            navExpanded,
+                        'w-0 opacity-0': !navExpanded
+                    }"
+                >
+                    Favoriten
+                </div>
+            </div>
 
-      <!-- favorites -->
-      <div
-        *ngIf="currentUser?.email"
-        class="flex items-center cursor-pointer grow-0"
-        [ngClass]="{
-          'gap-x-3': navExpanded
-        }"
-        (click)="closeNav()"
-      >
-        <div
-          [routerLink]="'favorites'"
-          class="flex justify-center header-icon"
-          routerLinkActive="activeIcon"
-        >
-          <div class="w-7">
-            <app-icon iconName="like"></app-icon>
-          </div>
-        </div>
-        <div
-          [routerLink]="'favorites'"
-          [ngClass]="{
-            'w-auto opacity-100 transition-all duration-200 ease-linear':
-              navExpanded,
-            'w-0 opacity-0': !navExpanded
-          }"
-        >
-          Favoriten
-        </div>
-      </div>
+            <!-- create recipes -->
+            <div
+                class="flex items-center cursor-pointer grow-0"
+                [ngClass]="{
+                    'gap-x-3': navExpanded
+                }"
+                (click)="closeNav()"
+            >
+                <div
+                    [routerLink]="'create'"
+                    class="flex justify-center transition-all duration-200 ease-linear header-icon"
+                    routerLinkActive="activeIcon"
+                >
+                    <div class="w-6">
+                        <app-icon iconName="plus"></app-icon>
+                    </div>
+                </div>
+                <div
+                    [routerLink]="'create'"
+                    [ngClass]="{
+                        'w-auto opacity-100 transition-all duration-200 ease-linear':
+                            navExpanded,
+                        'w-0 opacity-0': !navExpanded
+                    }"
+                >
+                    Erstellen
+                </div>
+            </div>
 
-      <!-- create recipes -->
-      <div
-        *ngIf="currentUser?.email"
-        class="flex items-center cursor-pointer grow-0"
-        [ngClass]="{
-          'gap-x-3': navExpanded
-        }"
-        (click)="closeNav()"
-      >
-        <div
-          [routerLink]="'create'"
-          class="flex justify-center transition-all duration-200 ease-linear header-icon"
-          routerLinkActive="activeIcon"
-        >
-          <div class="w-6">
-            <app-icon iconName="plus"></app-icon>
-          </div>
-        </div>
-        <div
-          [routerLink]="'create'"
-          [ngClass]="{
-            'w-auto opacity-100 transition-all duration-200 ease-linear':
-              navExpanded,
-            'w-0 opacity-0': !navExpanded
-          }"
-        >
-          Erstellen
-        </div>
-      </div>
+            <!-- arrow -->
+            <div class="flex justify-center cursor-pointer header-icon grow-0">
+                <div
+                    class="transition duration-300 ease-out w-7"
+                    [ngClass]="{
+                        'rotate-180': navExpanded
+                    }"
+                >
+                    <app-icon
+                        iconName="arrow"
+                        (click)="onArrowClick()"
+                    ></app-icon>
+                </div>
+            </div>
 
-      <!-- arrow -->
-      <div class="flex justify-center cursor-pointer header-icon grow-0">
-        <div
-          class="transition duration-300 ease-out w-7"
-          [ngClass]="{
-            'rotate-180': navExpanded
-          }"
-        >
-          <app-icon iconName="arrow" (click)="onArrowClick()"></app-icon>
-        </div>
-      </div>
+            <div class="grow"></div>
 
-      <div class="grow"></div>
-
-      <!-- settings -->
-      <div
-      *ngIf="currentUser?.email"
-      class="flex items-center cursor-pointer grow-0 mb-20"
-      [ngClass]="{
-        'gap-x-3': navExpanded
-      }"
-      (click)="closeNav()"
-    >
-      <div
-        [routerLink]="'settings'"
-        class="flex justify-center transition-all duration-200 ease-linear header-icon"
-        routerLinkActive="activeIcon"
-      >
-        <div class="w-8">
-          <app-icon iconName="settings"></app-icon>
+            <!-- settings -->
+            <div
+                *ngIf="currentUser?.email"
+                class="flex items-center cursor-pointer grow-0 mb-20"
+                [ngClass]="{
+                    'gap-x-3': navExpanded
+                }"
+                (click)="closeNav()"
+            >
+                <div
+                    [routerLink]="'settings'"
+                    class="flex justify-center transition-all duration-200 ease-linear header-icon"
+                    routerLinkActive="activeIcon"
+                >
+                    <div class="w-8">
+                        <app-icon iconName="settings"></app-icon>
+                    </div>
+                </div>
+                <div
+                    [routerLink]="'settings'"
+                    [ngClass]="{
+                        'w-auto opacity-100 transition-all duration-200 ease-linear':
+                            navExpanded,
+                        'w-0 opacity-0': !navExpanded
+                    }"
+                >
+                    Einstellungen
+                </div>
+            </div>
         </div>
-      </div>
-      <div
-        [routerLink]="'settings'"
-        [ngClass]="{
-          'w-auto opacity-100 transition-all duration-200 ease-linear':
-            navExpanded,
-          'w-0 opacity-0': !navExpanded
-        }"
-      >
-        Einstellungen
-      </div>
-    </div>
-    </div>
-  </nav>
+    </nav>
 </header>
 
 <!--mobile nav-->
 <nav
-  class="absolute z-50 w-full h-full p-5 transition-all duration-500 ease-in-out bg-white lg:hidden"
-  [ngClass]="{
-    '-left-full': !isMobileNavVisible,
-    'left-0': isMobileNavVisible
-  }"
->
-  <div class="flex justify-end w-full">
-    <div class="w-7" (click)="toggleMobileNav()">
-      <app-icon iconName="close"></app-icon>
-    </div>
-  </div>
-
-  <div
-    class="flex flex-col items-center justify-center h-full gap-y-10"
+    class="absolute z-50 w-full h-full p-5 transition-all duration-500 ease-in-out bg-white lg:hidden"
     [ngClass]="{
-      'items-center': !navExpanded,
-      'pl-10 items-start': navExpanded
+        '-left-full': !isMobileNavVisible,
+        'left-0': isMobileNavVisible
     }"
-  >
-    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
-      <div
-        [routerLink]="'recipes'"
-        class="flex justify-center header-icon"
-        routerLinkActive="activeIcon"
-      >
-        <div class="w-7">
-          <app-icon iconName="home"></app-icon>
+>
+    <div class="flex justify-end w-full">
+        <div class="w-7" (click)="toggleMobileNav()">
+            <app-icon iconName="close"></app-icon>
         </div>
-      </div>
-      <div [routerLink]="'recipes'" *ngIf="navExpanded">Foodboard</div>
     </div>
 
-    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
-      <div
-        [routerLink]="'myrecipes'"
-        class="flex justify-center header-icon"
-        routerLinkActive="activeIcon"
-      >
-        <div class="w-7">
-          <app-icon iconName="cooking"></app-icon>
+    <div
+        class="flex flex-col items-center justify-center h-full gap-y-10"
+        [ngClass]="{
+            'items-center': !navExpanded,
+            'pl-10 items-start': navExpanded
+        }"
+    >
+        <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+            <div
+                [routerLink]="'recipes'"
+                class="flex justify-center header-icon"
+                routerLinkActive="activeIcon"
+            >
+                <div class="w-7">
+                    <app-icon iconName="home"></app-icon>
+                </div>
+            </div>
+            <div [routerLink]="'recipes'" *ngIf="navExpanded">Foodboard</div>
         </div>
-      </div>
-      <div [routerLink]="'myrecipes'" *ngIf="navExpanded">Meine Rezepte</div>
-    </div>
 
-    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
-      <div
-        [routerLink]="'favorites'"
-        class="flex justify-center header-icon"
-        routerLinkActive="activeIcon"
-      >
-        <div class="w-7">
-          <app-icon iconName="like"></app-icon>
+        <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+            <div
+                [routerLink]="'myrecipes'"
+                class="flex justify-center header-icon"
+                routerLinkActive="activeIcon"
+            >
+                <div class="w-7">
+                    <app-icon iconName="cooking"></app-icon>
+                </div>
+            </div>
+            <div [routerLink]="'myrecipes'" *ngIf="navExpanded">
+                Meine Rezepte
+            </div>
         </div>
-      </div>
-      <div [routerLink]="'favorites'" *ngIf="navExpanded">Favoriten</div>
-    </div>
 
-    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
-      <div
-        [routerLink]="'create'"
-        class="flex justify-center header-icon"
-        routerLinkActive="activeIcon"
-      >
-        <div class="w-6">
-          <app-icon iconName="plus"></app-icon>
+        <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+            <div
+                [routerLink]="'favorites'"
+                class="flex justify-center header-icon"
+                routerLinkActive="activeIcon"
+            >
+                <div class="w-7">
+                    <app-icon iconName="like"></app-icon>
+                </div>
+            </div>
+            <div [routerLink]="'favorites'" *ngIf="navExpanded">Favoriten</div>
         </div>
-      </div>
-      <div [routerLink]="'create'" *ngIf="navExpanded">Erstellen</div>
-    </div>
 
-    <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
-      <div
-        [routerLink]="'auth'"
-        class="flex justify-center header-icon"
-        routerLinkActive="activeIcon"
-      >
-        <div class="w-8">
-          <app-icon iconName="user"></app-icon>
+        <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+            <div
+                [routerLink]="'create'"
+                class="flex justify-center header-icon"
+                routerLinkActive="activeIcon"
+            >
+                <div class="w-6">
+                    <app-icon iconName="plus"></app-icon>
+                </div>
+            </div>
+            <div [routerLink]="'create'" *ngIf="navExpanded">Erstellen</div>
         </div>
-      </div>
-      <div [routerLink]="'auth'" *ngIf="navExpanded">Profil</div>
+
+        <div class="flex items-center gap-x-3" (click)="toggleMobileNav()">
+            <div
+                [routerLink]="'auth'"
+                class="flex justify-center header-icon"
+                routerLinkActive="activeIcon"
+            >
+                <div class="w-8">
+                    <app-icon iconName="user"></app-icon>
+                </div>
+            </div>
+            <div [routerLink]="'auth'" *ngIf="navExpanded">Profil</div>
+        </div>
     </div>
-  </div>
 </nav>

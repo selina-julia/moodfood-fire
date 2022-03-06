@@ -5,3 +5,10 @@
 body {
   font-family: "Noto Sans", sans-serif;
 }
+
+input {
+  background: white;
+  border-bottom: 1px solid black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
