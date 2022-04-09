@@ -78,7 +78,6 @@ export class RecipeFormComponent implements OnInit {
         this.authService.user$.subscribe((val) => {
             if (val) {
                 this.userId = val.uid;
-                console.log(this.userId);
             }
             this.setUserId();
         });
@@ -100,7 +99,6 @@ export class RecipeFormComponent implements OnInit {
     }
 
     public cookingSteps(): FormArray {
-        console.log(this.form.get("cookingSteps"));
         return this.form.get("cookingSteps") as FormArray;
     }
 
@@ -126,20 +124,14 @@ export class RecipeFormComponent implements OnInit {
     }
 
     public upload(event: Event) {
+        console.log(event);
         this.isLoading = true;
-        if ((event?.target as HTMLInputElement).files) {
-            const x = (event?.target as HTMLInputElement).files;
 
-            if (x) {
-                this.filePath = x[0];
-            }
-        }
-
-        const filePath = "/images" + Math.random() + this.filePath;
+        const filePath = "/images" + Math.random() + event;
         const fileRef = this.storage.ref(filePath);
 
         this.storage
-            .upload(filePath, this.filePath)
+            .upload(filePath, event)
             .snapshotChanges()
             .pipe(
                 finalize(() => {
@@ -150,6 +142,7 @@ export class RecipeFormComponent implements OnInit {
                         this.form.value["image"] = url;
                         this.form.patchValue({ image: url });
                         // this.form.controls['image'] = url;
+                        console.log("here");
                         this.previewImage = url;
                     });
                 })
@@ -158,9 +151,7 @@ export class RecipeFormComponent implements OnInit {
     }
 
     private listenToFormGroupChanges(): void {
-        this.form.valueChanges.subscribe((value) => {
-            console.log(value);
-        });
+        this.form.valueChanges.subscribe((value) => {});
     }
 
     public refreshCreateModalState() {

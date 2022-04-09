@@ -67,7 +67,13 @@
             </div>
 
             <!-- Bild -->
-            <div>
+            <app-image-upload
+                [isLoading]="isLoading"
+                [previewImage]="previewImage"
+                (imageUpload)="upload($event)"
+            ></app-image-upload>
+
+            <!-- <div>
                 <div>
                     <div>
                         <label
@@ -119,7 +125,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="flex-grow w-6/12">

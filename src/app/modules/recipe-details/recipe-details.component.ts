@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { map, Observable, of } from "rxjs";
 
 import { Recipe } from "../recipes/shared/recipe";
@@ -21,17 +21,20 @@ export class RecipeDetailsComponent implements OnInit {
     public category?: Category;
     public userId?: string;
     public user?: User;
+    public showModal = false;
 
     constructor(
         private route: ActivatedRoute,
         private recipeService: RecipesService,
         private categoriesService: CategoriesService,
         private headerTitleService: HeaderTitleService,
-        private afs: AngularFirestore,
-        private authService: AuthService
+        private router: Router,
+        private authService: AuthService,
+        private cdRef: ChangeDetectorRef
     ) {}
 
     ngOnInit(): void {
+        this.refreshCurrentUser();
         this.headerTitleService.setTitle("");
 
         const routeParams = this.route.snapshot.paramMap;
@@ -76,6 +79,34 @@ export class RecipeDetailsComponent implements OnInit {
     //     });
     //   });
     // }
+
+    public refreshCurrentUser(): void {
+        this.authService.user$.subscribe((val) => {
+            if (val) {
+                this.user = val?.email ? val : undefined;
+            }
+            this.cdRef.detectChanges();
+        });
+    }
+
+    public onCancelClick() {
+        this.showModal = false;
+    }
+
+    public getDeleteRecipeModalData() {
+        return {
+            headline: "Rezept löschen",
+            description: `Bist du sicher, dass du das Rezept '${this.recipe?.title}' löschen möchtest?`,
+            actionButton: "Löschen",
+            cancelButton: "Abbrechen"
+        };
+    }
+
+    public onModalDeleteClick(id: string | undefined) {
+        this.recipeService.deleteRecipe(id);
+        this.showModal = false;
+        this.router.navigate(["/myrecipes"]);
+    }
 
     public getAuthor$(
         item: Recipe | undefined

@@ -1,3 +1,36 @@
-<p>
-  image-upload works!
-</p>
+<div class="flex mb-5 items-center gap-x-6">
+    <div class="relative">
+        <img
+            class="object-cover w-20 h-20 mb-2 overflow-hidden rounded-full"
+            [src]="previewImage"
+            alt=""
+        />
+
+        <div
+            *ngIf="isLoading"
+            wire:loading
+            class="absolute top-0 right-0 flex items-center justify-center w-full h-full"
+        >
+            <svg
+                class="absolute w-6 h-6 bg-transparent border-2 border-transparent border-opacity-50 rounded-full animate-spin"
+                style="border-right-color: black; border-top-color: black"
+                viewBox="0 0 24 24"
+            ></svg>
+        </div>
+    </div>
+
+    <div>
+        <p class="text-sm mb-2">JPG, GIF oder PNG.</p>
+
+        <div class="relative w-full h-ful cursor-pointer">
+            <input
+                type="file"
+                (change)="upload($event)"
+                #fileuploader
+                class="h-full w-full opacity-0 absolute inset-0 cursor-pointer"
+            />
+            <app-button type="outline" buttonText="Bild hochladen">
+            </app-button>
+        </div>
+    </div>
+</div>

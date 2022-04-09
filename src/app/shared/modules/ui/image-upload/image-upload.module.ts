@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ImageUploadComponent } from './image-upload.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ImageUploadComponent } from "./image-upload.component";
+import { ButtonModule } from "../button/button.module";
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [ImageUploadComponent]
+    imports: [CommonModule, ButtonModule],
+    declarations: [ImageUploadComponent],
+    exports: [ImageUploadComponent]
 })
-export class ImageUploadModule { }
+export class ImageUploadModule {}

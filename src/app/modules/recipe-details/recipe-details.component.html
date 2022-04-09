@@ -1,7 +1,28 @@
 <div
     class="mb-10 post-thumbnail lg:bg-fixed lg:bg-cover"
     [ngStyle]="{ backgroundImage: 'url(' + recipe?.image + ')' }"
-></div>
+>
+    <div
+        class="pt-3 mr-3 flex gap-x-3 justify-end"
+        *ngIf="user?.uid === recipe?.userId"
+    >
+        <app-button
+            type="transparent-blur"
+            buttonText="Bearbeiten"
+            class="box-shadow flex justify-end"
+            icon="edit"
+            [routerLink]="['/recipes/edit', recipe?.uid]"
+        ></app-button>
+
+        <app-button
+            type="transparent-blur"
+            buttonText="Löschen"
+            class="box-shadow flex justify-end"
+            icon="trash"
+            (click)="showModal = !showModal"
+        ></app-button>
+    </div>
+</div>
 <div class="px-16 pb-20">
     <div class="flex items-center mb-4">
         <img
@@ -52,3 +73,13 @@
         </div>
     </div>
 </div>
+
+<app-modal
+    (cancel)="onCancelClick()"
+    (action)="onModalDeleteClick(recipe?.uid)"
+    [title]="recipe?.title"
+    *ngIf="showModal"
+    type="warning"
+    [modalData]="getDeleteRecipeModalData()"
+>
+</app-modal>
