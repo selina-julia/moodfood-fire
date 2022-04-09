@@ -116,7 +116,7 @@
     -->
 
         <div
-            *ngIf="userId"
+            *ngIf="user"
             class="absolute p-3 border border-gray-300 rounded-lg -top-2 -right-2"
             (click)="updateFavorites(item)"
             [ngClass]="getFavoriteClasses(item)"

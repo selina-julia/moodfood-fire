@@ -1,51 +1,54 @@
 <div
-  class="mb-10 post-thumbnail"
-  [ngStyle]="{ backgroundImage: 'url(' + recipe?.image + ')' }"
+    class="mb-10 post-thumbnail lg:bg-fixed lg:bg-cover"
+    [ngStyle]="{ backgroundImage: 'url(' + recipe?.image + ')' }"
 ></div>
-<div class="px-16">
-  <div class="flex items-center mb-4">
-    <img
-      class="w-5 h-5 mr-2 transition duration-200 ease-in-out"
-      src="../../assets/icons/back.svg"
-    />
+<div class="px-16 pb-20">
+    <div class="flex items-center mb-4">
+        <img
+            class="w-5 h-5 mr-2 transition duration-200 ease-in-out"
+            src="../../assets/icons/back.svg"
+        />
 
-    <button routerLink="/recipes">Zurück</button>
-  </div>
+        <button routerLink="/recipes">Zurück</button>
+    </div>
 
-  <h1 class="mb-10 text-3xl font-bold xl:w-7/12 lg:text-7xl">
-    {{ recipe?.title }}
-  </h1>
+    <h1 class="mb-10 text-3xl font-bold xl:w-7/12 lg:text-7xl">
+        {{ recipe?.title }}
+    </h1>
 
-  <!-- <p>{{getAuthorById(recipe?.userId)}}</p> -->
+    <!-- <p>{{getAuthorById(recipe?.userId)}}</p> -->
 
-  <span
-    *ngIf="recipe?.categories"
-    class="px-2 py-1 mr-3 border border-gray-500 rounded-sm"
-  >
-    {{ category?.name }}
-  </span>
+    <span
+        *ngIf="recipe?.categories"
+        class="px-2 py-1 mr-3 border border-gray-500 rounded-sm"
+    >
+        {{ category?.name }}
+    </span>
 
-  <!-- <p class="mt-5 xl:mr-36">{{ recipe?.description }}</p> -->
+    <!-- <p class="mt-5 xl:mr-36">{{ recipe?.description }}</p> -->
 
-  <div class="mt-5 lg:flex">
-    <div class="w-full xl:w-5/12 ingredients-wrapper">
-      <h2 class="mt-5 mb-5 text-2xl font-medium">Zutaten</h2>
+    <div class="mt-5 lg:flex">
+        <div class="w-full xl:w-5/12 ingredients-wrapper">
+            <h2 class="mt-5 mb-5 text-2xl font-medium">Zutaten</h2>
 
-      <p>Zutat</p>
-      <p>Zutat</p>
-      <p>Zutat</p>
+            <p>Zutat</p>
+            <p>Zutat</p>
+            <p>Zutat</p>
 
-      <!--
+            <!--
       <p v-for="i in ingredients" :key="i" class="mb-2">
         <span>{{ i.amount }}</span>
         <span>{{ i.unit }}</span>
         <span>{{ i.name }}</span>
       </p>
       -->
+        </div>
+        <div class="w-full instructions-wrapper">
+            <h2 class="mt-5 mb-2 text-2xl font-medium">Zubereitung</h2>
+            <!-- <p class="mt-5 xl:mr-36">{{ recipe?.description }}</p> -->
+            <p *ngFor="let step of recipe?.cookingSteps" class="mb-2">
+                {{ step.text }}
+            </p>
+        </div>
     </div>
-    <div class="w-full instructions-wrapper">
-      <h2 class="mt-5 mb-2 text-2xl font-medium">Zubereitung</h2>
-      <p class="mt-5 xl:mr-36">{{ recipe?.description }}</p>
-    </div>
-  </div>
 </div>

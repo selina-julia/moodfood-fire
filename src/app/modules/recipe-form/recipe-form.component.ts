@@ -78,7 +78,9 @@ export class RecipeFormComponent implements OnInit {
         this.authService.user$.subscribe((val) => {
             if (val) {
                 this.userId = val.uid;
+                console.log(this.userId);
             }
+            this.setUserId();
         });
     }
 
@@ -95,10 +97,10 @@ export class RecipeFormComponent implements OnInit {
             userId: new FormControl(""),
             cookingSteps: this.fb.array([])
         });
-        this.setUserId();
     }
 
     public cookingSteps(): FormArray {
+        console.log(this.form.get("cookingSteps"));
         return this.form.get("cookingSteps") as FormArray;
     }
 
@@ -156,9 +158,9 @@ export class RecipeFormComponent implements OnInit {
     }
 
     private listenToFormGroupChanges(): void {
-        this.form.valueChanges.subscribe(() => {});
-
-        // this.subscriptions.add(valueChangesSub);
+        this.form.valueChanges.subscribe((value) => {
+            console.log(value);
+        });
     }
 
     public refreshCreateModalState() {
@@ -187,6 +189,9 @@ export class RecipeFormComponent implements OnInit {
     }
 
     public createRecipe() {
+        // const { cookingSteps } = this.form.controls;
+        // cookingSteps.patchValue(Object.values(cookingSteps.value));
+
         if (!this.isUpdating) {
             this.recipeService.createRecipe(this.form.value).then();
             this.router.navigate(["/myrecipes"]);
@@ -215,7 +220,9 @@ export class RecipeFormComponent implements OnInit {
                 time: this.recipe?.time,
                 image: this.recipe?.image,
                 level: this.recipe?.level
+                // cookingSteps: this.recipe?.cookingSteps
             });
+
             this.previewImage = this.recipe?.image;
         }, 1000);
 

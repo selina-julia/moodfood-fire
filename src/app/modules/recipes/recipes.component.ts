@@ -62,9 +62,9 @@ export class RecipesComponent implements OnInit {
     public refreshCurrentUser(): void {
         this.authService.user$.subscribe((val) => {
             if (val) {
-                console.log(val);
                 this.userId = val.uid;
-                this.user = val;
+                this.user = val?.email ? val : undefined;
+
                 this.getRecipes();
             }
         });
@@ -224,7 +224,6 @@ export class RecipesComponent implements OnInit {
     }
 
     getRecipes() {
-        console.log(this.userId);
         if (!this.userId) {
             return;
         }

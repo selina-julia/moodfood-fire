@@ -1,42 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/shared/models/user';
-import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { Component, OnInit } from "@angular/core";
+import { User } from "src/app/shared/models/user";
+import { AuthService } from "src/app/shared/services/auth/auth.service";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+    selector: "app-header",
+    templateUrl: "./header.component.html",
+    styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
-  public navExpanded = false;
-  public isMobileNavVisible = false;
-  public currentUser?: User;
+    public navExpanded = false;
+    public isMobileNavVisible = false;
+    public currentUser?: User;
 
-  constructor(private authService: AuthService) {}
+    public mainNavItems = [
+        {
+            label: "Dashboard",
+            link: "",
+            icon: "home",
+            iconSize: 7,
+            isVisibleWithoutLogin: true
+        },
+        {
+            label: "Rezepte",
+            link: "myrecipes",
+            icon: "cooking",
+            iconSize: 7,
+            isVisibleWithoutLogin: true
+        },
+        {
+            label: "Favoriten",
+            link: "favorites",
+            icon: "like",
+            iconSize: 7,
+            isVisibleWithoutLogin: false
+        },
+        {
+            label: "Erstellen",
+            link: "create",
+            icon: "plus",
+            iconSize: 6,
+            isVisibleWithoutLogin: false
+        }
+    ];
 
-  ngOnInit(): void {
-    this.refreshCurrentUser();
-  }
+    public bottomNavItems = [
+        {
+            label: "Einstellungen",
+            link: "settings",
+            icon: "settings",
+            iconSize: 8,
+            isVisibleWithoutLogin: false
+        }
+    ];
 
-  public onArrowClick() {
-    this.navExpanded = !this.navExpanded;
-  }
+    constructor(private authService: AuthService) {}
 
-  public closeNav() {
-    this.navExpanded = false;
-  }
+    ngOnInit(): void {
+        this.refreshCurrentUser();
+    }
 
-  public toggleMobileNav() {
-    this.isMobileNavVisible = !this.isMobileNavVisible;
-  }
+    public onArrowClick() {
+        this.navExpanded = !this.navExpanded;
+    }
 
-  public refreshCurrentUser(): void {
-    this.authService.fetchUser();
+    public closeNav() {
+        this.navExpanded = false;
+    }
 
-    this.authService.user$.subscribe((val) => {
-      if (val) {
-        this.currentUser = val;
-      }
-    });
-  }
+    public toggleMobileNav() {
+        this.isMobileNavVisible = !this.isMobileNavVisible;
+    }
+
+    public refreshCurrentUser(): void {
+        this.authService.user$.subscribe((val) => {
+            console.log(val);
+            this.currentUser = val?.email ? val : undefined;
+        });
+    }
 }
