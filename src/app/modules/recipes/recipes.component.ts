@@ -43,17 +43,12 @@ export class RecipesComponent implements OnInit {
         private authService: AuthService
     ) {}
 
-    async ngOnInit() {
+    ngOnInit(): void {
         this.isFavoritesPage = this.router.url === "/favorites";
         this.isDashboardPage = this.router.url === "/recipes";
-        this.isLoading = true;
 
-        setTimeout(() => {
-            this.refreshCurrentUser();
-            this.getRecipes();
-            this.initFormGroup();
-            this.isLoading = false;
-        }, 1200);
+        this.refreshCurrentUser();
+        this.initFormGroup();
 
         this.headerTitleService.setTitle(
             this.isFavoritesPage ? "Favoriten" : "Meine Rezepte"
@@ -64,13 +59,13 @@ export class RecipesComponent implements OnInit {
         }
     }
 
-    public async refreshCurrentUser(): Promise<void> {
-        this.authService.fetchUser();
-
+    public refreshCurrentUser(): void {
         this.authService.user$.subscribe((val) => {
             if (val) {
+                console.log(val);
                 this.userId = val.uid;
                 this.user = val;
+                this.getRecipes();
             }
         });
     }
@@ -229,9 +224,11 @@ export class RecipesComponent implements OnInit {
     }
 
     getRecipes() {
+        console.log(this.userId);
         if (!this.userId) {
             return;
         }
+        this.isLoading = true;
         if (this.isFavoritesPage) {
             this.recipeService.getRecipes().subscribe((items) => {
                 const favoriteRecipes = this.user?.favoriteRecipes;
@@ -265,5 +262,7 @@ export class RecipesComponent implements OnInit {
                 );
             });
         }
+
+        this.isLoading = false;
     }
 }

@@ -1,31 +1,31 @@
 <div class="flex items-center gap-x-4">
-  <p *ngIf="currentUser?.firstName">
-    Willkommen zurück, {{ currentUser?.firstName }}!
-  </p>
-  <div
-    *ngIf="currentUser?.firstName"
-    class="flex items-center justify-center w-10 h-10 bg-[#f6cc63] rounded-full box-shadow"
-  >
-    <span class="text-xl text-black">A</span>
-  </div>
+    <p *ngIf="currentUser?.firstName">
+        Willkommen zurück, {{ currentUser?.firstName }}!
+    </p>
+    <div
+        *ngIf="currentUser?.firstName"
+        class="flex items-center justify-center w-10 h-10 bg-[#f6cc63] rounded-full box-shadow"
+    >
+        <span class="text-xl text-black">{{ getInitialLetter() }}</span>
+    </div>
 
-  <div
-    *ngIf="currentUser?.email"
-    (click)="onLogout()"
-    class="flex items-center justify-center w-10 h-10 text-black bg-white rounded-full box-shadow"
-  >
-    <span class="p-2 text-xl font-semibold text-black">
-      <app-icon iconName="logout"></app-icon>
-    </span>
-  </div>
+    <div
+        *ngIf="currentUser?.email"
+        (click)="onLogout()"
+        class="flex items-center justify-center w-10 h-10 text-black bg-white rounded-full box-shadow"
+    >
+        <span class="p-2 text-xl font-semibold text-black">
+            <app-icon iconName="logout"></app-icon>
+        </span>
+    </div>
 
-  <div
-    [routerLink]="'auth'"
-    *ngIf="!currentUser?.email"
-    class="flex items-center justify-center w-10 h-10 text-black bg-white rounded-full box-shadow"
-  >
-    <span class="p-2 text-xl font-semibold text-black">
-      <app-icon iconName="user"></app-icon>
-    </span>
-  </div>
+    <div
+        [routerLink]="'auth'"
+        *ngIf="!currentUser?.email"
+        class="flex items-center justify-center w-10 h-10 text-black bg-white rounded-full box-shadow"
+    >
+        <span class="p-2 text-xl font-semibold text-black">
+            <app-icon iconName="user"></app-icon>
+        </span>
+    </div>
 </div>

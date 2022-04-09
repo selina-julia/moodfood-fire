@@ -17,7 +17,6 @@ export class UserSettingsFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.initForm();
-        console.log(this.user);
     }
 
     public onCancel() {
