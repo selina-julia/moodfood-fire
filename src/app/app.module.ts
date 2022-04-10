@@ -57,7 +57,7 @@ import { NgxGoogleAnalyticsModule } from "ngx-google-analytics";
         FormsModule,
         ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebase),
-        NgxGoogleAnalyticsModule.forRoot("G-FXY6C7WKYF"),
+        NgxGoogleAnalyticsModule.forRoot("G-LVEDLGLE1T"),
         AngularFireAnalyticsModule,
         AngularFirestoreModule,
         RecipesModule,
