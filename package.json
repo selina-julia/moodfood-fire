@@ -25,6 +25,7 @@
     "angular-svg-icon": "^13.0.0",
     "autoprefixer": "^10.4.0",
     "firebase": "^9.6.1",
+    "ngx-google-analytics": "^13.0.1",
     "postcss": "^8.4.5",
     "rxfire": "^6.0.0",
     "rxjs": "~7.4.0",

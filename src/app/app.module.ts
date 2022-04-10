@@ -36,6 +36,7 @@ import { UserSettingsComponent } from "./modules/user-settings/user-settings.com
 import { UserSettingsFormComponent } from "./modules/user-settings-form/user-settings-form.component";
 import { ModalModule } from "./shared/modules/ui/modal/modal.module";
 import { ImageUploadModule } from "./shared/modules/ui/image-upload/image-upload.module";
+import { NgxGoogleAnalyticsModule } from "ngx-google-analytics";
 
 @NgModule({
     declarations: [
@@ -56,6 +57,7 @@ import { ImageUploadModule } from "./shared/modules/ui/image-upload/image-upload
         FormsModule,
         ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebase),
+        NgxGoogleAnalyticsModule.forRoot("G-FXY6C7WKYF"),
         AngularFireAnalyticsModule,
         AngularFirestoreModule,
         RecipesModule,
